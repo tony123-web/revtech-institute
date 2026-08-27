@@ -1,3 +1,42 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Course, Module, Lesson
+
+
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "duration",
+        "is_published",
+        "created_at",
+    )
+
+    list_filter = ("is_published",)
+    prepopulated_fields = {"slug": ("title",)}
+
+
+@admin.register(Module)
+class ModuleAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "course",
+        "order",
+    )
+
+    list_filter = ("course",)
+
+
+@admin.register(Lesson)
+class LessonAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "module",
+        "order",
+        "is_published",
+    )
+
+    list_filter = (
+        "is_published",
+        "module",
+    )

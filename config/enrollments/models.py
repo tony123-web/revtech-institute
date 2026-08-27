@@ -2,9 +2,10 @@ from django.contrib.auth.models import User
 from django.db import models
 from courses.models import Course
 from cohorts.models import Cohort
-
+import uuid
 
 class Enrollment(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     student = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

@@ -1,7 +1,8 @@
 from django.db import models
-
+import uuid
 
 class Course(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
     description = models.TextField()
@@ -21,6 +22,7 @@ class Course(models.Model):
         return self.title
 
 class Module(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     course = models.ForeignKey(
         Course,
         on_delete=models.CASCADE,
@@ -38,6 +40,7 @@ class Module(models.Model):
 
 
 class Lesson(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     module = models.ForeignKey(
         Module,
         on_delete=models.CASCADE,
