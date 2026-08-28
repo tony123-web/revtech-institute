@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="cohort-page">
+
+<div class="cohort-page-header">
+
+    <a
+        href="{% url 'dashboard' %}"
+        class="back-link"
+    >
+        ← Dashboard
+    </a>
+
+    <span class="dashboard-label">
+        {{ cohort.program.title }}
+    </span>
+
+    <h1>
+        {{ cohort.name }}
+    </h1>
+
+    {% if cohort.description %}
+        <p>
+            {{ cohort.description }}
+        </p>
+    {% endif %}
+
+</div>
+
+
+<div class="cohort-actions">
+
+    <a
+        href="{% url 'seminar_room' cohort.id %}"
+        class="primary-button"
+    >
+        Enter Seminar Room →
+    </a>
+
+</div>
+
+
+<section class="modules-section">
+
+    <div class="section-heading">
+
+        <span class="dashboard-label">
+            CURRICULUM
+        </span>
+
+        <h2>
+            Your Learning Modules
+        </h2>
+
+    </div>
+
+
+    {% if modules %}
+
+        <div class="modules-list">
+
+            {% for module in modules %}
+
+                <article class="module-card">
+
+                    <div class="module-number">
+                        {{ forloop.counter }}
+                    </div>
+
+                    <div class="module-content">
+
+                        <h3>
+                            {{ module.title }}
+                        </h3>
+
+                        {% if module.description %}
+                            <p>
+                                {{ module.description }}
+                            </p>
+                        {% endif %}
+
+                        <span>
+                            {{ module.lessons.count }}
+                            lesson{{ module.lessons.count|pluralize }}
+                        </span>
+
+                    </div>
+
+                    <a
+                        href="{% url 'module_detail' module.id %}"
+                        class="module-link"
+                    >
+                        View Module →
+                    </a>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <h3>
+                Learning content is coming soon.
+            </h3>
+
+            <p>
+                Your instructor has not published any
+                modules for this cohort yet.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+</div>
+
+{% endblock %}

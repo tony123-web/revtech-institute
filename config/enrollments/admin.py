@@ -5,21 +5,27 @@ from .models import Enrollment
 
 @admin.register(Enrollment)
 class EnrollmentAdmin(admin.ModelAdmin):
+
     list_display = (
         "student",
-        "course",
         "cohort",
-        "enrolled_at",
+        "payment_verified",
         "is_active",
+        "enrolled_at",
     )
 
     list_filter = (
+        "payment_verified",
         "is_active",
         "cohort",
-        "course",
     )
 
     search_fields = (
         "student__username",
         "student__email",
+        "cohort__name",
+    )
+
+    ordering = (
+        "-enrolled_at",
     )

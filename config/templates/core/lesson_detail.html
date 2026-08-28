@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="lesson-page">
+
+<div class="lesson-header">
+
+    <a
+        href="{% url 'module_detail' module.id %}"
+        class="back-link"
+    >
+        ← Back to {{ module.title }}
+    </a>
+
+    <span class="dashboard-label">
+        {{ cohort.name }}
+    </span>
+
+    <h1>
+        {{ lesson.title }}
+    </h1>
+
+    {% if lesson.description %}
+        <p>
+            {{ lesson.description }}
+        </p>
+    {% endif %}
+
+</div>
+
+
+<!-- Lesson Recording -->
+
+<section class="lesson-video-section">
+
+    <div class="section-heading">
+
+        <span class="dashboard-label">
+            RECORDED SESSION
+        </span>
+
+        <h2>
+            Lesson Recording
+        </h2>
+
+    </div>
+
+
+    {% if lesson.video_url %}
+
+        <div class="video-container">
+
+            <iframe
+                src="{{ lesson.video_url }}"
+                title="{{ lesson.title }}"
+                allowfullscreen
+            ></iframe>
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <h3>
+                Recording not available yet.
+            </h3>
+
+            <p>
+                Your instructor has not uploaded the
+                recording for this lesson yet.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+<!-- Assignment -->
+
+<section class="lesson-assignment-section">
+
+    <div class="section-heading">
+
+        <span class="dashboard-label">
+            ASSIGNMENT
+        </span>
+
+        <h2>
+            Your Task
+        </h2>
+
+    </div>
+
+
+    {% if assignments %}
+
+        {% for assignment in assignments %}
+
+            <article class="assignment-card">
+
+                <h3>
+                    {{ assignment.title }}
+                </h3>
+
+                <div class="assignment-instructions">
+                    {{ assignment.instructions|linebreaks }}
+                </div>
+
+                {% if assignment.due_date %}
+
+                    <p class="assignment-due">
+
+                        Due:
+                        {{ assignment.due_date }}
+
+                    </p>
+
+                {% endif %}
+
+            </article>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <h3>
+                No assignment for this lesson.
+            </h3>
+
+            <p>
+                Your instructor has not added an
+                assignment yet.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+<!-- Navigation -->
+
+<div class="lesson-navigation">
+
+    <a
+        href="{% url 'module_detail' module.id %}"
+        class="secondary-button"
+    >
+        ← All Lessons
+    </a>
+
+</div>
+
+
+</div>
+
+{% endblock %}

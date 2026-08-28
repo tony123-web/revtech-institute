@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="seminar-page">
+
+<div class="seminar-header">
+
+    <a
+        href="{% url 'dashboard' %}"
+        class="back-link"
+    >
+        ← Back to Dashboard
+    </a>
+
+    <span class="dashboard-label">
+        COHORT SEMINAR ROOM
+    </span>
+
+    <h1>
+        {{ seminar_room.title }}
+    </h1>
+
+    <p>
+        {{ seminar_room.description }}
+    </p>
+
+</div>
+
+
+<div class="seminar-grid">
+
+    <!-- Live Session -->
+    <section class="seminar-card">
+
+        <span class="card-label">
+            LIVE SESSIONS
+        </span>
+
+        <h2>
+            Join the live class
+        </h2>
+
+        <p>
+            Use the Zoom link below when your live
+            session is scheduled.
+        </p>
+
+        {% if seminar_room.zoom_link %}
+
+            <a
+                href="{{ seminar_room.zoom_link }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="primary-button"
+            >
+                Join Zoom Session →
+            </a>
+
+        {% else %}
+
+            <p>
+                The Zoom link has not been added yet.
+            </p>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- Community -->
+    <section class="seminar-card">
+
+        <span class="card-label">
+            COMMUNITY
+        </span>
+
+        <h2>
+            Cohort Community
+        </h2>
+
+        <p>
+            Connect with your classmates and receive
+            important cohort updates.
+        </p>
+
+        {% if seminar_room.whatsapp_link %}
+
+            <a
+                href="{{ seminar_room.whatsapp_link }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="primary-button"
+            >
+                Join WhatsApp Community →
+            </a>
+
+        {% else %}
+
+            <p>
+                Community link has not been added yet.
+            </p>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- Cohort Information -->
+    <section class="seminar-card">
+
+        <span class="card-label">
+            COHORT
+        </span>
+
+        <h2>
+            {{ cohort.name }}
+        </h2>
+
+        {% if cohort.description %}
+
+            <p>
+                {{ cohort.description }}
+            </p>
+
+        {% endif %}
+
+        <div class="cohort-details">
+
+            <div>
+                <span>Start Date</span>
+                <strong>
+                    {{ cohort.start_date }}
+                </strong>
+            </div>
+
+            <div>
+                <span>End Date</span>
+
+                <strong>
+                    {% if cohort.end_date %}
+                        {{ cohort.end_date }}
+                    {% else %}
+                        To be announced
+                    {% endif %}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Coming Soon -->
+<!--    Resources -->
+    <section class="seminar-card resources-card">
+
+    <span class="card-label">
+        RESOURCES
+    </span>
+
+    <h2>
+        Cohort Resources
+    </h2>
+
+    <p>
+        Useful materials and links provided for
+        {{ cohort.name }}.
+    </p>
+
+
+    {% if resources %}
+
+        <div class="resources-list">
+
+            {% for resource in resources %}
+
+                <a
+                    href="{{ resource.url }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="resource-item"
+                >
+
+                    <div>
+
+                        <h3>
+                            {{ resource.title }}
+                        </h3>
+
+                        {% if resource.description %}
+
+                            <p>
+                                {{ resource.description }}
+                            </p>
+
+                        {% endif %}
+
+                    </div>
+
+                    <span>
+                        ↗
+                    </span>
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <p>
+            No resources have been added yet.
+        </p>
+
+    {% endif %}
+
+</section>
+
+
+<!--    Discussion -->
+    <section class="seminar-card discussions-card">
+
+    <span class="card-label">
+        COMMUNITY
+    </span>
+
+    <h2>
+        Cohort Discussions
+    </h2>
+
+    <p>
+        Ask questions, share ideas and interact with
+        other members of your cohort.
+    </p>
+
+    <a
+        href="{% url 'discussions' cohort.id %}"
+        class="primary-button"
+    >
+        Open Discussions →
+    </a>
+
+</section>
+
+</div>
+
+
+</div>
+
+{% endblock %}

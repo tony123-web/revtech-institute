@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="discussion-detail-page">
+
+
+<div class="discussion-detail-header">
+
+    <a
+        href="{% url 'discussions' cohort.id %}"
+        class="back-link"
+    >
+        ← Discussions
+    </a>
+
+</div>
+
+
+<article class="discussion-main">
+
+    <div class="discussion-meta">
+
+        <span class="discussion-type">
+            {{ discussion.get_post_type_display }}
+        </span>
+
+        <span>
+            {{ discussion.created_at|date:"M d, Y H:i" }}
+        </span>
+
+    </div>
+
+
+    <h1>
+        {{ discussion.title }}
+    </h1>
+
+
+    <p class="discussion-author">
+        Posted by
+        <strong>
+            {{ discussion.author.username }}
+        </strong>
+    </p>
+
+
+    <div class="discussion-content">
+
+        {{ discussion.content|linebreaks }}
+
+    </div>
+
+</article>
+
+
+<section class="replies-section">
+
+    <div class="section-heading">
+
+        <span class="dashboard-label">
+            CONVERSATION
+        </span>
+
+        <h2>
+            Replies
+        </h2>
+
+    </div>
+
+
+    {% if replies %}
+
+        <div class="replies-list">
+
+            {% for reply in replies %}
+
+                <article class="reply-card">
+
+                    <div class="reply-meta">
+
+                        <strong>
+                            {{ reply.author.username }}
+                        </strong>
+
+                        <span>
+                            {{ reply.created_at|date:"M d, Y H:i" }}
+                        </span>
+
+                    </div>
+
+                    <div class="reply-content">
+
+                        {{ reply.content|linebreaks }}
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <p>
+                No replies yet. Start the conversation.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+</div>
+
+{% endblock %}

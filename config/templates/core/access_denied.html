@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="access-denied">
+
+<span class="dashboard-label">
+    ACCESS RESTRICTED
+</span>
+
+<h1>
+    You don't have access to this cohort.
+</h1>
+
+<p>
+    This seminar room is available only to students
+    with an active enrollment in this cohort.
+</p>
+
+<a
+    href="{% url 'dashboard' %}"
+    class="primary-button"
+>
+    Return to Dashboard
+</a>
+
+
+</div>
+
+{% endblock %}

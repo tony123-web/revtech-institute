@@ -1,37 +1,37 @@
 from django.contrib.auth.models import User
 from django.db import models
-from courses.models import Course
 from cohorts.models import Cohort
 import uuid
 
+
 class Enrollment(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+
     student = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name="enrollments"
     )
-    course = models.ForeignKey(
-        Course,
-        on_delete=models.CASCADE,
-        related_name="enrollments"
-    )
+
     cohort = models.ForeignKey(
         Cohort,
         on_delete=models.CASCADE,
         related_name="enrollments"
     )
-
     enrolled_at = models.DateTimeField(auto_now_add=True)
+    payment_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["student", "course", "cohort"],
-                name="unique_student_course_cohort"
+                fields=["student", "cohort"],
+                name="unique_student_cohort"
             )
         ]
 
     def __str__(self):
-        return f"{self.student.username} - {self.course.title}"
+        return f"{self.student.username} - {self.cohort.program.title}"

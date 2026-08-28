@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="module-page">
+<div class="module-page-header">
+
+    <a
+        href="{% url 'cohort_detail' cohort.id %}"
+        class="back-link"
+    >
+        ← Back to {{ cohort.name }}
+    </a>
+
+    <span class="dashboard-label">
+        {{ cohort.program.title }}
+    </span>
+
+    <h1>
+        {{ module.title }}
+    </h1>
+
+    {% if module.description %}
+        <p>
+            {{ module.description }}
+        </p>
+    {% endif %}
+
+</div>
+
+
+<section class="lessons-section">
+
+    <div class="section-heading">
+
+        <span class="dashboard-label">
+            MODULE LESSONS
+        </span>
+
+        <h2>
+            Lessons
+        </h2>
+
+    </div>
+
+
+    {% if lessons %}
+
+        <div class="lessons-list">
+
+            {% for lesson in lessons %}
+
+                <article class="lesson-card">
+
+                    <div class="lesson-number">
+                        {{ forloop.counter }}
+                    </div>
+
+                    <div class="lesson-content">
+
+                        <h3>
+                            {{ lesson.title }}
+                        </h3>
+
+                        {% if lesson.description %}
+                            <p>
+                                {{ lesson.description }}
+                            </p>
+                        {% endif %}
+
+                        {% if lesson.duration_seconds %}
+
+                            <span>
+                                {{ lesson.duration_seconds }}
+                                seconds
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                    {% if lesson.is_active %}
+
+                       <a
+                            href="{% url 'lesson_detail' lesson.id %}"
+                            class="module-link"
+                        >
+                            Start Lesson →
+                        </a>
+
+                    {% endif %}
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <h3>
+                No lessons available yet.
+            </h3>
+
+            <p>
+                Your instructor has not published
+                lessons for this module yet.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+</div>
+
+{% endblock %}

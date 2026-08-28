@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard-page">
+
+
+<!-- Dashboard Header -->
+<section class="dashboard-header">
+
+    <div>
+        <span class="dashboard-label">STUDENT DASHBOARD</span>
+
+        <h1>
+            Welcome back, {{ request.user.username }}
+        </h1>
+
+        <p>
+            Continue your learning journey with RevTech Institute.
+        </p>
+    </div>
+
+</section>
+
+
+<!-- Programs -->
+<section class="dashboard-section">
+
+    <div class="section-heading">
+        <div>
+            <span class="dashboard-label">MY LEARNING</span>
+            <h2>Your Programs</h2>
+        </div>
+
+    </div>
+
+
+    {% if enrollments %}
+
+        <div class="program-grid">
+
+            {% for enrollment in enrollments %}
+
+                <article class="program-card">
+
+                    <!-- Program information -->
+                    <div class="program-card-header">
+
+                        <div>
+                            <span class="program-tag">
+                                {{ enrollment.cohort.name }}
+                            </span>
+
+                            <h3>
+                                <a
+                                    href="{% url 'cohort_detail' enrollment.cohort.id %}"
+                                >
+                                    {{ enrollment.cohort.program.title }}
+                                </a>
+                            </h3>
+
+                            <p>
+                                <a href="{% url 'cohort_detail' enrollment.cohort.id %}">
+                                    {{ enrollment.cohort.program.short_description }}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <!-- Progress -->
+                    <div class="progress-section">
+
+                        <div class="progress-header">
+
+                            <span>
+                                Learning Progress
+                            </span>
+
+                            <strong>
+                                {{ enrollment.progress }}%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+
+                            <div
+                                class="progress-fill"
+                                style="width: {{ enrollment.progress }}%;"
+                            ></div>
+
+                        </div>
+
+
+                        <small>
+                            {{ enrollment.completed_lessons }}
+                            of
+                            {{ enrollment.total_lessons }}
+                            lessons completed
+                        </small>
+
+                    </div>
+
+
+                    <!-- Continue Learning -->
+                    {% if enrollment.next_lesson %}
+
+                        <div class="next-lesson">
+
+                            <div class="next-lesson-info">
+
+                                <span class="section-label">
+                                    NEXT LESSON
+                                </span>
+
+                                <h4>
+                                    {{ enrollment.next_lesson.title }}
+                                </h4>
+
+                                <p>
+                                    {{ enrollment.next_lesson.module.title }}
+                                </p>
+
+                            </div>
+
+
+                            <a
+                                href="{% url 'lesson_detail' enrollment.next_lesson.id %}"
+                                class="primary-button"
+                            >
+                                Continue Learning
+                                <span>→</span>
+                            </a>
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="course-complete">
+
+                            <span class="section-label">
+                                PROGRAM COMPLETE
+                            </span>
+
+                            <h4>
+                                Congratulations!
+                            </h4>
+
+                            <p>
+                                You've completed all the lessons
+                                in this program.
+                            </p>
+
+                        </div>
+
+                    {% endif %}
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <!-- No Enrollment -->
+        <div class="empty-dashboard">
+
+            <div class="empty-icon">
+                +
+            </div>
+
+            <h3>
+                No active programs yet
+            </h3>
+
+            <p>
+                You are not enrolled in an active RevTech
+                program yet.
+            </p>
+
+            <a
+                href="#"
+                class="primary-button"
+            >
+                Explore Programs
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+</div>
+
+{% endblock %}

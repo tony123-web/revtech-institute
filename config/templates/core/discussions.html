@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="discussions-page">
+
+<div class="discussions-header">
+
+    <a
+        href="{% url 'seminar_room' cohort.id %}"
+        class="back-link"
+    >
+        ← Seminar Room
+    </a>
+
+    <span class="dashboard-label">
+        {{ cohort.name }}
+    </span>
+
+    <h1>
+        Cohort Discussions
+    </h1>
+
+    <p>
+        Ask questions, share ideas and learn together.
+    </p>
+
+</div>
+
+
+<div class="discussion-actions">
+
+    <a
+    href="{% url 'create_discussion' cohort.id %}"
+    class="primary-button"
+>
+    Start a Discussion →
+</a>
+
+</div>
+
+
+<section class="discussion-list">
+
+    {% if discussions %}
+
+        {% for discussion in discussions %}
+
+            <article class="discussion-card">
+
+                <div class="discussion-meta">
+
+                    <span class="discussion-type">
+                        {{ discussion.get_post_type_display }}
+                    </span>
+
+                    <span>
+                        {{ discussion.created_at|date:"M d, Y" }}
+                    </span>
+
+                </div>
+
+
+                <h2>
+                    {{ discussion.title }}
+                </h2>
+
+
+                <p class="discussion-author">
+                    Posted by
+                    <strong>
+                        {{ discussion.author.username }}
+                    </strong>
+                </p>
+
+
+                <div class="discussion-content">
+
+                    {{ discussion.content|linebreaks }}
+
+                </div>
+
+
+                <a
+                    href="{% url 'discussion_detail' discussion.id %}"
+                    class="discussion-link"
+                >
+                    View Discussion →
+                </a>
+
+            </article>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <h3>
+                No discussions yet.
+            </h3>
+
+            <p>
+                Be the first student to ask a question
+                or share an idea.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+</div>
+
+{% endblock %}
