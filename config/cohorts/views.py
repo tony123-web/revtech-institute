@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def cohort_list(request):
+    return render(request, "cohorts/cohort_list.html")
