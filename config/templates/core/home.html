@@ -4,34 +4,528 @@
 RevTech Institute | Practical Technology Education
 {% endblock %}
 
+{% block description %}
+RevTech Institute provides practical technology education through
+structured learning, mentorship, projects and collaborative experiences.
+{% endblock %}
+
+
 {% block content %}
 
-<section>
-    <h1>Build Skills. Build Projects. Build Your Future.</h1>
+<!-- =====================================================
+     HERO
+     ===================================================== -->
 
-    <p>
-        RevTech Institute provides practical technology education
-        designed to help learners develop real-world skills and
-        build meaningful projects.
-    </p>
+<section class="hero">
 
-    <a href="{% url 'courses' %}">
-        Explore Programs
-    </a>
+    <div class="hero-container">
 
-    <a href="{% url 'cohorts' %}">
-        View Cohorts
-    </a>
+        <div class="hero-content">
+
+<!--            <div class="hero-label">-->
+<!--                Practical Technology Education-->
+<!--            </div>-->
+
+            <h1>
+                Learn technology.
+                <br>
+                <span>Build something real.</span>
+            </h1>
+
+            <p class="hero-description">
+                RevTech Institute is a practical learning community
+                where students develop technology skills, work on
+                real projects and learn how to turn ideas into
+                working solutions.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a
+                    href="{% url 'courses' %}"
+                    class="secondary-button"
+                >
+                    Explore Programs
+                </a>
+
+                <a
+                    href="{% url 'cohorts' %}"
+                    class="secondary-button"
+                >
+                    View Upcoming Cohort
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 
-<section>
-    <h2>What We Do</h2>
 
-    <p>
-        We combine structured learning, practical projects,
-        mentorship and collaboration to help students move
-        from learning concepts to building real solutions.
-    </p>
+<!-- =====================================================
+     INTRODUCTION
+     ===================================================== -->
+
+<section class="section intro-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                About RevTech
+            </span>
+
+            <h2>
+                Learning should lead to something you can build.
+            </h2>
+
+        </div>
+
+        <div class="intro-content">
+
+            <p>
+                Technology is easier to understand when you
+                actually use it. At RevTech Institute, learning
+                goes beyond watching tutorials and memorizing
+                concepts.
+            </p>
+
+            <p>
+                Students learn through structured lessons,
+                practical exercises, collaborative work and
+                projects that demonstrate what they can actually do.
+            </p>
+
+        </div>
+
+    </div>
+
 </section>
+
+
+<!-- =====================================================
+     WHAT WE OFFER
+     ===================================================== -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-heading centered">
+
+            <span class="section-label">
+                The RevTech Approach
+            </span>
+
+            <h2>
+                More than just lessons.
+            </h2>
+
+            <p>
+                We combine learning, practice and real-world
+                application.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    01
+                </div>
+
+                <h3>
+                    Structured Learning
+                </h3>
+
+                <p>
+                    Follow a clear curriculum designed to take
+                    you from fundamental concepts to practical
+                    implementation.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    02
+                </div>
+
+                <h3>
+                    Practical Projects
+                </h3>
+
+                <p>
+                    Apply what you learn by building projects
+                    that can become part of your portfolio.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    03
+                </div>
+
+                <h3>
+                    Collaborative Learning
+                </h3>
+
+                <p>
+                    Learn alongside other students, exchange
+                    ideas and solve problems together.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    04
+                </div>
+
+                <h3>
+                    Career Direction
+                </h3>
+
+                <p>
+                    Develop practical skills that can help you
+                    explore opportunities in the technology industry.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LEARNING PROCESS
+     ===================================================== -->
+
+<section class="section process-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                How It Works
+            </span>
+
+            <h2>
+                From learning to building.
+            </h2>
+
+        </div>
+
+
+        <div class="process-list">
+
+            <div class="process-item">
+
+                <span>01</span>
+
+                <div>
+                    <h3>Learn</h3>
+
+                    <p>
+                        Understand the concepts and tools behind
+                        the technology you're studying.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="process-item">
+
+                <span>02</span>
+
+                <div>
+                    <h3>Practice</h3>
+
+                    <p>
+                        Reinforce your understanding through
+                        exercises and guided tasks.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="process-item">
+
+                <span>03</span>
+
+                <div>
+                    <h3>Build</h3>
+
+                    <p>
+                        Apply your knowledge to practical projects
+                        that solve real problems.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="process-item">
+
+                <span>04</span>
+
+                <div>
+                    <h3>Showcase</h3>
+
+                    <p>
+                        Present your work through your RevTech
+                        profile and personal portfolio.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     UPCOMING COHORT
+     ===================================================== -->
+
+<section class="section cohort-preview">
+
+    <div class="container">
+
+        <div class="cohort-card">
+
+            <div class="cohort-info">
+
+                <span class="section-label">
+                    Upcoming Cohort
+                </span>
+
+                <h2>
+                    RevTech October Cohort
+                </h2>
+
+                <p>
+                    A practical technology learning experience
+                    designed to help students build foundational
+                    skills, work on projects and develop a
+                    portfolio of real work.
+                </p>
+
+
+                <div class="cohort-meta">
+
+                    <div>
+                        <span>Duration</span>
+                        <strong>3 Months</strong>
+                    </div>
+
+                    <div>
+                        <span>Format</span>
+                        <strong>Online</strong>
+                    </div>
+
+                    <div>
+                        <span>Projects</span>
+                        <strong>Practical</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="cohort-action">
+
+                <a
+                    href="{% url 'cohorts' %}"
+                    class="primary-button"
+                >
+                    View Cohort
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     STUDENT PROJECTS
+     ===================================================== -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-heading centered">
+
+            <span class="section-label">
+                Student Work
+            </span>
+
+            <h2>
+                See what our learners build.
+            </h2>
+
+            <p>
+                Projects will be showcased here as students
+                progress through their programs.
+            </p>
+
+        </div>
+
+
+        <div class="project-preview">
+
+            <div class="project-placeholder">
+                <span class="project-placeholder-icon">
+                    ◇
+                </span>
+                <h3>
+                    Student projects are coming soon.
+                </h3>
+                <p>
+                    As our cohorts progress, this space will showcase
+                    projects built by RevTech learners.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="center-button">
+
+            <a
+                href="{% url 'projects' %}"
+                class="secondary-button"
+            >
+                Explore Student Projects
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FINAL CTA
+     ===================================================== -->
+
+<section class="section final-cta">
+
+    <div class="container">
+
+        <div class="cta-card">
+
+            <span class="section-label">
+                Start Your Journey
+            </span>
+
+            <h2>
+                Ready to start building?
+            </h2>
+
+            <p>
+                Explore our programs and find the learning
+                path that fits your goals.
+            </p>
+
+            <a
+                href="{% url 'courses' %}"
+                class="primary-button"
+            >
+                Explore Programs
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SOCIAL HUB
+     ===================================================== -->
+
+<div class="social-hub">
+
+    <div class="social-links">
+
+        <a
+            href="#"
+            class="social-link"
+            aria-label="GitHub"
+            target="_blank"
+        >
+            GH
+        </a>
+
+        <a
+            href="#"
+            class="social-link"
+            aria-label="LinkedIn"
+            target="_blank"
+        >
+            IN
+        </a>
+
+        <a
+            href="#"
+            class="social-link"
+            aria-label="Instagram"
+            target="_blank"
+        >
+            IG
+        </a>
+
+        <a
+            href="#"
+            class="social-link"
+            aria-label="WhatsApp"
+            target="_blank"
+        >
+            WA
+        </a>
+
+    </div>
+
+
+    <button
+        class="social-toggle"
+        type="button"
+        aria-label="Open RevTech social links"
+    >
+        ✦
+    </button>
+
+</div>
 
 {% endblock %}

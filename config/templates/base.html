@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
 
     <meta
         name="description"
-        content="{% block description %}RevTech Institute — Practical technology education for the next generation of developers and innovators.{% endblock %}"
+        content="{% block description %}RevTech Institute — Practical technology education for the next generation of builders.{% endblock %}"
     >
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -17,13 +18,17 @@
 
 <body>
 
-    <header>
-        <nav>
-            <a href="{% url 'home' %}">
-                RevTech Institute
+    <!-- Navigation -->
+    <header class="site-header">
+
+        <nav class="navbar">
+
+            <a href="{% url 'home' %}" class="brand">
+                <span class="brand-mark">RT</span>
+                <span>RevTech<span class="brand-highlight"> Institute</span></span>
             </a>
 
-            <div>
+            <div class="nav-links">
                 <a href="{% url 'home' %}">Home</a>
                 <a href="{% url 'about' %}">About</a>
                 <a href="{% url 'courses' %}">Programs</a>
@@ -32,23 +37,122 @@
                 <a href="{% url 'contact' %}">Contact</a>
             </div>
 
-            <div>
-                <a href="{% url 'login' %}">Login</a>
-                <a href="{% url 'register' %}">Register</a>
+            <div class="nav-actions">
+                <a href="{% url 'login' %}" class="login-link">
+                    Login
+                </a>
+
+                <a href="{% url 'register' %}" class="nav-button">
+                    Get Started
+                </a>
             </div>
+
         </nav>
+
     </header>
+<!-- Mobile Bottom Navigation -->
+<nav class="mobile-bottom-nav">
+
+    <a href="{% url 'home' %}" class="mobile-nav-item">
+        <span class="mobile-nav-icon">⌂</span>
+        <span>Home</span>
+    </a>
+
+    <a href="{% url 'courses' %}" class="mobile-nav-item">
+        <span class="mobile-nav-icon">▣</span>
+        <span>Programs</span>
+    </a>
+
+    <a href="{% url 'cohorts' %}" class="mobile-nav-item">
+        <span class="mobile-nav-icon">◉</span>
+        <span>Cohorts</span>
+    </a>
+
+    <a href="{% url 'projects' %}" class="mobile-nav-item">
+        <span class="mobile-nav-icon">◇</span>
+        <span>Projects</span>
+    </a>
+
+    <button
+        type="button"
+        class="mobile-nav-item mobile-more-button"
+        id="mobile-more-button"
+    >
+        <span class="mobile-nav-icon">☰</span>
+        <span>More</span>
+    </button>
+
+</nav>
 
 
+<!-- Mobile More Menu -->
+<div class="mobile-more-menu" id="mobile-more-menu">
+
+    <div class="mobile-more-header">
+
+        <div>
+            <span class="section-label">
+                Navigation
+            </span>
+
+            <h3>RevTech Institute</h3>
+        </div>
+
+        <button
+            type="button"
+            id="close-more-menu"
+            aria-label="Close menu"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <a href="{% url 'about' %}">
+        <span>About RevTech</span>
+        <span>→</span>
+    </a>
+
+
+    <a href="{% url 'contact' %}">
+        <span>Contact</span>
+        <span>→</span>
+    </a>
+
+
+    <a href="{% url 'login' %}">
+        <span>Login</span>
+        <span>→</span>
+    </a>
+
+
+    <a href="{% url 'register' %}">
+        <span>Create Account</span>
+        <span>→</span>
+    </a>
+
+</div>
+
+    <!-- Main Content -->
     <main>
 
         {% if messages %}
-            {% for message in messages %}
-                <div>
-                    {{ message }}
-                </div>
-            {% endfor %}
+
+            <div class="messages">
+
+                {% for message in messages %}
+
+                    <div class="message">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
         {% endif %}
+
 
         {% block content %}
         {% endblock %}
@@ -56,12 +160,48 @@
     </main>
 
 
-    <footer>
-        <p>
-            © {% now "Y" %} RevTech Institute.
-            All rights reserved.
-        </p>
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+            <div>
+                <a href="{% url 'home' %}" class="footer-brand">
+                    RevTech Institute
+                </a>
+
+                <p>
+                    Practical technology education for the next
+                    generation of builders.
+                </p>
+            </div>
+
+            <div class="footer-links">
+
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'courses' %}">Programs</a>
+                <a href="{% url 'cohorts' %}">Cohorts</a>
+                <a href="{% url 'projects' %}">Projects</a>
+                <a href="{% url 'contact' %}">Contact</a>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+                © {% now "Y" %} RevTech Institute.
+                All rights reserved.
+            </p>
+
+        </div>
+
     </footer>
 
+
+    <script src="{% static 'js/main.js' %}"></script>
+
 </body>
+
 </html>
