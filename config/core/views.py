@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.conf import settings
 from django.views.decorators.http import require_GET
 from django.core.files.storage import default_storage
 from cohorts.models import SeminarRoom, Discussion,DiscussionReply,Cohort
@@ -39,7 +39,8 @@ def home(request):
     return render(request, "core/home.html",
                   {
                       "cohort":cohort,
-                      'featured_projects':featured_projects
+                      'featured_projects':featured_projects,
+                      'link_all_link':settings.LINK_ALL_CONNECT
                 }
     )
 

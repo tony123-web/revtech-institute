@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Enrollment Confirmed</title>
+
+</head>
+
+<body style="
+    margin: 0;
+    padding: 0;
+    background-color: #f3f4f6;
+    font-family: Arial, Helvetica, sans-serif;
+">
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td align="center" style="padding: 40px 15px;">
+
+        <table
+            width="600"
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            style="
+                max-width: 600px;
+                width: 100%;
+                background-color: #ffffff;
+                border-radius: 12px;
+                overflow: hidden;
+            "
+        >
+
+            <!-- Header -->
+            <tr>
+                <td style="
+                    padding: 30px;
+                    text-align: center;
+                    background-color: #111827;
+                ">
+
+                    <h1 style="
+                        margin: 0;
+                        color: #ffffff;
+                        font-size: 28px;
+                    ">
+                        REVTECH
+                    </h1>
+
+                    <p style="
+                        margin: 6px 0 0;
+                        color: #9ca3af;
+                        font-size: 14px;
+                    ">
+                        INSTITUTE
+                    </p>
+
+                </td>
+            </tr>
+
+
+            <!-- Content -->
+            <tr>
+                <td style="padding: 40px 35px;">
+
+                    <h2 style="
+                        margin-top: 0;
+                        color: #111827;
+                    ">
+                        Payment Confirmed 🎉
+                    </h2>
+
+                    <p style="
+                        color: #374151;
+                        font-size: 16px;
+                        line-height: 1.6;
+                    ">
+                        Hello {{ student.first_name|default:student.username }},
+                    </p>
+
+                    <p style="
+                        color: #374151;
+                        font-size: 16px;
+                        line-height: 1.6;
+                    ">
+                        Your payment has been successfully verified and
+                        your enrollment at RevTech Institute is now active.
+                    </p>
+
+
+                    <!-- Enrollment Details -->
+                    <table
+                        width="100%"
+                        cellpadding="0"
+                        cellspacing="0"
+                        style="
+                            margin: 25px 0;
+                            background-color: #f9fafb;
+                            border-radius: 8px;
+                        "
+                    >
+
+                        <tr>
+                            <td style="
+                                padding: 20px;
+                                color: #6b7280;
+                                font-size: 14px;
+                            ">
+
+                                <strong style="color: #111827;">
+                                    Program
+                                </strong>
+
+                                <br>
+
+                                {{ program.title }}
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="
+                                padding: 0 20px 20px;
+                                color: #6b7280;
+                                font-size: 14px;
+                            ">
+
+                                <strong style="color: #111827;">
+                                    Cohort
+                                </strong>
+
+                                <br>
+
+                                {{ cohort.name }}
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="
+                                padding: 0 20px 20px;
+                                color: #6b7280;
+                                font-size: 14px;
+                            ">
+
+                                <strong style="color: #111827;">
+                                    Amount Paid
+                                </strong>
+
+                                <br>
+
+                                ₦{{ enrollment.amount_paid|floatformat:2 }}
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="
+                                padding: 0 20px 20px;
+                                color: #6b7280;
+                                font-size: 14px;
+                            ">
+
+                                <strong style="color: #111827;">
+                                    Payment Reference
+                                </strong>
+
+                                <br>
+
+                                {{ reference }}
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="
+                                padding: 0 20px 20px;
+                                color: #6b7280;
+                                font-size: 14px;
+                            ">
+
+                                <strong style="color: #111827;">
+                                    Cohort Start Date
+                                </strong>
+
+                                <br>
+
+                                {{ cohort.start_date|date:"d F Y" }}
+
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+                    <p style="
+                        color: #374151;
+                        font-size: 16px;
+                        line-height: 1.6;
+                    ">
+                        You can now access your learning dashboard and
+                        continue with your RevTech learning journey.
+                    </p>
+
+
+                    <!-- Dashboard Button -->
+                    <div style="
+                        text-align: center;
+                        margin: 30px 0;
+                    ">
+
+                        <a
+                            href="{{ dashboard_url }}"
+                            style="
+                                display: inline-block;
+                                padding: 14px 25px;
+                                background-color: #111827;
+                                color: #ffffff;
+                                text-decoration: none;
+                                border-radius: 6px;
+                                font-weight: bold;
+                            "
+                        >
+                            Go to Dashboard
+                        </a>
+
+                    </div>
+
+
+                    <p style="
+                        color: #374151;
+                        font-size: 16px;
+                        line-height: 1.6;
+                    ">
+                        We're excited to have you with us.
+                        Welcome to RevTech Institute!
+                    </p>
+
+                </td>
+            </tr>
+
+
+            <!-- Footer -->
+            <tr>
+                <td style="
+                    padding: 25px;
+                    text-align: center;
+                    background-color: #f9fafb;
+                    color: #6b7280;
+                    font-size: 13px;
+                ">
+
+                    <p style="margin: 0;">
+                        © {% now "Y" %} RevTech Institute
+                    </p>
+
+                    <p style="margin: 8px 0 0;">
+                        Practical technology education for the future.
+                    </p>
+
+                </td>
+            </tr>
+
+        </table>
+
+    </td>
+</tr>
+
+
+</table>
+
+</body>
+</html>

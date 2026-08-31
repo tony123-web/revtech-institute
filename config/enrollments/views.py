@@ -6,7 +6,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
-
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 from cohorts.models import Cohort
 from .models import Enrollment
 
@@ -15,6 +16,56 @@ import hmac
 import json
 import uuid
 import requests
+
+
+def send_enrollment_confirmation_email(
+    enrollment,
+    reference
+):
+    student = enrollment.student
+    cohort = enrollment.cohort
+    program = cohort.program
+
+    dashboard_url = (
+        "http://127.0.0.1:8000/dashboard/"
+    )
+
+    html_message = render_to_string(
+        "enrollments/emails/enrollment_confirmation.html",
+        {
+            "student": student,
+            "enrollment": enrollment,
+            "cohort": cohort,
+            "program": program,
+            "reference": reference,
+            "dashboard_url": dashboard_url,
+        }
+    )
+
+    text_message = (
+        f"Hello {student.first_name or student.username},\n\n"
+        "Your payment has been successfully verified "
+        "and your enrollment is now active.\n\n"
+        f"Program: {program.title}\n"
+        f"Cohort: {cohort.name}\n"
+        f"Amount Paid: ₦{enrollment.amount_paid:,.2f}\n"
+        f"Payment Reference: {reference}\n\n"
+        "Welcome to RevTech Institute!"
+    )
+
+    email = EmailMultiAlternatives(
+        subject="Payment Confirmed — Welcome to RevTech Institute",
+        body=text_message,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[student.email],
+    )
+
+    email.attach_alternative(
+        html_message,
+        "text/html"
+    )
+
+    email.send(fail_silently=False)
 
 
 def verify_and_activate_enrollment(enrollment, reference):
@@ -87,7 +138,6 @@ def verify_and_activate_enrollment(enrollment, reference):
             "payment_date",
         ]
     )
-
     return True, "Payment successful! Your enrollment is now active."
 
 @login_required
@@ -559,7 +609,10 @@ def paystack_confirm_revtech(request):
         enrollment,
         reference
     )
-
+    send_enrollment_confirmation_email(
+        enrollment,
+        reference
+    )
     if not success:
         return JsonResponse(
             {
