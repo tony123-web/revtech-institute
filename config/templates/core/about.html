@@ -1,21 +1,235 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}
-About | RevTech Institute
+About RevTech
 {% endblock %}
 
 {% block content %}
 
-<h1>About RevTech Institute</h1>
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
 
-<p>
-    RevTech Institute is a technology learning platform focused
-    on practical, career-oriented education.
-</p>
+<div class="about-page">
 
-<p>
-    Our goal is to help learners develop relevant technical skills,
-    build real projects and create opportunities through technology.
-</p>
+<!-- HERO -->
+
+<section class="about-hero">
+
+    <span class="about-label">
+        ABOUT REVTECH
+    </span>
+
+    <h1>
+        Building the next generation of
+        technology professionals.
+    </h1>
+
+    <p>
+        RevTech is a practical technology learning platform
+        focused on helping students develop the skills,
+        confidence and experience needed to build real-world
+        solutions.
+    </p>
+
+</section>
+
+
+<!-- OUR STORY -->
+
+<section class="about-section">
+
+    <div class="about-section-heading">
+
+        <span>
+            OUR STORY
+        </span>
+
+        <h2>
+            Learning should lead to building.
+        </h2>
+
+    </div>
+
+    <div class="about-text">
+
+        <p>
+            RevTech was created to provide a practical and
+            accessible environment where aspiring technology
+            professionals can learn by doing.
+        </p>
+
+        <p>
+            We believe that understanding concepts is only
+            the beginning. Students should have the opportunity
+            to apply what they learn through projects,
+            assignments, collaboration and problem solving.
+        </p>
+
+        <p>
+            Our programs are designed to take learners from
+            foundational concepts to practical projects that
+            demonstrate what they can actually do.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- MISSION -->
+
+<section class="about-highlight">
+
+    <div>
+
+        <span>
+            OUR MISSION
+        </span>
+
+        <h2>
+            Make practical technology education
+            more accessible.
+        </h2>
+
+        <p>
+            We aim to create an environment where students
+            can develop valuable technology skills without
+            being limited by expensive training programs
+            or a lack of practical experience.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- VALUES -->
+
+<section class="values-section">
+
+    <div class="about-section-heading">
+
+        <span>
+            WHAT WE VALUE
+        </span>
+
+        <h2>
+            How we approach learning.
+        </h2>
+
+    </div>
+
+
+    <div class="values-grid">
+
+        <div class="value-card">
+
+            <h3>
+                Practical Learning
+            </h3>
+
+            <p>
+                We focus on applying concepts through
+                projects, assignments and real-world
+                problem solving.
+            </p>
+
+        </div>
+
+
+        <div class="value-card">
+
+            <h3>
+                Consistency
+            </h3>
+
+            <p>
+                Technology is built through continuous
+                learning and practice. We encourage students
+                to keep building beyond the classroom.
+            </p>
+
+        </div>
+
+
+        <div class="value-card">
+
+            <h3>
+                Collaboration
+            </h3>
+
+            <p>
+                Students learn better when they can ask
+                questions, share ideas and work with others.
+            </p>
+
+        </div>
+
+
+        <div class="value-card">
+
+            <h3>
+                Real Projects
+            </h3>
+
+            <p>
+                Our goal is for students to leave with
+                evidence of their skills through projects
+                they can share with others.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- VISION -->
+
+<section class="about-vision">
+
+    <span>
+        OUR VISION
+    </span>
+
+    <h2>
+        From learning technology
+        to creating with technology.
+    </h2>
+
+    <p>
+        We envision a growing community of learners who
+        don't just consume technology but develop the
+        skills to build solutions, create opportunities
+        and contribute meaningfully to the technology
+        ecosystem.
+    </p>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="about-cta">
+
+    <h2>
+        Ready to start building?
+    </h2>
+
+    <p>
+        Explore our programs and discover the next
+        opportunity to grow your technology skills.
+    </p>
+
+    <a href="{% url 'courses' %}">
+        Explore Programs
+    </a>
+
+</section>
+
+
+</div>
 
 {% endblock %}

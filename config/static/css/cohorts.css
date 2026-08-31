@@ -1,0 +1,523 @@
+/* =========================================================
+REVTECH — UPCOMING COHORT
+========================================================= */
+
+.upcoming-cohort-page {
+width: 100%;
+max-width: 1200px;
+margin: 0 auto;
+padding: 40px 20px 80px;
+}
+
+/* =========================================================
+HERO
+========================================================= */
+
+.upcoming-hero {
+padding: 80px 40px;
+border-radius: 24px;
+background: var(--card-bg, #111827);
+color: var(--text-color, #ffffff);
+margin-bottom: 30px;
+}
+
+.upcoming-hero-content {
+max-width: 800px;
+margin: 0 auto;
+text-align: center;
+}
+
+.cohort-label {
+display: inline-block;
+font-size: 0.75rem;
+font-weight: 700;
+letter-spacing: 2px;
+margin-bottom: 15px;
+opacity: 0.65;
+}
+
+.upcoming-hero h1 {
+font-size: clamp(2.3rem, 6vw, 4rem);
+line-height: 1.1;
+margin: 0 0 15px;
+}
+
+.upcoming-program {
+font-size: 1.2rem;
+font-weight: 600;
+margin-bottom: 18px;
+opacity: 0.8;
+}
+
+.upcoming-description {
+max-width: 650px;
+margin: 0 auto;
+line-height: 1.8;
+opacity: 0.75;
+}
+
+.upcoming-actions {
+margin-top: 30px;
+}
+
+/* =========================================================
+BUTTON
+========================================================= */
+
+.cohort-primary-button {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 14px 28px;
+border-radius: 10px;
+background: #ffffff;
+color: #111827;
+text-decoration: none;
+font-size: 0.95rem;
+font-weight: 700;
+transition:
+transform 0.2s ease,
+opacity 0.2s ease;
+}
+
+.cohort-primary-button:hover {
+transform: translateY(-2px);
+opacity: 0.9;
+}
+
+/* =========================================================
+COHORT INFORMATION
+========================================================= */
+
+.cohort-info {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 15px;
+margin-bottom: 30px;
+}
+
+.info-card {
+padding: 25px 20px;
+border: 1px solid var(--border-color, #e5e7eb);
+border-radius: 15px;
+background: var(--card-bg, );
+}
+
+.info-card span {
+display: block;
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 1px;
+opacity: 0.55;
+margin-bottom: 8px;
+}
+
+.info-card strong {
+font-size: 1rem;
+}
+
+/* =========================================================
+REGISTRATION NOTICE
+========================================================= */
+
+.registration-notice {
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 20px;
+padding: 25px 30px;
+border-radius: 15px;
+border: 1px solid var(--border-color, #e5e7eb);
+background: var(--card-bg, #111827);
+margin-bottom: 80px;
+}
+
+.registration-notice span {
+display: block;
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 1px;
+opacity: 0.55;
+margin-bottom: 5px;
+}
+
+.registration-notice strong {
+font-size: 1rem;
+}
+
+.notice-button {
+display: inline-flex;
+padding: 11px 20px;
+border-radius: 8px;
+text-decoration: none;
+background: var(--primary-color, #111827);
+color: #ffffff;
+font-size: 0.85rem;
+font-weight: 700;
+}
+
+/* =========================================================
+SECTION HEADING
+========================================================= */
+
+.section-heading {
+text-align: center;
+max-width: 700px;
+margin: 0 auto 50px;
+}
+
+.section-heading > span {
+display: inline-block;
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 2px;
+opacity: 0.55;
+margin-bottom: 8px;
+}
+
+.section-heading h2 {
+font-size: 2.4rem;
+margin: 0 0 12px;
+}
+
+.section-heading p {
+line-height: 1.7;
+opacity: 0.7;
+}
+
+/* =========================================================
+WEEK
+========================================================= */
+
+.upcoming-week {
+max-width: 950px;
+margin: 0 auto 35px;
+padding: 30px;
+border: 1px solid var(--border-color, #e5e7eb);
+border-radius: 18px;
+background: var(--card-bg, );
+}
+
+.upcoming-week-header {
+padding-bottom: 20px;
+border-bottom: 1px solid var(--border-color, #e5e7eb);
+}
+
+.upcoming-week-header span {
+display: block;
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 1px;
+opacity: 0.5;
+margin-bottom: 6px;
+}
+
+.upcoming-week-header h3 {
+margin: 0;
+font-size: 1.45rem;
+}
+
+.upcoming-week > p {
+line-height: 1.7;
+font-size: 0.9rem;
+opacity: 0.7;
+margin: 20px 0;
+}
+
+/* =========================================================
+MODULES
+========================================================= */
+
+.upcoming-modules {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+.upcoming-module {
+padding: 20px;
+border-radius: 12px;
+background: var(--secondary-bg, );
+}
+
+.upcoming-module h4 {
+margin: 0 0 8px;
+font-size: 1rem;
+}
+
+.upcoming-module p {
+font-size: 0.88rem;
+line-height: 1.6;
+opacity: 0.7;
+margin: 0 0 15px;
+}
+
+.upcoming-module ul {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+.upcoming-module li {
+padding: 7px 0 7px 22px;
+font-size: 0.85rem;
+line-height: 1.5;
+position: relative;
+opacity: 0.8;
+}
+
+.upcoming-module li::before {
+content: "✓";
+position: absolute;
+left: 0;
+font-weight: 700;
+}
+
+/* =========================================================
+FINAL CTA
+========================================================= */
+
+.cohort-final-cta {
+margin-top: 90px;
+padding: 70px 30px;
+text-align: center;
+border-radius: 22px;
+background: var(--card-bg, #111827);
+color: #ffffff;
+}
+
+.cohort-final-cta > span {
+display: block;
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 2px;
+opacity: 0.6;
+margin-bottom: 10px;
+}
+
+.cohort-final-cta h2 {
+font-size: 2.2rem;
+margin: 0 0 12px;
+}
+
+.cohort-final-cta p {
+max-width: 550px;
+margin: 0 auto 25px;
+line-height: 1.7;
+opacity: 0.7;
+}
+
+/* =========================================================
+NO UPCOMING COHORT
+========================================================= */
+
+.no-upcoming-cohort {
+max-width: 750px;
+margin: 70px auto;
+padding: 70px 30px;
+text-align: center;
+border: 1px dashed var(--border-color, #d1d5db);
+border-radius: 20px;
+}
+
+.no-upcoming-cohort > span {
+display: block;
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 2px;
+opacity: 0.5;
+margin-bottom: 12px;
+}
+
+.no-upcoming-cohort h1 {
+font-size: 2.2rem;
+margin-bottom: 15px;
+}
+
+.no-upcoming-cohort p {
+max-width: 500px;
+margin: 0 auto 25px;
+line-height: 1.7;
+opacity: 0.7;
+}
+
+/* =========================================================
+DARK MODE
+========================================================= */
+
+@media (prefers-color-scheme: dark) {
+
+```
+.info-card,
+.registration-notice,
+.upcoming-week {
+    background: var(--card-bg, #111827);
+    border-color: var(--border-color, #263244);
+}
+
+.upcoming-module {
+    background: var(--secondary-bg, #172033);
+}
+```
+
+}
+
+/* =========================================================
+TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+```
+.cohort-info {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.upcoming-hero {
+    padding: 60px 30px;
+}
+```
+
+}
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+```
+.upcoming-cohort-page {
+    padding: 25px 15px 60px;
+}
+
+.upcoming-hero {
+    padding: 50px 20px;
+    border-radius: 18px;
+}
+
+.upcoming-hero h1 {
+    font-size: 2.2rem;
+}
+
+.upcoming-description {
+    font-size: 0.92rem;
+}
+
+.cohort-info {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.info-card {
+    padding: 18px 14px;
+}
+
+.registration-notice {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px;
+    margin-bottom: 60px;
+}
+
+.notice-button {
+    width: 100%;
+    justify-content: center;
+}
+
+.section-heading h2 {
+    font-size: 1.9rem;
+}
+
+.upcoming-week {
+    padding: 20px;
+}
+
+.upcoming-week-header h3 {
+    font-size: 1.2rem;
+}
+
+.cohort-final-cta {
+    padding: 50px 20px;
+    margin-top: 65px;
+}
+
+.cohort-final-cta h2 {
+    font-size: 1.8rem;
+}
+
+.cohort-primary-button {
+    width: 100%;
+}
+```
+
+}
+
+
+/* =========================================================
+   COLLAPSIBLE WEEKS
+   ========================================================= */
+
+.upcoming-week {
+    overflow: hidden;
+}
+
+.upcoming-week-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    list-style: none;
+    padding: 5px 0;
+}
+
+.upcoming-week-header::-webkit-details-marker {
+    display: none;
+}
+
+.upcoming-week-header::marker {
+    display: none;
+}
+
+.upcoming-week-header h3 {
+    margin: 0;
+}
+
+.week-toggle {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--border-color, #e5e7eb);
+    font-size: 1.3rem;
+    transition: transform 0.2s ease;
+}
+
+.upcoming-week[open] .week-toggle {
+    transform: rotate(45deg);
+}
+
+.week-description {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color, #e5e7eb);
+}
+
+.upcoming-module li {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.upcoming-module li span {
+    font-size: 0.75rem;
+    opacity: 0.5;
+    white-space: nowrap;
+}
+
+
+
+

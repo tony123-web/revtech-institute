@@ -49,7 +49,7 @@ structured learning, mentorship, projects and collaborative experiences.
                 </a>
 
                 <a
-                    href="{% url 'cohorts' %}"
+                    href="{% url 'recent_upcoming_cohort' %}"
                     class="secondary-button"
                 >
                     View Upcoming Cohort
@@ -62,6 +62,115 @@ structured learning, mentorship, projects and collaborative experiences.
     </div>
 
 </section>
+
+<!-- =====================================================
+     STUDENT PROJECTS
+     ===================================================== -->
+
+<section class="home-projects">
+
+<div class="home-projects-header">
+
+    <span>STUDENT PROJECTS</span>
+
+    <h2>
+        See what our students are building.
+    </h2>
+
+    <p>
+        Explore projects created by RevTech students
+        as they apply what they learn to real-world
+        problems.
+    </p>
+
+</div>
+
+
+<div class="home-projects-grid">
+
+    {% for project in featured_projects %}
+
+        <article class="home-project-card">
+
+            {% if project.images.first %}
+
+                <a href="{% url 'project_detail' project.id %}">
+
+                    <img
+                        src="{{ project.images.first.image.url }}"
+                        alt="{{ project.title }}"
+                    >
+
+                </a>
+
+            {% endif %}
+
+
+            <div class="home-project-content">
+
+                <small>
+                    {{ project.cohort.name }}
+                </small>
+
+                <h3>
+                    {{ project.title }}
+                </h3>
+
+                <p>
+                    {{ project.description|truncatewords:18 }}
+                </p>
+
+
+                <div class="home-project-footer">
+
+                    <span>
+                        {% if project.student.get_full_name %}
+                            {{ project.student.get_full_name }}
+                        {% else %}
+                            {{ project.student.username }}
+                        {% endif %}
+                    </span>
+
+                    <a
+                        href="{% url 'project_detail' project.id %}"
+                    >
+                        View →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    {% empty %}
+
+        <p class="home-projects-empty">
+            Student projects will appear here soon.
+        </p>
+
+    {% endfor %}
+
+</div>
+
+
+{% if featured_projects %}
+
+    <div class="home-projects-action">
+
+        <a href="{% url 'project_list' %}">
+            View All Projects
+        </a>
+
+    </div>
+
+{% endif %}
+
+
+</section>
+
+
+
 
 
 <!-- =====================================================
@@ -323,22 +432,19 @@ structured learning, mentorship, projects and collaborative experiences.
                 </span>
 
                 <h2>
-                    RevTech October Cohort
+                    {{cohort.name}}
                 </h2>
 
-                <p>
-                    A practical technology learning experience
-                    designed to help students build foundational
-                    skills, work on projects and develop a
-                    portfolio of real work.
+                <p style="white-space: pre-line;">
+                    {{cohort.description}}
                 </p>
 
 
                 <div class="cohort-meta">
 
                     <div>
-                        <span>Duration</span>
-                        <strong>3 Months</strong>
+                        <span>Capacity</span>
+                        <strong>{{cohort.capacity}}</strong>
                     </div>
 
                     <div>
@@ -359,7 +465,7 @@ structured learning, mentorship, projects and collaborative experiences.
             <div class="cohort-action">
 
                 <a
-                    href="{% url 'cohorts' %}"
+                    href="{% url 'recent_upcoming_cohort' %}"
                     class="primary-button"
                 >
                     View Cohort
@@ -374,64 +480,7 @@ structured learning, mentorship, projects and collaborative experiences.
 </section>
 
 
-<!-- =====================================================
-     STUDENT PROJECTS
-     ===================================================== -->
 
-<section class="section">
-
-    <div class="container">
-
-        <div class="section-heading centered">
-
-            <span class="section-label">
-                Student Work
-            </span>
-
-            <h2>
-                See what our learners build.
-            </h2>
-
-            <p>
-                Projects will be showcased here as students
-                progress through their programs.
-            </p>
-
-        </div>
-
-
-        <div class="project-preview">
-
-            <div class="project-placeholder">
-                <span class="project-placeholder-icon">
-                    ◇
-                </span>
-                <h3>
-                    Student projects are coming soon.
-                </h3>
-                <p>
-                    As our cohorts progress, this space will showcase
-                    projects built by RevTech learners.
-                </p>
-            </div>
-
-        </div>
-
-
-        <div class="center-button">
-
-            <a
-                href="{% url 'projects' %}"
-                class="secondary-button"
-            >
-                Explore Student Projects
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
 
 
 <!-- =====================================================

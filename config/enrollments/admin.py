@@ -9,12 +9,15 @@ class EnrollmentAdmin(admin.ModelAdmin):
     list_display = (
         "student",
         "cohort",
+        "status",
         "payment_verified",
         "is_active",
-        "enrolled_at",
+        "amount_paid",
+        "payment_date",
     )
 
     list_filter = (
+        "status",
         "payment_verified",
         "is_active",
         "cohort",
@@ -24,8 +27,11 @@ class EnrollmentAdmin(admin.ModelAdmin):
         "student__username",
         "student__email",
         "cohort__name",
+        "payment_reference",
     )
 
-    ordering = (
-        "-enrolled_at",
+    readonly_fields = (
+        "payment_reference",
+        "payment_date",
+        "amount_paid",
     )

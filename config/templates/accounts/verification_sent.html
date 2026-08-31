@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Verify Your Email | RevTech Institute
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-page">
+
+    <div class="auth-container">
+
+        <div class="auth-header">
+
+            <span class="section-label">
+
+            </span>
+
+            <h1>
+                Check your email
+            </h1>
+
+            <p>
+                We've sent a verification link to your email address.
+            </p>
+
+        </div>
+
+        <div class="auth-card">
+
+            <p>
+                Please check your inbox and click the verification
+                link to activate your RevTech account.
+            </p>
+
+            <p>
+                If you don't see the email, check your spam or
+                junk folder.
+            </p>
+
+            <div class="auth-footer">
+
+                <p>
+                    Already verified?
+                    <a href="{% url 'login' %}">
+                        Login
+                    </a>
+                </p>
+
+                <div class="auth-footer">
+                    <p>
+                        Didn't receive the email?
+                    </p>
+                    <a href="{% url 'resend_verification' %}">
+                        Resend verification email
+                    </a>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

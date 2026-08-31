@@ -1,15 +1,47 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from cohorts.models import SeminarRoom, Discussion
-from courses.models import Lesson,LessonProgress,Module
-from cohorts.forms import DiscussionForm
-from django.db.models import Count, Q
 from django.http import JsonResponse
+from django.views.decorators.http import require_GET
+from django.core.files.storage import default_storage
+from cohorts.models import SeminarRoom, Discussion,DiscussionReply,Cohort
+from courses.forms import AssignmentSubmissionForm
+from courses.models import Lesson,LessonProgress,Module,Assignment,AssignmentSubmission
+from cohorts.forms import DiscussionForm
+from projects.models import Project
+from django.db.models import Count, Q
+from django.db import models
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404
 
 
 def home(request):
-    return render(request, "core/home.html")
+    cohort = (
+        Cohort.objects
+        .filter(is_open=True)
+        .select_related("program")
+        .prefetch_related(
+            "weeks__modules__lessons"
+        )
+        .order_by("start_date")
+        .first()
+    )
+    featured_projects = Project.objects.filter(
+        is_published=True,
+        is_featured=True
+    ).select_related(
+        "student",
+        "cohort"
+    ).prefetch_related(
+        "images"
+    )[:2]
+
+    return render(request, "core/home.html",
+                  {
+                      "cohort":cohort,
+                      'featured_projects':featured_projects
+                }
+    )
 
 
 def about(request):
@@ -22,7 +54,9 @@ def contact(request):
 
 @login_required
 def dashboard(request):
-
+    profile = request.user.profile
+    if not profile.is_complete:
+        return redirect("complete_profile")
     enrollments = request.user.enrollments.filter(
         is_active=True
     ).select_related(
@@ -93,31 +127,34 @@ def dashboard(request):
     )
 
 @login_required
-def cohort_detail(request, cohort_id):
-    enrollment = get_object_or_404(
-        request.user.enrollments.select_related(
-            "cohort",
-            "cohort__program"
+def core_cohort_detail(request, slug):
+    cohort = get_object_or_404(
+        Cohort.objects.prefetch_related(
+            "weeks__modules__lessons",
+            "weeks__modules__lessons__assignments",
         ),
-        cohort_id=cohort_id,
-        is_active=True
+        slug=slug,
     )
 
-    cohort = enrollment.cohort
+    enrollment = request.user.enrollments.filter(
+        cohort=cohort,
+        is_active=True,
+    ).first()
 
-    modules = cohort.modules.filter(
-        is_active=True
-    ).prefetch_related(
-        "lessons"
-    )
+    if not enrollment:
+        return render(
+            request,
+            "core/access_denied.html",
+            status=403,
+        )
 
     return render(
         request,
         "core/cohort_detail.html",
         {
             "cohort": cohort,
-            "modules": modules,
-        }
+            "weeks": cohort.weeks.all(),
+        },
     )
 
 @login_required
@@ -160,6 +197,14 @@ def module_detail(request, module_id):
 
 @login_required
 def seminar_room(request, cohort_id):
+    cohort = get_object_or_404(
+        Cohort.objects.prefetch_related(
+            "weeks__modules__lessons",
+            "weeks__modules__lessons__assignments",
+            "announcements",
+        ),
+        id=cohort_id,
+    )
     seminar_room = get_object_or_404(
         SeminarRoom,
         cohort_id=cohort_id,
@@ -178,11 +223,46 @@ def seminar_room(request, cohort_id):
     resources = seminar_room.resources.filter(
         is_active=True
     )
+    assignments = Assignment.objects.filter(
+        lesson__module__cohort=seminar_room.cohort,
+        is_active=True
+    ).select_related(
+        "lesson",
+        "lesson__module"
+    ).prefetch_related(
+        "submissions"
+    )
+    submissions = AssignmentSubmission.objects.filter(
+        assignment__lesson__module__cohort=seminar_room.cohort
+    ).select_related(
+        "student",
+        "assignment",
+    )
 
+    if request.user.is_staff:
+        visible_submissions = submissions
+    else:
+        visible_submissions = submissions.filter(
+            models.Q(student=request.user) |
+            models.Q(is_visible_to_cohort=True)
+        )
     context = {
         "seminar_room": seminar_room,
         "cohort": seminar_room.cohort,
         "resources": resources,
+        "assignments":assignments,
+        "weeks": cohort.weeks.all(),
+        "submissions": visible_submissions,
+        "enrollment": enrollment,
+        "announcements": cohort.announcements.filter(
+            is_active=True
+        ),
+        "members": cohort.enrollments.filter(
+            is_active=True
+        ).select_related("student"),
+        "projects": cohort.projects.filter(
+            is_published=True
+        ).select_related("student"),
     }
 
     return render(
@@ -272,6 +352,48 @@ def create_discussion(request, cohort_id):
     )
 
 @login_required
+def create_reply(request, discussion_id):
+    discussion = get_object_or_404(
+        Discussion.objects.select_related(
+            "seminar_room",
+            "seminar_room__cohort"
+        ),
+        id=discussion_id,
+        is_active=True
+    )
+
+    cohort = discussion.seminar_room.cohort
+
+    enrollment = request.user.enrollments.filter(
+        cohort=cohort,
+        is_active=True
+    ).first()
+
+    if not enrollment:
+        return render(
+            request,
+            "core/access_denied.html",
+            status=403
+        )
+
+    if request.method == "POST":
+
+        content = request.POST.get("content", "").strip()
+
+        if content:
+
+            DiscussionReply.objects.create(
+                discussion=discussion,
+                author=request.user,
+                content=content
+            )
+
+    return redirect(
+        "discussion_detail",
+        discussion_id=discussion.id
+    )
+
+@login_required
 def discussion_detail(request, discussion_id):
     discussion = get_object_or_404(
         Discussion.objects.select_related(
@@ -318,28 +440,28 @@ def lesson_detail(request, lesson_id):
         Lesson.objects.select_related(
             "module",
             "module__cohort",
-            "module__cohort__program"
         ),
         id=lesson_id,
-        is_active=True
+        is_active=True,
     )
 
     cohort = lesson.module.cohort
 
     enrollment = request.user.enrollments.filter(
         cohort=cohort,
-        is_active=True
+        is_active=True,
     ).first()
 
     if not enrollment:
         return render(
             request,
             "core/access_denied.html",
-            status=403
+            status=403,
         )
 
-    assignments = lesson.assignments.filter(
-        is_active=True
+    progress, created = LessonProgress.objects.get_or_create(
+        student=request.user,
+        lesson=lesson,
     )
 
     return render(
@@ -349,78 +471,266 @@ def lesson_detail(request, lesson_id):
             "lesson": lesson,
             "module": lesson.module,
             "cohort": cohort,
-            "assignments": assignments,
-        }
+            "progress": progress,
+        },
     )
 
+
 @login_required
-def update_lesson_progress(request, lesson_id):
-    if request.method != "POST":
-        return JsonResponse(
-            {"error": "POST request required."},
-            status=405
-        )
+@require_GET
+def lesson_video_url(request, lesson_id):
     lesson = get_object_or_404(
-        Lesson,
+        Lesson.objects.select_related(
+            "module",
+            "module__cohort",
+        ),
         id=lesson_id,
-        is_active=True
+        is_active=True,
     )
+    cohort = lesson.module.cohort
     enrollment = request.user.enrollments.filter(
-        cohort__program=lesson.module.program,
-        is_active=True
+        cohort=cohort,
+        is_active=True,
     ).first()
 
     if not enrollment:
         return JsonResponse(
-            {"error": "You are not enrolled in this program."},
-            status=403
+            {"error": "You are not enrolled in this cohort."},
+            status=403,
         )
 
-    watched_seconds = request.POST.get(
-        "watched_seconds",
-        0
+    if not lesson.video_file:
+        return JsonResponse(
+            {"error": "No uploaded video available."},
+            status=404,
+        )
+
+    video_url = default_storage.url(
+        lesson.video_file.name
     )
 
-    try:
-        watched_seconds = int(watched_seconds)
-    except (TypeError, ValueError):
-        watched_seconds = 0
+    return JsonResponse({
+        "url": video_url
+    })
 
-    watched_seconds = min(
-        watched_seconds,
-        lesson.duration_seconds
+
+@login_required
+@require_POST
+def update_lesson_progress(request, lesson_id):
+    lesson = get_object_or_404(
+        Lesson,
+        id=lesson_id,
+        is_active=True,
     )
+
+    enrollment = request.user.enrollments.filter(
+        cohort=lesson.module.cohort,
+        is_active=True,
+    ).first()
+
+    if not enrollment:
+        return JsonResponse(
+            {"error": "Access denied."},
+            status=403,
+        )
 
     progress, created = LessonProgress.objects.get_or_create(
         student=request.user,
-        lesson=lesson
+        lesson=lesson,
     )
 
-    progress.watched_seconds = max(
-        progress.watched_seconds,
+    try:
+        watched_seconds = int(
+            request.POST.get(
+                "watched_seconds",
+                0
+            )
+        )
+    except (TypeError, ValueError):
+        watched_seconds = 0
+
+    # Never allow negative values.
+    watched_seconds = max(
+        0,
         watched_seconds
     )
 
-    if lesson.duration_seconds > 0:
-
-        completion_percentage = (
-            progress.watched_seconds /
+    # Never allow watched time beyond the actual lesson duration.
+    if lesson.duration_seconds:
+        watched_seconds = min(
+            watched_seconds,
             lesson.duration_seconds
-        ) * 100
+        )
 
-        if completion_percentage >= 90:
+    # Don't allow progress to move backwards.
+    if watched_seconds > progress.watched_seconds:
+        progress.watched_seconds = watched_seconds
+
+    # 90% completion rule
+    if lesson.duration_seconds:
+        completion_threshold = (
+            lesson.duration_seconds * 0.90
+        )
+
+        if progress.watched_seconds >= completion_threshold:
+
             progress.completed = True
 
-    if progress.completed and not progress.completed_at:
-        from django.utils import timezone
-        progress.completed_at = timezone.now()
+            if not progress.completed_at:
+                from django.utils import timezone
+
+                progress.completed_at = timezone.now()
 
     progress.save()
 
+    percentage = 0
+
+    if lesson.duration_seconds:
+
+        percentage = min(
+            100,
+            round(
+                (
+                    progress.watched_seconds /
+                    lesson.duration_seconds
+                ) * 100
+            )
+        )
+
     return JsonResponse({
         "watched_seconds": progress.watched_seconds,
+        "percentage": percentage,
         "completed": progress.completed,
     })
+
+@login_required
+def assignment_detail(request, assignment_id):
+    assignment = get_object_or_404(
+        Assignment.objects.select_related(
+            "lesson",
+            "lesson__module",
+            "lesson__module__cohort",
+        ),
+        id=assignment_id,
+        is_active=True,
+    )
+
+    cohort = assignment.lesson.module.cohort
+
+    enrollment = request.user.enrollments.filter(
+        cohort=cohort,
+        is_active=True,
+    ).first()
+
+    if not enrollment:
+        return render(
+            request,
+            "core/access_denied.html",
+            status=403,
+        )
+
+    submission = AssignmentSubmission.objects.filter(
+        assignment=assignment,
+        student=request.user,
+    ).first()
+
+    if request.method == "POST":
+
+        form = AssignmentSubmissionForm(
+            request.POST,
+            instance=submission,
+        )
+
+        if form.is_valid():
+
+            submission = form.save(
+                commit=False
+            )
+
+            submission.assignment = assignment
+            submission.student = request.user
+
+            submission.save()
+
+            return redirect(
+                "assignment_detail",
+                assignment_id=assignment.id,
+            )
+
+    else:
+
+        form = AssignmentSubmissionForm(
+            instance=submission
+        )
+
+    return render(
+        request,
+        "core/assignment_detail.html",
+        {
+            "assignment": assignment,
+            "lesson": assignment.lesson,
+            "module": assignment.lesson.module,
+            "cohort": cohort,
+            "submission": submission,
+            "form": form,
+        },
+    )
+
+@login_required
+def review_submission(request, submission_id):
+    if not request.user.is_staff:
+        return render(
+            request,
+            "core/access_denied.html",
+            status=403
+        )
+
+    submission = get_object_or_404(
+        AssignmentSubmission.objects.select_related(
+            "student",
+            "assignment",
+            "assignment__lesson",
+            "assignment__lesson__module",
+            "assignment__lesson__module__cohort",
+        ),
+        id=submission_id,
+    )
+
+    if request.method == "POST":
+
+        feedback = request.POST.get(
+            "instructor_feedback",
+            ""
+        ).strip()
+
+        submission.instructor_feedback = feedback
+
+        submission.is_visible_to_cohort = (
+            request.POST.get("is_visible_to_cohort") == "on"
+        )
+
+        submission.save()
+
+        return redirect(
+            "seminar_room",
+            cohort_id=(
+                submission.assignment
+                .lesson
+                .module
+                .cohort
+                .id
+            )
+        )
+
+    return render(
+        request,
+        "core/review_submission.html",
+        {
+            "submission": submission,
+        }
+    )
+
+
 
 
 

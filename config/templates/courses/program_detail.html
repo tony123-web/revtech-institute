@@ -1,0 +1,395 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}{{ program.title }} | RevTech{% endblock %}
+
+{% block content %}
+
+
+
+<div class="program-page">
+  <div class="hero-label">
+<!--                Practical Technology Education-->
+            </div>
+
+<!-- =========================================
+     PROGRAM HERO
+     ========================================= -->
+
+<section class="program-hero">
+
+    {% if program.thumbnail %}
+        <div class="program-hero-image">
+            <img
+                src="{{ program.thumbnail.url }}"
+                alt="{{ program.title }}"
+            >
+        </div>
+    {% endif %}
+
+    <div class="program-hero-content">
+
+        <span class="program-label">
+            REVTECH PROGRAM
+        </span>
+
+        <h1>
+            {{ program.title }}
+        </h1>
+
+        <p class="program-short-description">
+            {{ program.short_description }}
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     PROGRAM DESCRIPTION
+     ========================================= -->
+
+<section class="program-about">
+
+    <h2>About This Program</h2>
+
+    <div class="program-description">
+        {{ program.description|linebreaks }}
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     COHORTS
+     ========================================= -->
+
+<section class="program-cohorts">
+
+    <div class="section-heading">
+
+        <span class="program-label">
+            LEARNING COHORTS
+        </span>
+
+        <h2>
+            Available Cohorts
+        </h2>
+
+        <p>
+            Explore the cohorts available for
+            {{ program.title }}.
+        </p>
+
+    </div>
+
+
+    {% if cohorts %}
+
+        <div class="cohorts-container">
+
+            {% for cohort in cohorts %}
+
+                <article class="cohort-card">
+
+                    <!-- COHORT HEADER -->
+
+                    <div class="cohort-header">
+
+                        <div>
+
+                            <span class="cohort-number">
+                                COHORT
+                            </span>
+
+                            <h3>
+                                {{ cohort.name }}
+                            </h3>
+
+                        </div>
+
+
+                        {% if cohort.is_open %}
+
+                            <span class="cohort-status open">
+                                Registration Open
+                            </span>
+
+                        {% else %}
+
+                            <span class="cohort-status closed">
+                                Registration Closed
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- COHORT DESCRIPTION -->
+
+                    {% if cohort.description %}
+
+                        <div class="cohort-description">
+
+                            {{ cohort.description|linebreaks }}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- COHORT DETAILS -->
+
+                    <div class="cohort-details">
+
+                        <div class="cohort-detail">
+
+                            <span>
+                                Start Date
+                            </span>
+
+                            <strong>
+                                {{ cohort.start_date|date:"M d, Y" }}
+                            </strong>
+
+                        </div>
+
+
+                        {% if cohort.end_date %}
+
+                            <div class="cohort-detail">
+
+                                <span>
+                                    End Date
+                                </span>
+
+                                <strong>
+                                    {{ cohort.end_date|date:"M d, Y" }}
+                                </strong>
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <div class="cohort-detail">
+
+                            <span>
+                                Tuition
+                            </span>
+
+                            <strong>
+                                ₦{{ cohort.price|floatformat:2 }}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="cohort-detail">
+
+                            <span>
+                                Capacity
+                            </span>
+
+                            <strong>
+                                {{ cohort.capacity }} Students
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================
+                         CURRICULUM
+                         ================================= -->
+
+                    <div class="curriculum">
+
+                        <h4>
+                            Curriculum
+                        </h4>
+
+
+                        {% for week in cohort.weeks.all %}
+
+                            {% if week.is_active %}
+
+                                <div class="week">
+
+                                    <div class="week-header">
+
+                                        <span class="week-number">
+                                            Week {{ week.week_number }}
+                                        </span>
+
+                                        <h5>
+                                            {{ week.title }}
+                                        </h5>
+
+                                    </div>
+
+
+                                    {% if week.description %}
+
+                                        <p class="week-description">
+                                            {{ week.description }}
+                                        </p>
+
+                                    {% endif %}
+
+
+                                    <!-- MODULES -->
+
+                                    <div class="modules">
+
+                                        {% for module in week.modules.all %}
+
+                                            {% if module.is_active %}
+
+                                                <div class="module">
+
+                                                    <div class="module-header">
+
+                                                        <span class="module-icon">
+                                                            ▸
+                                                        </span>
+
+                                                        <div>
+
+                                                            <h6>
+                                                                {{ module.title }}
+                                                            </h6>
+
+                                                            {% if module.description %}
+
+                                                                <p>
+                                                                    {{ module.description }}
+                                                                </p>
+
+                                                            {% endif %}
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <!-- LESSONS -->
+<ul class="lessons">
+
+    {% for lesson in module.lessons.all %}
+
+        {% if lesson.is_active %}
+
+            <li>
+
+                <span class="lesson-icon">
+                    ✓
+                </span>
+
+                <span>
+                    {{ lesson.title }}
+                </span>
+
+            </li>
+
+        {% endif %}
+
+    {% empty %}
+
+        <li class="no-lessons">
+            Lessons are being prepared.
+        </li>
+
+    {% endfor %}
+
+</ul>
+
+                                                </div>
+
+                                            {% endif %}
+
+                                        {% empty %}
+
+                                            <p class="empty-message">
+                                                Modules are being prepared.
+                                            </p>
+
+                                        {% endfor %}
+
+                                    </div>
+
+                                </div>
+
+                            {% endif %}
+
+                        {% empty %}
+
+                            <p class="empty-message">
+                                The curriculum for this cohort
+                                is being prepared.
+                            </p>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- =================================
+                         ENROLLMENT
+                         ================================= -->
+
+                    <div class="cohort-action">
+
+                        {% if cohort.is_open %}
+
+                            <a
+                                href="{% url 'enroll_in_cohort' cohort.id %}"
+                                class="program-button"
+                            >
+                                Enroll in This Cohort
+                            </a>
+
+                        {% else %}
+
+                            <span class="closed-text">
+                                Registration is currently closed.
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+
+    {% else %}
+
+        <div class="empty-programs">
+
+            <h3>
+                No cohorts available yet
+            </h3>
+
+            <p>
+                New cohorts for this program will be
+                announced soon.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+</div>
+
+{% endblock %}

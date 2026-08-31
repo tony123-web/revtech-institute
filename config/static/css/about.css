@@ -1,0 +1,228 @@
+/* =========================================================
+REVTECH — ABOUT PAGE
+========================================================= */
+
+.about-page {
+max-width: 1200px;
+margin: 0 auto;
+padding: 40px 20px 80px;
+}
+
+/* HERO */
+
+.about-hero {
+text-align: center;
+max-width: 850px;
+margin: 40px auto 100px;
+}
+
+.about-label,
+.about-section-heading span,
+.about-highlight span,
+.about-vision span {
+display: inline-block;
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 2px;
+opacity: 0.55;
+margin-bottom: 12px;
+}
+
+.about-hero h1 {
+font-size: clamp(1.5rem, 4vw, 3.5rem);
+line-height: 1.08;
+margin: 0 0 25px;
+}
+
+.about-hero p {
+max-width: 700px;
+margin: auto;
+font-size: 1.05rem;
+line-height: 1.8;
+opacity: 0.7;
+}
+
+/* GENERAL SECTIONS */
+
+.about-section {
+display: grid;
+grid-template-columns: 0.8fr 1.2fr;
+gap: 80px;
+max-width: 1000px;
+margin: 0 auto 100px;
+}
+
+.about-section-heading h2 {
+font-size: 2.2rem;
+line-height: 1.2;
+margin: 0;
+}
+
+.about-text p {
+line-height: 1.8;
+margin: 0 0 20px;
+opacity: 0.75;
+}
+
+/* MISSION */
+
+.about-highlight {
+max-width: 1000px;
+margin: 0 auto 110px;
+padding: 60px;
+border-radius: 22px;
+background: var(--card-bg, #111827);
+color: #ffffff;
+}
+
+.about-highlight h2 {
+max-width: 700px;
+font-size: 2.5rem;
+line-height: 1.2;
+margin: 0 0 20px;
+}
+
+.about-highlight p {
+max-width: 700px;
+line-height: 1.8;
+opacity: 0.7;
+}
+
+/* VALUES */
+
+.values-section {
+max-width: 1000px;
+margin: 0 auto 110px;
+}
+
+.values-section .about-section-heading {
+text-align: center;
+margin-bottom: 50px;
+}
+
+.values-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 18px;
+}
+
+.value-card {
+padding: 30px;
+border: 1px solid var(--border-color, #e5e7eb);
+border-radius: 16px;
+background: var(--card-bg, #111827);
+}
+
+.value-card h3 {
+margin: 0 0 12px;
+font-size: 1.15rem;
+}
+
+.value-card p {
+margin: 0;
+line-height: 1.7;
+font-size: 0.9rem;
+opacity: 0.7;
+}
+
+/* VISION */
+
+.about-vision {
+max-width: 800px;
+margin: 0 auto 100px;
+text-align: center;
+}
+
+.about-vision h2 {
+font-size: 2.5rem;
+line-height: 1.2;
+margin: 0 0 20px;
+}
+
+.about-vision p {
+line-height: 1.8;
+opacity: 0.7;
+}
+
+/* CTA */
+
+.about-cta {
+text-align: center;
+padding: 65px 25px;
+border-radius: 22px;
+background: var(--card-bg, #111827);
+color: #ffffff;
+}
+
+.about-cta h2 {
+font-size: 2.2rem;
+margin: 0 0 12px;
+}
+
+.about-cta p {
+max-width: 550px;
+margin: 0 auto 25px;
+line-height: 1.7;
+opacity: 0.7;
+}
+
+.about-cta a {
+display: inline-flex;
+padding: 13px 25px;
+border-radius: 9px;
+background: #ffffff;
+color: #111827;
+text-decoration: none;
+font-weight: 700;
+}
+
+/* MOBILE */
+
+@media (max-width: 750px) {
+
+```
+.about-page {
+    padding: 25px 15px 60px;
+}
+
+.about-hero {
+    margin: 30px auto 70px;
+}
+
+.about-section {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-bottom: 70px;
+}
+
+.about-highlight {
+    padding: 40px 25px;
+    margin-bottom: 70px;
+}
+
+.about-highlight h2 {
+    font-size: 2rem;
+}
+
+.values-grid {
+    grid-template-columns: 1fr;
+}
+
+.values-section {
+    margin-bottom: 70px;
+}
+
+.about-vision {
+    margin-bottom: 70px;
+}
+
+.about-vision h2 {
+    font-size: 2rem;
+}
+
+.about-cta h2 {
+    font-size: 1.9rem;
+}
+```
+
+}

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Cohort, SeminarRoom, SeminarResource,Discussion,DiscussionReply
+from .models import Cohort, SeminarRoom, SeminarResource,Discussion,DiscussionReply,Week,Announcement
 
 
 @admin.register(Cohort)
@@ -117,7 +117,52 @@ class DiscussionReplyAdmin(admin.ModelAdmin):
         "discussion__title",
     )
 
+@admin.register(Week)
+class WeekAdmin(admin.ModelAdmin):
 
+    list_display = (
+        "title",
+        "cohort",
+        "week_number",
+        "start_date",
+        "end_date",
+        "is_active",
+    )
 
+    list_filter = (
+        "cohort",
+        "is_active",
+    )
+
+    search_fields = (
+        "title",
+        "cohort__name",
+    )
+
+    ordering = (
+        "cohort",
+        "week_number",
+    )
+
+@admin.register(Announcement)
+class AnnouncementAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "title",
+        "cohort",
+        "created_at",
+        "is_active",
+    )
+
+    list_filter = (
+        "cohort",
+        "is_active",
+    )
+
+    search_fields = (
+        "title",
+        "content",
+        "cohort__name",
+    )
 
 

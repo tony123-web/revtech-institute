@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="assignment-detail-page">
+
+
+<div class="assignment-detail-header">
+
+    <a
+        href="{% url 'seminar_room' cohort.id %}"
+        class="back-link"
+    >
+        ← Seminar Room
+    </a>
+
+    <span class="dashboard-label">
+        {{ module.title }}
+    </span>
+
+    <h1>
+        {{ assignment.title }}
+    </h1>
+
+    <p>
+        {{ lesson.title }}
+    </p>
+
+</div>
+
+
+<!-- Assignment Question -->
+
+<section class="assignment-question-card">
+
+    <span class="card-label">
+        ASSIGNMENT
+    </span>
+
+    <h2>
+        Task
+    </h2>
+
+    <div class="assignment-instructions">
+
+        {{ assignment.instructions|linebreaks }}
+
+    </div>
+
+    {% if assignment.due_date %}
+
+        <p class="assignment-due">
+
+            Due:
+            {{ assignment.due_date|date:"M d, Y H:i" }}
+
+        </p>
+
+    {% endif %}
+
+</section>
+
+
+<!-- Submission -->
+
+<section class="submission-section">
+
+    <div class="section-heading">
+
+        <span class="dashboard-label">
+            YOUR SUBMISSION
+        </span>
+
+        <h2>
+            Submit Your Work
+        </h2>
+
+        <p>
+            Upload your project to GitHub and paste
+            the repository link below.
+        </p>
+
+    </div>
+
+
+    <form
+        method="POST"
+        class="submission-form"
+    >
+
+        {% csrf_token %}
+
+
+        <div class="form-group">
+
+            <label for="{{ form.github_url.id_for_label }}">
+                GitHub Repository
+            </label>
+
+            {{ form.github_url }}
+
+            {{ form.github_url.errors }}
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="{{ form.comment.id_for_label }}">
+                Comment
+            </label>
+
+            {{ form.comment }}
+
+            {{ form.comment.errors }}
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="primary-button"
+        >
+
+            {% if submission %}
+                Update Submission →
+            {% else %}
+                Submit Assignment →
+            {% endif %}
+
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- Existing Submission -->
+
+{% if submission %}
+
+    <section class="existing-submission">
+
+        <span class="dashboard-label">
+            SUBMITTED
+        </span>
+
+        <h2>
+            Your Submission
+        </h2>
+
+        <p>
+            Submitted on
+            {{ submission.submitted_at|date:"M d, Y H:i" }}
+        </p>
+
+        <a
+            href="{{ submission.github_url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="secondary-button"
+        >
+            Open GitHub Repository ↗
+        </a>
+
+
+        {% if submission.instructor_feedback %}
+
+            <div class="instructor-feedback">
+
+                <span class="card-label">
+                    INSTRUCTOR FEEDBACK
+                </span>
+
+                <div>
+                    {{ submission.instructor_feedback|linebreaks }}
+                </div>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+{% endif %}
+
+
+</div>
+
+{% endblock %}

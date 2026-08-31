@@ -1,0 +1,390 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Upcoming Cohort | RevTech
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/cohorts.css' %}">
+
+<div class="upcoming-cohort-page">
+
+<div class="hero-label">
+<!--                Practical Technology Education-->
+            </div>
+{% if cohort %}
+
+    <!-- =========================================
+         HERO
+         ========================================= -->
+
+    <section class="upcoming-hero">
+
+        <div class="upcoming-hero-content">
+
+            <span class="cohort-label">
+                UPCOMING COHORT
+            </span>
+
+            <h1>
+                {{ cohort.name }}
+            </h1>
+
+            {% if cohort.program %}
+
+                <p class="upcoming-program">
+                    {{ cohort.program.title }}
+                </p>
+
+            {% endif %}
+
+            {% if cohort.description %}
+
+                <p class="upcoming-description" style="white-space: pre-line;">
+                    {{ cohort.description }}
+                </p>
+
+            {% endif %}
+
+            <div class="upcoming-actions">
+
+                {% if cohort.is_open %}
+
+                    <a
+                        href="{% url 'enroll_in_cohort' cohort.id %}"
+                        class="cohort-primary-button"
+                    >
+                        Enroll Now
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         COHORT INFORMATION
+         ========================================= -->
+
+    <section class="cohort-info">
+
+        <div class="info-card">
+
+            <span>START DATE</span>
+
+            <strong>
+                {{ cohort.start_date|date:"M d, Y" }}
+            </strong>
+
+        </div>
+
+
+        {% if cohort.end_date %}
+
+            <div class="info-card">
+
+                <span>END DATE</span>
+
+                <strong>
+                    {{ cohort.end_date|date:"M d, Y" }}
+                </strong>
+
+            </div>
+
+        {% endif %}
+
+
+        <div class="info-card">
+
+            <span>INVESTMENT</span>
+
+            <strong>
+                ₦{{ cohort.price|floatformat:2 }}
+            </strong>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <span>CAPACITY</span>
+
+            <strong>
+                {{ cohort.capacity }} Students
+            </strong>
+
+        </div>
+        <div class="info-card">
+
+            <span>SPOTS AVAILABLE</span>
+
+            <strong>
+                {{ available_spots }} Spots
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         REGISTRATION DEADLINE
+         ========================================= -->
+
+    {% if cohort.registration_deadline %}
+
+        <section class="registration-notice">
+
+            <div>
+
+                <span>
+                    REGISTRATION DEADLINE
+                </span>
+
+                <strong>
+                    {{ cohort.registration_deadline|date:"F d, Y" }}
+                </strong>
+
+            </div>
+
+            {% if cohort.is_open %}
+
+                <a
+                    href="{% url 'enroll_in_cohort' cohort.id %}"
+                    class="notice-button"
+                >
+                    Secure Your Spot
+                </a>
+
+            {% endif %}
+
+        </section>
+
+    {% endif %}
+
+
+    <!-- =========================================
+         WHAT YOU WILL LEARN
+         ========================================= -->
+
+    <section class="cohort-curriculum">
+
+        <div class="section-heading">
+
+            <span>
+                CURRICULUM
+            </span>
+
+            <h2>
+                What You'll Learn
+            </h2>
+
+            <p>
+                Explore the learning journey planned
+                for this cohort.
+            </p>
+
+        </div>
+
+
+        {% for week in cohort.weeks.all %}
+
+    {% if week.is_active %}
+
+        <details class="upcoming-week">
+
+            <summary class="upcoming-week-header">
+
+                <div>
+                    <span>
+                        WEEK {{ week.week_number }}
+                    </span>
+
+                    <h3>
+                        {{ week.title }}
+                    </h3>
+                </div>
+
+                <span class="week-toggle">
+                    +
+                </span>
+
+            </summary>
+
+
+            {% if week.description %}
+
+                <p class="week-description">
+                    {{ week.description }}
+                </p>
+
+            {% endif %}
+
+
+            <div class="upcoming-modules">
+
+                {% for module in week.modules.all %}
+
+                    {% if module.is_active %}
+
+                        <div class="upcoming-module">
+
+                            <h4>
+                                {{ module.title }}
+                            </h4>
+
+                            {% if module.description %}
+
+                                <p>
+                                    {{ module.description }}
+                                </p>
+
+                            {% endif %}
+
+
+                            {% if module.lessons.all %}
+
+                                <ul>
+
+                                    {% for lesson in module.lessons.all %}
+
+                                        {% if lesson.is_active %}
+
+                                            <li>
+                                                {{ lesson.title }}
+
+                                                {% if lesson.duration_seconds %}
+                                                    <span>
+                                                        {{ lesson.duration_seconds }} sec
+                                                    </span>
+                                                {% endif %}
+                                            </li>
+
+                                        {% endif %}
+
+                                    {% endfor %}
+
+                                </ul>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endif %}
+
+                {% empty %}
+
+                    <p>
+                        Modules for this week are being prepared.
+                    </p>
+
+                {% endfor %}
+
+            </div>
+
+        </details>
+
+    {% endif %}
+
+{% empty %}
+
+    <div class="empty-curriculum">
+
+        <h3>
+            Curriculum Coming Soon
+        </h3>
+
+        <p>
+            The detailed curriculum for this cohort
+            is currently being prepared.
+        </p>
+
+    </div>
+
+{% endfor %}
+
+    </section>
+
+
+    <!-- =========================================
+         FINAL CTA
+         ========================================= -->
+
+    <section class="cohort-final-cta">
+
+        <span>
+            READY TO START?
+        </span>
+
+        <h2>
+            Join {{ cohort.name }}
+        </h2>
+
+        <p>
+            Take the next step in your technology journey
+            with RevTech.
+        </p>
+
+        {% if cohort.is_open and available_spots > 0 %}
+            <a
+                href="{% url 'enroll_in_cohort' cohort.id %}"
+                class="cohort-primary-button"
+            >
+                Enroll Now
+            </a>
+
+            {% else %}
+
+                <span class="closed-text">
+                    This cohort is currently full.
+                </span>
+
+        {% endif %}
+
+    </section>
+
+
+
+{% else %}
+
+    <!-- =========================================
+         NO UPCOMING COHORT
+         ========================================= -->
+
+    <section class="no-upcoming-cohort">
+
+        <span>
+            REVTECH
+        </span>
+
+        <h1>
+            No Upcoming Cohort Yet
+        </h1>
+
+        <p>
+            We're preparing our next learning cohort.
+            Check back soon for registration details.
+        </p>
+
+        <a
+            href="{% url 'courses' %}"
+            class="cohort-primary-button"
+        >
+            Explore Programs
+        </a>
+
+    </section>
+
+{% endif %}
+
+
+</div>
+
+{% endblock %}

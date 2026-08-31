@@ -1,15 +1,123 @@
 {% extends "base.html" %}
 
 {% block title %}
-Login | RevTech Institute
+    Login | RevTech Institute
 {% endblock %}
 
 {% block content %}
 
-<h1>Login</h1>
+<section class="auth-page">
 
-<p>
-    Student login will be implemented here.
-</p>
+    <div class="auth-container">
+
+        <div class="auth-header">
+
+            <span class="section-label">
+
+            </span>
+
+            <h1>
+                Welcome back
+            </h1>
+
+            <p>
+                Login to continue your RevTech journey.
+            </p>
+
+        </div>
+
+        <div class="auth-card">
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="form-errors">
+                        {% for error in form.non_field_errors %}
+                            <p>
+                                {{ error }}
+                            </p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+
+                    <label for="{{ form.email.id_for_label }}">
+                        Email address
+                    </label>
+
+                    {{ form.email }}
+
+                    {% for error in form.email.errors %}
+                        <small class="form-error">
+                            {{ error }}
+                        </small>
+                    {% endfor %}
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="{{ form.password.id_for_label }}">
+                        Password
+                    </label>
+
+                    {{ form.password }}
+
+                    {% for error in form.password.errors %}
+                        <small class="form-error">
+                            {{ error }}
+                        </small>
+                    {% endfor %}
+
+                </div>
+
+                <div class="auth-forgot-password">
+
+                    <a href="{% url 'password_reset' %}">
+                        Forgot password?
+                    </a>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="primary-button auth-button"
+                >
+                    Login
+                </button>
+
+            </form>
+
+<!--            <div class="auth-divider">-->
+<!--                <span>OR</span>-->
+<!--            </div>-->
+
+<!--            <a-->
+<!--                href="#"-->
+<!--                class="google-button"-->
+<!--            >-->
+<!--                Continue with Google-->
+<!--            </a>-->
+
+            <div class="auth-footer">
+
+                <p>
+                    Don't have an account?
+
+                    <a href="{% url 'register' %}">
+                        Create an account
+                    </a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 {% endblock %}

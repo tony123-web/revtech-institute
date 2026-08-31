@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+My Projects | RevTech
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/projects.css' %}">
+
+<section class="my-projects-page">
+
+<div class="my-projects-header">
+
+    <span>MY WORK</span>
+
+    <h1>
+        My Projects
+    </h1>
+
+    <p>
+        Manage and track the projects you have
+        submitted during your RevTech journey.
+    </p>
+
+</div>
+
+
+{% if projects %}
+
+    <div class="my-projects-grid">
+
+        {% for project in projects %}
+
+            <article class="my-project-card">
+
+                {% if project.images.first %}
+
+                    <img
+                        src="{{ project.images.first.image.url }}"
+                        alt="{{ project.title }}"
+                    >
+
+                {% endif %}
+
+
+                <div class="my-project-content">
+
+                    <span class="project-cohort">
+                        {{ project.cohort.name }}
+                    </span>
+
+                    <h2>
+                        {{ project.title }}
+                    </h2>
+
+                    <p>
+                        {{ project.description|truncatewords:20 }}
+                    </p>
+
+
+                    <div class="project-status">
+
+                        {% if project.is_published %}
+
+                            <span class="status-published">
+                                ✓ Published
+                            </span>
+
+                        {% else %}
+
+                            <span class="status-review">
+                                Under Review
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                  <div class="my-project-actions">
+                        <a href="{% url 'project_detail' project_id=project.id %}">
+                            View Project
+                        </a>
+
+                        {% if not project.is_published %}
+
+                            <a href="{% url 'project_edit' project.id %}">
+                                Edit
+                            </a>
+
+                        {% endif %}
+                  </div>
+
+
+                </div>
+
+            </article>
+
+        {% endfor %}
+
+    </div>
+
+{% else %}
+
+    <div class="no-projects">
+
+        <h2>
+            You haven't submitted a project yet.
+        </h2>
+
+        <p>
+            Complete your project and showcase what
+            you've built at RevTech.
+        </p>
+
+        <a href="{% url 'project_create' %}">
+            Submit Your Project
+        </a>
+
+    </div>
+
+{% endif %}
+
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ cohort.name }} | RevTech Institute
+{% endblock %}
+
+{% block content %}
+
+<section class="cohort-detail-page">
+
+    <div class="cohort-detail-container">
+
+        <div class="cohort-detail-hero">
+
+            <span class="section-label">
+                {{ cohort.program.title }}
+            </span>
+
+            <h1>
+                {{ cohort.name }}
+            </h1>
+
+            {% if cohort.description %}
+
+                <p>
+                    {{ cohort.description }}
+                </p>
+
+            {% endif %}
+
+            <div class="cohort-detail-price">
+
+                <span>
+                    Cohort Fee
+                </span>
+
+                <strong>
+                    ₦{{ cohort.price|floatformat:2 }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="cohort-information">
+
+            <div class="cohort-info-item">
+
+                <span>
+                    Start Date
+                </span>
+
+                <strong>
+                    {{ cohort.start_date|date:"M d, Y" }}
+                </strong>
+
+            </div>
+
+
+            {% if cohort.end_date %}
+
+                <div class="cohort-info-item">
+
+                    <span>
+                        End Date
+                    </span>
+
+                    <strong>
+                        {{ cohort.end_date|date:"M d, Y" }}
+                    </strong>
+
+                </div>
+
+            {% endif %}
+
+
+            {% if cohort.registration_deadline %}
+
+                <div class="cohort-info-item">
+
+                    <span>
+                        Registration Deadline
+                    </span>
+
+                    <strong>
+                        {{ cohort.registration_deadline|date:"M d, Y" }}
+                    </strong>
+
+                </div>
+
+            {% endif %}
+
+
+            <div class="cohort-info-item">
+
+                <span>
+                    Capacity
+                </span>
+
+                <strong>
+                    {{ cohort.capacity }} students
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="cohort-enrollment-cta">
+
+            <h2>
+                Ready to join this cohort?
+            </h2>
+
+            <p>
+                Secure your place and begin your RevTech learning journey.
+            </p>
+
+            {% if request.user.is_authenticated %}
+
+                <a
+                    href="{% url 'enroll_in_cohort' cohort.id %}"
+                    class="primary-button"
+                >
+                    Enroll Now
+                </a>
+
+            {% else %}
+
+                <a
+                    href="{% url 'login' %}?next={{ request.path }}"
+                    class="primary-button"
+                >
+                    Login to Enroll
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

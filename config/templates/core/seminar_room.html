@@ -27,8 +27,119 @@
 
 </div>
 
+    <div class="seminar-navigator">
 
-<div class="seminar-grid">
+<button
+    class="seminar-nav-item active"
+    data-section="live"
+    type="button"
+>
+    <span class="nav-icon">🎥</span>
+    <span>Live</span>
+</button>
+
+<button
+    class="seminar-nav-item active"
+    data-section="cohort"
+    type="button"
+>
+    <span class="nav-icon">🎥</span>
+    <span>Cohort</span>
+</button>
+
+<button
+    class="seminar-nav-item"
+    data-section="lessons"
+    type="button"
+>
+    <span class="nav-icon">📚</span>
+    <span>Lessons</span>
+</button>
+
+
+<button
+    class="seminar-nav-item"
+    data-section="assignments"
+    type="button"
+>
+    <span class="nav-icon">📝</span>
+    <span>Assignments</span>
+</button>
+
+
+<button
+    class="seminar-nav-item"
+    data-section="discussion"
+    type="button"
+>
+    <span class="nav-icon">💬</span>
+    <span>Discussion</span>
+</button>
+
+
+<button
+    class="seminar-nav-item"
+    data-section="resources"
+    type="button"
+>
+    <span class="nav-icon">📁</span>
+    <span>Resources</span>
+</button>
+
+
+<button
+    class="seminar-nav-item"
+    data-section="announcements"
+    type="button"
+>
+    <span class="nav-icon">📢</span>
+    <span>Announcements</span>
+</button>
+
+<button
+    class="seminar-nav-item active"
+    data-section="Community"
+    type="button"
+>
+    <span class="nav-icon">👥</span>
+    <span>Community</span>
+</button>
+
+<button
+    class="seminar-nav-item active"
+    data-section="submission"
+    type="button"
+>
+    <span class="nav-icon">📝</span>
+    <span>submission</span>
+</button>
+
+<button
+    class="seminar-nav-item"
+    data-section="members"
+    type="button"
+>
+    <span class="nav-icon">👥</span>
+    <span>Members</span>
+</button>
+
+
+<button
+    class="seminar-nav-item"
+    data-section="project"
+    type="button"
+>
+    <span class="nav-icon">🚀</span>
+    <span>Project</span>
+</button>
+
+</div>
+
+
+<div
+    class="seminar-panel active"
+    data-panel="live"
+>
 
     <!-- Live Session -->
     <section class="seminar-card">
@@ -67,93 +178,269 @@
 
     </section>
 
+</div>
 
-    <!-- Community -->
-    <section class="seminar-card">
 
-        <span class="card-label">
-            COMMUNITY
+<div
+    class="seminar-panel"
+    data-panel="lessons"
+>
+
+    {% for week in weeks %}
+
+        <section class="seminar-week">
+
+            <div class="seminar-week-header">
+
+                <span>
+                    WEEK {{ week.week_number }}
+                </span>
+
+                <h2>
+                    {{ week.title }}
+                </h2>
+
+                {% if week.description %}
+                    <p>
+                        {{ week.description }}
+                    </p>
+                {% endif %}
+
+            </div>
+
+
+            {% for module in week.modules.all %}
+
+                <div class="seminar-module">
+
+                    <h3>
+                        {{ module.title }}
+                    </h3>
+
+
+                    <div class="seminar-lessons">
+
+                        {% for lesson in module.lessons.all %}
+
+                            <a
+                                href="{% url 'lesson_detail' lesson.id %}"
+                                class="seminar-lesson"
+                            >
+
+                                <span>
+                                    {{ lesson.title }}
+                                </span>
+
+                                <span>
+                                    →
+                                </span>
+
+                            </a>
+
+                        {% empty %}
+
+                            <p>
+                                No lessons uploaded yet.
+                            </p>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <p>
+                    No modules have been added yet.
+                </p>
+
+            {% endfor %}
+
+        </section>
+
+    {% empty %}
+
+        <p>
+            The curriculum has not been uploaded yet.
+        </p>
+
+    {% endfor %}
+
+</div>
+
+
+<div
+    class="seminar-panel"
+    data-panel="assignments"
+>
+
+    <div class="assignments-header">
+
+        <span class="section-label">
+            Cohort Assignments
         </span>
 
         <h2>
-            Cohort Community
+            Assignments
         </h2>
 
         <p>
-            Connect with your classmates and receive
-            important cohort updates.
+            Complete the assignments for each lesson
+            and submit your GitHub link.
         </p>
 
-        {% if seminar_room.whatsapp_link %}
-
-            <a
-                href="{{ seminar_room.whatsapp_link }}"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="primary-button"
-            >
-                Join WhatsApp Community →
-            </a>
-
-        {% else %}
-
-            <p>
-                Community link has not been added yet.
-            </p>
-
-        {% endif %}
-
-    </section>
+    </div>
 
 
-    <!-- Cohort Information -->
-    <section class="seminar-card">
+    {% for week in weeks %}
 
-        <span class="card-label">
-            COHORT
-        </span>
+        <section class="assignment-week">
 
-        <h2>
-            {{ cohort.name }}
-        </h2>
+            <div class="assignment-week-header">
 
-        {% if cohort.description %}
+                <span>
+                    WEEK {{ week.week_number }}
+                </span>
 
-            <p>
-                {{ cohort.description }}
-            </p>
-
-        {% endif %}
-
-        <div class="cohort-details">
-
-            <div>
-                <span>Start Date</span>
-                <strong>
-                    {{ cohort.start_date }}
-                </strong>
-            </div>
-
-            <div>
-                <span>End Date</span>
-
-                <strong>
-                    {% if cohort.end_date %}
-                        {{ cohort.end_date }}
-                    {% else %}
-                        To be announced
-                    {% endif %}
-                </strong>
+                <h3>
+                    {{ week.title }}
+                </h3>
 
             </div>
+
+
+            {% for module in week.modules.all %}
+
+                <div class="assignment-module">
+
+                    <h4>
+                        {{ module.title }}
+                    </h4>
+
+
+                    {% for lesson in module.lessons.all %}
+
+                        {% for assignment in lesson.assignments.all %}
+
+                            <article class="assignment-card">
+
+                                <div class="assignment-card-header">
+
+                                    <div>
+
+                                        <span class="assignment-label">
+                                            Assignment
+                                        </span>
+
+                                        <h5>
+                                            {{ assignment.title }}
+                                        </h5>
+
+                                    </div>
+
+                                    <span class="assignment-lesson">
+                                        {{ lesson.title }}
+                                    </span>
+
+                                </div>
+
+
+                                <div class="assignment-instructions">
+
+                                    {{ assignment.instructions|linebreaks }}
+
+                                </div>
+
+
+                                {% if assignment.due_date %}
+
+                                    <div class="assignment-due">
+
+                                        Due:
+                                        {{ assignment.due_date|date:"M d, Y H:i" }}
+
+                                    </div>
+
+                                {% endif %}
+
+
+                                <a
+                                    href="{% url 'assignment_detail' assignment.id %}"
+                                    class="primary-button"
+                                >
+                                    View Assignment →
+                                </a>
+
+                            </article>
+
+                        {% endfor %}
+
+                    {% endfor %}
+
+                </div>
+
+            {% empty %}
+
+                <p class="empty-content">
+                    No modules have been added yet.
+                </p>
+
+            {% endfor %}
+
+        </section>
+
+    {% empty %}
+
+        <div class="empty-content">
+
+            <p>
+                No assignments have been uploaded yet.
+            </p>
 
         </div>
 
-    </section>
+    {% endfor %}
+
+</div>
 
 
-    <!-- Coming Soon -->
-<!--    Resources -->
+<div
+    class="seminar-panel"
+    data-panel="discussion"
+>
+    <!-- Discussion content -->
+    <section class="seminar-card discussions-card">
+
+    <span class="card-label">
+        COMMUNITY
+    </span>
+
+    <h2>
+        Cohort Discussions
+    </h2>
+
+    <p>
+        Ask questions, share ideas and interact with
+        other members of your cohort.
+    </p>
+
+    <a
+        href="{% url 'discussions' cohort.id %}"
+        class="primary-button"
+    >
+        Open Discussions →
+    </a>
+
+</section>
+</div>
+
+
+<div
+    class="seminar-panel"
+    data-panel="resources"
+>
+    <!--    Resources -->
     <section class="seminar-card resources-card">
 
     <span class="card-label">
@@ -218,36 +505,560 @@
     {% endif %}
 
 </section>
+</div>
+
+<div
+    class="seminar-panel"
+    data-panel="Community"
+>
+    <!-- Community -->
+    <section class="seminar-card">
+
+        <span class="card-label">
+            COMMUNITY
+        </span>
+
+        <h2>
+            Cohort Community
+        </h2>
+
+        <p>
+            Connect with your classmates and receive
+            important cohort updates.
+        </p>
+
+        {% if seminar_room.whatsapp_link %}
+
+            <a
+                href="{{ seminar_room.whatsapp_link }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="primary-button"
+            >
+                Join WhatsApp Community →
+            </a>
+
+        {% else %}
+
+            <p>
+                Community link has not been added yet.
+            </p>
+
+        {% endif %}
+
+    </section>
+</div>
 
 
-<!--    Discussion -->
-    <section class="seminar-card discussions-card">
+<div
+    class="seminar-panel"
+    data-panel="cohort"
+>
+    <!-- cohort info -->
+    <section class="seminar-card">
 
-    <span class="card-label">
-        COMMUNITY
-    </span>
+        <span class="card-label">
+            COHORT
+        </span>
 
-    <h2>
-        Cohort Discussions
-    </h2>
+        <h2>
+            {{ cohort.name }}
+        </h2>
 
-    <p>
-        Ask questions, share ideas and interact with
-        other members of your cohort.
-    </p>
+        {% if cohort.description %}
 
-    <a
-        href="{% url 'discussions' cohort.id %}"
-        class="primary-button"
-    >
-        Open Discussions →
-    </a>
+            <p>
+                {{ cohort.description }}
+            </p>
+
+        {% endif %}
+
+        <div class="cohort-details">
+
+            <div>
+                <span>Start Date</span>
+                <strong>
+                    {{ cohort.start_date }}
+                </strong>
+            </div>
+
+            <div>
+                <span>End Date</span>
+
+                <strong>
+                    {% if cohort.end_date %}
+                        {{ cohort.end_date }}
+                    {% else %}
+                        To be announced
+                    {% endif %}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+</div>
+
+
+<div
+    class="seminar-panel"
+    data-panel="submission"
+>
+    <!--    Submitted works-->
+    <section class="seminar-card submissions-room-card">
+
+<span class="card-label">
+    STUDENT WORK
+</span>
+
+<h2>
+    Assignment Submissions
+</h2>
+
+<p>
+    View submitted work from members of this cohort.
+</p>
+
+
+{% if submissions %}
+
+    <div class="submission-list">
+
+        {% for submission in submissions %}
+
+            <article class="submission-card">
+
+                <div class="submission-card-header">
+
+                    <div>
+
+                        <span class="submission-assignment">
+                            {{ submission.assignment.title }}
+                        </span>
+
+                        <h3>
+                            {{ submission.student.username }}
+                        </h3>
+
+                    </div>
+
+                    {% if submission.is_visible_to_cohort %}
+
+                        <span class="submission-status">
+                            Shared with cohort
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+<!--                {% if submission.comment %}-->
+
+<!--                    <div class="student-comment">-->
+
+<!--                        {{ submission.comment|linebreaks }}-->
+
+<!--                    </div>-->
+
+<!--                {% endif %}-->
+
+
+                <div class="submission-footer">
+
+                    <span>
+                        Submitted
+                        {{ submission.submitted_at|date:"M d, Y" }}
+                    </span>
+
+                    <a
+                        href="{{ submission.github_url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="secondary-button"
+                    >
+                        View GitHub ↗
+                    </a>
+                    {% if request.user.is_staff %}
+                        <a
+                            href="{% url 'review_submission' submission.id %}"
+                            class="secondary-button"
+                        >
+                            Review Submission
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+
+                {% if submission.instructor_feedback %}
+
+                    <div class="instructor-feedback">
+
+                        <span class="card-label">
+                            INSTRUCTOR FEEDBACK
+                        </span>
+
+                        {{ submission.instructor_feedback|linebreaks }}
+
+                    </div>
+
+                {% endif %}
+
+            </article>
+
+        {% endfor %}
+
+    </div>
+
+{% else %}
+
+    <div class="empty-state">
+
+        <h3>
+            No submissions yet.
+        </h3>
+
+        <p>
+            Student submissions will appear here.
+        </p>
+
+    </div>
+
+{% endif %}
+
 
 </section>
+</div>
+
+
+<div
+    class="seminar-panel"
+    data-panel="announcements"
+>
+
+    <div class="announcements-header">
+
+        <span class="section-label">
+            Cohort Updates
+        </span>
+
+        <h2>
+            Announcements
+        </h2>
+
+        <p>
+            Important updates and information from your instructors.
+        </p>
+
+    </div>
+
+
+    <div class="announcement-list">
+
+        {% for announcement in announcements %}
+
+            <article class="announcement-card">
+
+                <div class="announcement-card-header">
+
+                    <h3>
+                        {{ announcement.title }}
+                    </h3>
+
+                    <time>
+                        {{ announcement.created_at|date:"M d, Y" }}
+                    </time>
+
+                </div>
+
+
+                <div class="announcement-content">
+
+                    {{ announcement.content|linebreaks }}
+
+                </div>
+
+            </article>
+
+        {% empty %}
+
+            <div class="empty-content">
+
+                <p>
+                    No announcements have been posted yet.
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+
+<div
+    class="seminar-panel"
+    data-panel="members"
+>
+
+    <div class="members-header">
+
+        <span class="section-label">
+            Cohort Community
+        </span>
+
+        <h2>
+            Members
+        </h2>
+
+        <p>
+            Students currently enrolled in {{ cohort.name }}.
+        </p>
+
+    </div>
+
+
+    <div class="members-list">
+
+        {% for member in members %}
+
+            <div class="member-card">
+
+                <div class="member-avatar">
+
+                    {{ member.student.username|first|upper }}
+
+                </div>
+
+
+                <div class="member-info">
+
+                    <h3>
+                        {{ member.student.get_full_name|default:member.student.username }}
+                    </h3>
+
+                    <span>
+                        Student
+                    </span>
+
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <div class="empty-content">
+
+                <p>
+                    No members have been enrolled in this cohort yet.
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+<div
+    class="seminar-panel"
+    data-panel="project"
+>
+
+    <div class="project-header">
+
+        <span class="section-label">
+            Cohort Projects
+        </span>
+
+        <h2>
+            Final Projects
+        </h2>
+
+        <p>
+            Projects created by students of {{ cohort.name }}.
+        </p>
+
+    </div>
+
+
+    <div class="project-grid">
+
+        {% for project in projects %}
+
+            <article class="project-card">
+
+                {% if project.image %}
+
+                    <div class="project-image">
+
+                        <img
+                            src="{{ project.image.url }}"
+                            alt="{{ project.title }}"
+                        >
+
+                    </div>
+
+                {% endif %}
+
+
+                <div class="project-content">
+
+                    <span class="project-student">
+                        {{ project.student.get_full_name|default:project.student.username }}
+                    </span>
+
+                    <h3>
+                        {{ project.title }}
+                    </h3>
+
+                    <p>
+                        {{ project.description }}
+                    </p>
+
+
+                    {% if project.technologies %}
+
+                        <div class="project-technologies">
+
+                            {{ project.technologies }}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="project-links">
+
+                        {% if project.github_url %}
+
+                            <a
+                                href="{{ project.github_url }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                GitHub →
+                            </a>
+
+                        {% endif %}
+
+
+                        {% if project.live_url %}
+
+                            <a
+                                href="{{ project.live_url }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Live Project →
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        {% empty %}
+
+            <div class="empty-content">
+
+                <p>
+                    No final projects have been published yet.
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
 
 </div>
 
 
 </div>
+
+<script>
+
+const seminarNavItems =
+    document.querySelectorAll(
+        ".seminar-nav-item"
+    );
+
+
+const seminarPanels =
+    document.querySelectorAll(
+        ".seminar-panel"
+    );
+
+
+seminarNavItems.forEach(
+    function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                const section =
+                    this.dataset.section;
+
+
+                seminarNavItems.forEach(
+                    function (item) {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                seminarPanels.forEach(
+                    function (panel) {
+
+                        panel.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                this.classList.add(
+                    "active"
+                );
+
+
+                const selectedPanel =
+                    document.querySelector(
+                        `[data-panel="${section}"]`
+                    );
+
+
+                if (selectedPanel) {
+
+                    selectedPanel.classList.add(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>
 
 {% endblock %}

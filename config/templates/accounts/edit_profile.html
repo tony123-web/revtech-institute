@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="profile-edit-page">
+
+
+<div class="profile-header">
+
+    <div>
+        <span class="dashboard-label">
+            PROFILE SETTINGS
+        </span>
+
+        <h1>
+            Edit Profile
+        </h1>
+
+        <p>
+            Keep your RevTech profile information up to date.
+        </p>
+    </div>
+
+</div>
+
+
+<form
+    method="POST"
+    enctype="multipart/form-data"
+    class="profile-form"
+>
+
+    {% csrf_token %}
+
+    {{ form.non_field_errors }}
+
+
+    {% for field in form %}
+
+        <div class="form-group">
+
+            {{ field.label_tag }}
+
+            {{ field }}
+
+            {% if field.help_text %}
+                <small>
+                    {{ field.help_text }}
+                </small>
+            {% endif %}
+
+            {{ field.errors }}
+
+        </div>
+
+    {% endfor %}
+
+
+    <div class="form-actions">
+
+        <a
+            href="{% url 'profile' %}"
+        >
+            Cancel
+        </a>
+
+        <button type="submit">
+            Save Changes
+        </button>
+
+    </div>
+
+</form>
+
+
+</section>
+
+{% endblock %}

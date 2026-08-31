@@ -1,0 +1,577 @@
+/* =========================================================
+REVTECH PROGRAM DETAIL PAGE
+========================================================= */
+
+.program-page {
+width: 100%;
+max-width: 1200px;
+margin: 0 auto;
+padding: 40px 20px 80px;
+}
+
+/* =========================================================
+PROGRAM HERO
+========================================================= */
+
+.program-hero {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 50px;
+align-items: center;
+margin-bottom: 70px;
+}
+
+.program-hero-image {
+width: 100%;
+overflow: hidden;
+border-radius: 18px;
+}
+
+.program-hero-image img {
+width: 100%;
+height: 360px;
+object-fit: cover;
+display: block;
+}
+
+.program-hero-content {
+max-width: 600px;
+}
+
+.program-label {
+display: inline-block;
+font-size: 0.75rem;
+font-weight: 700;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+opacity: 0.65;
+margin-bottom: 12px;
+}
+
+.program-hero-content h1 {
+font-size: clamp(2.2rem, 5vw, 3.5rem);
+line-height: 1.1;
+margin: 0 0 20px;
+}
+
+.program-short-description {
+font-size: 1.15rem;
+line-height: 1.8;
+opacity: 0.75;
+margin: 0;
+}
+
+/* =========================================================
+PROGRAM ABOUT
+========================================================= */
+
+.program-about {
+max-width: 900px;
+margin: 0 auto 80px;
+}
+
+.program-about h2 {
+font-size: 2rem;
+margin-bottom: 20px;
+}
+
+.program-description {
+font-size: 1rem;
+line-height: 1.9;
+opacity: 0.85;
+}
+
+/* =========================================================
+SECTION HEADING
+========================================================= */
+
+.section-heading {
+text-align: center;
+max-width: 700px;
+margin: 0 auto 45px;
+}
+
+.section-heading h2 {
+font-size: 2.3rem;
+margin: 5px 0 12px;
+}
+
+.section-heading p {
+line-height: 1.7;
+opacity: 0.7;
+}
+
+/* =========================================================
+COHORTS
+========================================================= */
+
+.cohorts-container {
+display: flex;
+flex-direction: column;
+gap: 45px;
+}
+
+/* =========================================================
+COHORT CARD
+========================================================= */
+
+.cohort-card {
+background: var(--card-bg, );
+border: 1px solid var(--border-color, #e5e7eb);
+border-radius: 18px;
+padding: 32px;
+overflow: hidden;
+}
+
+/* =========================================================
+COHORT HEADER
+========================================================= */
+
+.cohort-header {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+gap: 20px;
+padding-bottom: 25px;
+border-bottom: 1px solid var(
+--border-color,
+#e5e7eb
+);
+}
+
+.cohort-number {
+display: block;
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 1.5px;
+opacity: 0.55;
+margin-bottom: 6px;
+}
+
+.cohort-header h3 {
+font-size: 1.7rem;
+margin: 0;
+}
+
+/* =========================================================
+COHORT STATUS
+========================================================= */
+
+.cohort-status {
+display: inline-flex;
+align-items: center;
+padding: 7px 13px;
+border-radius: 999px;
+font-size: 0.78rem;
+font-weight: 700;
+white-space: nowrap;
+}
+
+.cohort-status.open {
+background: #dcfce7;
+color: #166534;
+}
+
+.cohort-status.closed {
+background: #f3f4f6;
+color: #6b7280;
+}
+
+/* =========================================================
+COHORT DESCRIPTION
+========================================================= */
+
+.cohort-description {
+margin: 25px 0;
+line-height: 1.7;
+opacity: 0.8;
+}
+
+/* =========================================================
+COHORT DETAILS
+========================================================= */
+
+.cohort-details {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 15px;
+margin: 30px 0;
+}
+
+.cohort-detail {
+padding: 18px;
+border-radius: 12px;
+background: var(
+--secondary-bg,
+
+);
+}
+
+.cohort-detail span {
+display: block;
+font-size: 0.75rem;
+opacity: 0.6;
+margin-bottom: 6px;
+}
+
+.cohort-detail strong {
+font-size: 0.95rem;
+}
+
+/* =========================================================
+CURRICULUM
+========================================================= */
+
+.curriculum {
+margin-top: 35px;
+}
+
+.curriculum > h4 {
+font-size: 1.35rem;
+margin-bottom: 25px;
+}
+
+/* =========================================================
+WEEK
+========================================================= */
+
+.week {
+border-left: 3px solid currentColor;
+padding-left: 24px;
+margin-bottom: 35px;
+}
+
+.week-header {
+margin-bottom: 10px;
+}
+
+.week-number {
+display: block;
+font-size: 0.72rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 1px;
+opacity: 0.55;
+margin-bottom: 5px;
+}
+
+.week-header h5 {
+font-size: 1.25rem;
+margin: 0;
+}
+
+.week-description {
+line-height: 1.7;
+font-size: 0.92rem;
+opacity: 0.7;
+margin-bottom: 20px;
+}
+
+/* =========================================================
+MODULE
+========================================================= */
+
+.modules {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+.module {
+padding: 20px;
+border-radius: 12px;
+background: var(
+--secondary-bg,
+
+);
+}
+
+.module-header {
+display: flex;
+align-items: flex-start;
+gap: 12px;
+}
+
+.module-icon {
+font-size: 1.1rem;
+font-weight: 700;
+margin-top: 1px;
+}
+
+.module-header h6 {
+font-size: 1rem;
+margin: 0 0 6px;
+}
+
+.module-header p {
+font-size: 0.88rem;
+line-height: 1.6;
+opacity: 0.7;
+margin: 0;
+}
+
+/* =========================================================
+LESSONS
+========================================================= */
+
+.lessons {
+list-style: none;
+margin: 18px 0 0;
+padding: 15px 0 0 30px;
+border-top: 1px solid var(
+--border-color,
+
+);
+}
+
+.lessons li {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 8px 0;
+font-size: 0.88rem;
+line-height: 1.5;
+}
+
+.lesson-icon {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+width: 20px;
+height: 20px;
+border-radius: 50%;
+font-size: 0.7rem;
+background: #e5e7eb;
+}
+
+.no-lessons {
+opacity: 0.55;
+font-style: italic;
+}
+
+/* =========================================================
+COHORT ACTION
+========================================================= */
+
+.cohort-action {
+display: flex;
+align-items: center;
+justify-content: flex-end;
+gap: 15px;
+margin-top: 35px;
+padding-top: 25px;
+border-top: 1px solid var(
+--border-color,
+#e5e7eb
+);
+}
+
+.program-button {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 13px 24px;
+border-radius: 9px;
+text-decoration: none;
+font-size: 0.92rem;
+font-weight: 700;
+background: var(
+--primary-color,
+#111827
+);
+color: #ffffff;
+transition:
+transform 0.2s ease,
+opacity 0.2s ease;
+}
+
+.program-button:hover {
+transform: translateY(-2px);
+opacity: 0.9;
+}
+
+.closed-text {
+font-size: 0.88rem;
+opacity: 0.55;
+}
+
+/* =========================================================
+EMPTY STATES
+========================================================= */
+
+.empty-programs {
+text-align: center;
+padding: 60px 20px;
+border: 1px dashed var(
+--border-color,
+#d1d5db
+);
+border-radius: 15px;
+}
+
+.empty-programs h3 {
+margin-bottom: 10px;
+}
+
+.empty-programs p {
+margin: 0;
+opacity: 0.65;
+}
+
+.empty-message {
+font-size: 0.88rem;
+opacity: 0.55;
+font-style: italic;
+}
+
+/* =========================================================
+DARK MODE
+========================================================= */
+
+@media (prefers-color-scheme: dark) {
+
+```
+.program-card,
+.cohort-card {
+    background: var(
+        --card-bg,
+        #111827
+    );
+    border-color: var(
+        --border-color,
+        #263244
+    );
+}
+
+.cohort-detail,
+.module {
+    background: var(
+        --secondary-bg,
+        #172033
+    );
+}
+
+.cohort-status.open {
+    background: #14532d;
+    color: #bbf7d0;
+}
+
+.cohort-status.closed {
+    background: #1f2937;
+    color: #9ca3af;
+}
+```
+
+}
+
+/* =========================================================
+TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+```
+.program-hero {
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.program-hero-image img {
+    height: 300px;
+}
+
+.program-hero-content {
+    max-width: 800px;
+}
+
+.cohort-details {
+    grid-template-columns: repeat(2, 1fr);
+}
+```
+
+}
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+```
+.program-page {
+    padding: 25px 15px 60px;
+}
+
+.program-hero {
+    margin-bottom: 50px;
+}
+
+.program-hero-image img {
+    height: 220px;
+}
+
+.program-hero-content h1 {
+    font-size: 2rem;
+}
+
+.program-short-description {
+    font-size: 1rem;
+}
+
+.program-about {
+    margin-bottom: 55px;
+}
+
+.program-about h2 {
+    font-size: 1.6rem;
+}
+
+.section-heading h2 {
+    font-size: 1.8rem;
+}
+
+.cohort-card {
+    padding: 20px;
+    border-radius: 14px;
+}
+
+.cohort-header {
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cohort-header h3 {
+    font-size: 1.4rem;
+}
+
+.cohort-details {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.cohort-detail {
+    padding: 14px;
+}
+
+.week {
+    padding-left: 16px;
+}
+
+.module {
+    padding: 16px;
+}
+
+.lessons {
+    padding-left: 5px;
+}
+
+.cohort-action {
+    justify-content: stretch;
+}
+
+.program-button {
+    width: 100%;
+}
+
+
+}

@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+<section class="profile-page">
+
+<div class="profile-header">
+
+    {% if profile.profile_image %}
+
+        <img
+            src="{{ profile.profile_image.url }}"
+            alt="{{ request.user.username }}"
+            class="profile-image"
+        >
+
+    {% else %}
+
+        <div class="profile-placeholder">
+            {{ request.user.username|first|upper }}
+        </div>
+
+    {% endif %}
+
+
+    <div>
+
+        <span class="dashboard-label">
+            MY PROFILE
+        </span>
+
+        <h1>
+            {{ request.user.get_full_name|default:request.user.username }}
+        </h1>
+
+        <p>
+            {{ request.user.email }}
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="profile-details">
+
+    <div class="profile-section">
+
+        <h2>Personal Information</h2>
+
+        <div class="profile-grid">
+
+            <div>
+                <span>Username</span>
+                <strong>{{ request.user.username }}</strong>
+            </div>
+
+            <div>
+                <span>Phone</span>
+                <strong>
+                    {{ profile.phone_number|default:"Not provided" }}
+                </strong>
+            </div>
+
+            <div>
+                <span>Institution</span>
+                <strong>
+                    {{ profile.institution|default:"Not provided" }}
+                </strong>
+            </div>
+
+            <div>
+                <span>Course</span>
+                <strong>
+                    {{ profile.course|default:"Not provided" }}
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="profile-section">
+
+        <h2>About Me</h2>
+
+        <p>
+            {{ profile.bio|default:"No bio added yet." }}
+        </p>
+
+    </div>
+
+
+    <div class="profile-section">
+
+        <h2>Skills</h2>
+
+        <p>
+            {{ profile.skills|default:"No skills added yet." }}
+        </p>
+
+    </div>
+
+
+    <div class="profile-section">
+
+        <h2>Links</h2>
+
+        <div class="profile-links">
+
+            {% if profile.github_url %}
+                <a href="{{ profile.github_url }}" target="_blank">
+                    GitHub
+                </a>
+            {% endif %}
+
+            {% if profile.linkedin_url %}
+                <a href="{{ profile.linkedin_url }}" target="_blank">
+                    LinkedIn
+                </a>
+            {% endif %}
+
+            {% if profile.portfolio_url %}
+                <a href="{{ profile.portfolio_url }}" target="_blank">
+                    Portfolio
+                </a>
+            {% endif %}
+
+            {% if profile.central_url %}
+                <a href="{{ profile.central_url }}" target="_blank">
+                    Central URL
+                </a>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <a
+        href="{% url 'edit_profile' %}"
+        class="primary-button"
+    >
+        Edit Profile
+    </a>
+
+</div>
+
+
+</section>
+
+{% endblock %}

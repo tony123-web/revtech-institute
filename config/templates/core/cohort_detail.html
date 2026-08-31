@@ -41,84 +41,192 @@
 
 </div>
 
+    {% for week in weeks %}
 
-<section class="modules-section">
+<section class="curriculum-week">
 
-    <div class="section-heading">
+    <div class="week-header">
 
-        <span class="dashboard-label">
-            CURRICULUM
+        <span class="week-number">
+            WEEK {{ week.week_number }}
         </span>
 
         <h2>
-            Your Learning Modules
+            {{ week.title }}
         </h2>
+
+        {% if week.description %}
+            <p>
+                {{ week.description }}
+            </p>
+        {% endif %}
 
     </div>
 
 
-    {% if modules %}
+    <div class="week-modules">
 
-        <div class="modules-list">
+        {% for module in week.modules.all %}
 
-            {% for module in modules %}
+        <article class="module-card">
 
-                <article class="module-card">
+            <div class="module-header">
 
-                    <div class="module-number">
-                        {{ forloop.counter }}
-                    </div>
+                <span class="module-number">
+                    Module {{ forloop.counter }}
+                </span>
 
-                    <div class="module-content">
+                <h3>
+                    {{ module.title }}
+                </h3>
 
-                        <h3>
-                            {{ module.title }}
-                        </h3>
+                {% if module.description %}
+                    <p>
+                        {{ module.description }}
+                    </p>
+                {% endif %}
 
-                        {% if module.description %}
-                            <p>
-                                {{ module.description }}
-                            </p>
+            </div>
+
+
+            <div class="module-lessons">
+
+                {% for lesson in module.lessons.all %}
+
+                <a
+                    href="{% url 'lesson_detail' lesson.id %}"
+                    class="lesson-item"
+                >
+
+                    <div>
+
+                        <strong>
+                            {{ lesson.title }}
+                        </strong>
+
+                        {% if lesson.description %}
+                            <small>
+                                {{ lesson.description }}
+                            </small>
                         {% endif %}
 
-                        <span>
-                            {{ module.lessons.count }}
-                            lesson{{ module.lessons.count|pluralize }}
-                        </span>
-
                     </div>
 
-                    <a
-                        href="{% url 'module_detail' module.id %}"
-                        class="module-link"
-                    >
-                        View Module →
-                    </a>
+                    <span>
+                        →
+                    </span>
 
-                </article>
+                </a>
 
-            {% endfor %}
+                {% empty %}
 
-        </div>
+                    <p class="empty-content">
+                        No lessons have been uploaded yet.
+                    </p>
 
-    {% else %}
+                {% endfor %}
 
-        <div class="empty-state">
+            </div>
 
-            <h3>
-                Learning content is coming soon.
-            </h3>
+        </article>
 
-            <p>
-                Your instructor has not published any
-                modules for this cohort yet.
+        {% empty %}
+
+            <p class="empty-content">
+                No modules have been added to this week yet.
             </p>
 
-        </div>
+        {% endfor %}
 
-    {% endif %}
+    </div>
 
 </section>
+
+{% empty %}
+
+    <p class="empty-content">
+        The curriculum for this cohort has not been uploaded yet.
+    </p>
+
+{% endfor %}
+
+<!--<section class="modules-section">-->
+
+<!--    <div class="section-heading">-->
+
+<!--        <span class="dashboard-label">-->
+<!--            CURRICULUM-->
+<!--        </span>-->
+
+<!--        <h2>-->
+<!--            Your Learning Modules-->
+<!--        </h2>-->
+
+<!--    </div>-->
+
+
+<!--    {% if modules %}-->
+
+<!--        <div class="modules-list">-->
+
+<!--            {% for module in modules %}-->
+
+<!--                <article class="module-card">-->
+
+<!--                    <div class="module-number">-->
+<!--                        {{ forloop.counter }}-->
+<!--                    </div>-->
+
+<!--                    <div class="module-content">-->
+
+<!--                        <h3>-->
+<!--                            {{ module.title }}-->
+<!--                        </h3>-->
+
+<!--                        {% if module.description %}-->
+<!--                            <p>-->
+<!--                                {{ module.description }}-->
+<!--                            </p>-->
+<!--                        {% endif %}-->
+
+<!--                        <span>-->
+<!--                            {{ module.lessons.count }}-->
+<!--                            lesson{{ module.lessons.count|pluralize }}-->
+<!--                        </span>-->
+
+<!--                    </div>-->
+
+<!--                    <a-->
+<!--                        href="{% url 'module_detail' module.id %}"-->
+<!--                        class="module-link"-->
+<!--                    >-->
+<!--                        View Module →-->
+<!--                    </a>-->
+
+<!--                </article>-->
+
+<!--            {% endfor %}-->
+
+<!--        </div>-->
+
+<!--    {% else %}-->
+
+<!--        <div class="empty-state">-->
+
+<!--            <h3>-->
+<!--                Learning content is coming soon.-->
+<!--            </h3>-->
+
+<!--            <p>-->
+<!--                Your instructor has not published any-->
+<!--                modules for this cohort yet.-->
+<!--            </p>-->
+
+<!--        </div>-->
+
+<!--    {% endif %}-->
+
+<!--</section>-->
 
 </div>
 

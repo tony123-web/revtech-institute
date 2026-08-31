@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Complete Your Profile | RevTech Institute
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-page profile-completion-page">
+
+    <div class="auth-container">
+
+        <div class="auth-header">
+
+            <span class="section-label">
+
+            </span>
+
+            <h1>
+                Complete your profile
+            </h1>
+
+            <p>
+                Tell us a little about yourself so we can personalize
+                your RevTech experience.
+            </p>
+
+        </div>
+
+
+        <div class="auth-card">
+
+            <form
+                method="post"
+                enctype="multipart/form-data"
+            >
+
+                {% csrf_token %}
+
+
+                {% if form.non_field_errors %}
+
+                    <div class="form-errors">
+
+                        {% for error in form.non_field_errors %}
+
+                            <p>
+                                {{ error }}
+                            </p>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+
+                <div class="form-group">
+
+                    <label for="id_profile_image">
+                        Profile picture
+                    </label>
+
+                    {{ form.profile_image }}
+
+                    {% for error in form.profile_image.errors %}
+
+                        <small class="form-error">
+                            {{ error }}
+                        </small>
+
+                    {% endfor %}
+
+                    <small class="form-help">
+                        A clear picture of yourself is required.
+                    </small>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        First name
+                    </label>
+
+                    <input
+                        type="text"
+                        value="{{ request.user.first_name }}"
+                        disabled
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Last name
+                    </label>
+
+                    <input
+                        type="text"
+                        value="{{ request.user.last_name }}"
+                        disabled
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.phone_number.id_for_label }}">
+                        Phone number
+                    </label>
+
+                    {{ form.phone_number }}
+
+                    {% for error in form.phone_number.errors %}
+
+                        <small class="form-error">
+                            {{ error }}
+                        </small>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.institution.id_for_label }}">
+                        Institution
+                    </label>
+
+                    {{ form.institution }}
+
+                    {% for error in form.institution.errors %}
+
+                        <small class="form-error">
+                            {{ error }}
+                        </small>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.course.id_for_label }}">
+                        Course / Field of study
+                    </label>
+
+                    {{ form.course }}
+
+                    {% for error in form.course.errors %}
+
+                        <small class="form-error">
+                            {{ error }}
+                        </small>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.bio.id_for_label }}">
+                        Bio
+                    </label>
+
+                    {{ form.bio }}
+
+                    {% for error in form.bio.errors %}
+
+                        <small class="form-error">
+                            {{ error }}
+                        </small>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.skills.id_for_label }}">
+                        Skills
+                    </label>
+
+                    {{ form.skills }}
+
+                    {% for error in form.skills.errors %}
+
+                        <small class="form-error">
+                            {{ error }}
+                        </small>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.github_url.id_for_label }}">
+                        GitHub
+                    </label>
+
+                    {{ form.github_url }}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.linkedin_url.id_for_label }}">
+                        LinkedIn
+                    </label>
+
+                    {{ form.linkedin_url }}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.portfolio_url.id_for_label }}">
+                        Portfolio
+                    </label>
+
+                    {{ form.portfolio_url }}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.central_url.id_for_label }}">
+                        Central URL
+                    </label>
+
+                    {{ form.central_url }}
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-button auth-button"
+                >
+                    Complete Profile
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

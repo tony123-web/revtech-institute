@@ -1,15 +1,120 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}
-Student Projects | RevTech Institute
+Student Projects
 {% endblock %}
 
 {% block content %}
 
-<h1>Student Projects</h1>
+<link rel="stylesheet" href="{% static 'css/projects.css' %}">
 
-<p>
-    Explore projects built by students at RevTech Institute.
-</p>
+<section class="projects-page">
+
+
+<div class="projects-header">
+
+    <span>STUDENT PROJECTS</span>
+
+    <h1>
+        See what our students are building.
+    </h1>
+
+    <p>
+        Explore practical projects created by RevTech
+        students throughout their learning journey.
+    </p>
+
+</div>
+
+
+<div class="projects-grid">
+
+    {% for project in projects %}
+
+        <article class="project-card">
+
+            {% if project.images.first %}
+
+                <img
+                    src="{{ project.images.first.image.url }}"
+                    alt="{{ project.title }}"
+                >
+
+            {% endif %}
+
+
+            <div class="project-card-content">
+
+                <span class="project-cohort">
+                    {{ project.cohort.name }}
+                </span>
+
+                <h2>
+                    {{ project.title }}
+                </h2>
+
+                <p>
+                    {{ project.description|truncatewords:25 }}
+                </p>
+
+
+                {% if project.technologies %}
+
+                    <div class="project-technologies">
+                        {{ project.technologies }}
+                    </div>
+
+                {% endif %}
+
+
+                <div class="project-student">
+
+                    {% if project.student.get_full_name %}
+
+                        {{ project.student.get_full_name }}
+
+                    {% else %}
+
+                        {{ project.student.username }}
+
+                    {% endif %}
+
+                </div>
+
+
+                <a
+                    href="{% url 'project_detail' project.id %}"
+                    class="project-link"
+                >
+                    View Project →
+                </a>
+
+            </div>
+
+        </article>
+
+    {% empty %}
+
+        <div class="projects-empty">
+
+            <h2>
+                No projects available yet.
+            </h2>
+
+            <p>
+                Student projects will appear here as
+                they are published.
+            </p>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+
+</section>
 
 {% endblock %}

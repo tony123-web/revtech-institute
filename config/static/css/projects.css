@@ -1,0 +1,601 @@
+/* =========================================================
+REVTECH — STUDENT PROJECTS
+========================================================= */
+
+.projects-page,
+.project-detail {
+max-width: 1200px;
+margin: 0 auto;
+padding: 50px 20px 90px;
+}
+
+/* =========================================================
+PROJECT LIST HEADER
+========================================================= */
+
+.projects-header {
+max-width: 750px;
+margin: 20px auto 70px;
+text-align: center;
+}
+
+.projects-header span,
+.project-detail-header > span {
+display: inline-block;
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 2px;
+opacity: 0.55;
+margin-bottom: 12px;
+}
+
+.projects-header h1 {
+font-size: clamp(2.0rem, 4.3vw, 3rem);
+line-height: 1.1;
+margin: 0 0 20px;
+}
+
+.projects-header p {
+line-height: 1.8;
+opacity: 0.7;
+}
+
+/* =========================================================
+PROJECT GRID
+========================================================= */
+
+.projects-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 25px;
+}
+
+.project-card {
+overflow: hidden;
+border: 1px solid var(--border-color, #e5e7eb);
+border-radius: 18px;
+background: var(--card-bg, #111827);
+transition:
+transform 0.25s ease,
+box-shadow 0.25s ease;
+}
+
+.project-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+.project-card > img {
+width: 100%;
+height: 220px;
+object-fit: cover;
+display: block;
+}
+
+.project-card-content {
+padding: 24px;
+}
+
+.project-cohort {
+display: inline-block;
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 1px;
+opacity: 0.5;
+margin-bottom: 10px;
+}
+
+.project-card h2 {
+font-size: 1.3rem;
+margin: 0 0 12px;
+}
+
+.project-card p {
+font-size: 0.9rem;
+line-height: 1.7;
+opacity: 0.7;
+margin: 0 0 18px;
+}
+
+.project-technologies {
+font-size: 0.78rem;
+font-weight: 600;
+opacity: 0.65;
+margin-bottom: 15px;
+}
+
+.project-student {
+font-size: 0.8rem;
+font-weight: 600;
+margin-bottom: 20px;
+}
+
+.project-link {
+display: inline-block;
+text-decoration: none;
+font-size: 0.85rem;
+font-weight: 700;
+color: inherit;
+}
+
+/* =========================================================
+EMPTY STATE
+========================================================= */
+
+.projects-empty {
+grid-column: 1 / -1;
+text-align: center;
+padding: 70px 20px;
+}
+
+.projects-empty h2 {
+margin-bottom: 10px;
+}
+
+.projects-empty p {
+opacity: 0.6;
+}
+
+/* =========================================================
+PROJECT DETAIL
+========================================================= */
+
+.project-detail-header {
+max-width: 850px;
+margin: 20px auto 45px;
+text-align: center;
+}
+
+.project-detail-header h1 {
+font-size: clamp(2.3rem, 5vw, 4rem);
+line-height: 1.1;
+margin: 0 0 20px;
+}
+
+.project-detail-header p {
+line-height: 1.8;
+opacity: 0.7;
+}
+
+/* =========================================================
+PROJECT META
+========================================================= */
+
+.project-meta {
+max-width: 900px;
+margin: 0 auto 70px;
+padding: 25px;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 20px;
+border-top: 1px solid var(--border-color, #e5e7eb);
+border-bottom: 1px solid var(--border-color, #e5e7eb);
+}
+
+.project-meta div {
+text-align: center;
+}
+
+.project-meta small {
+display: block;
+font-size: 0.65rem;
+letter-spacing: 1.5px;
+opacity: 0.5;
+margin-bottom: 7px;
+}
+
+.project-meta strong {
+font-size: 0.9rem;
+}
+
+/* =========================================================
+SCREENSHOT GALLERY
+========================================================= */
+
+.project-gallery {
+max-width: 1050px;
+margin: 0 auto 70px;
+}
+
+.project-gallery h2 {
+margin-bottom: 25px;
+font-size: 1.7rem;
+}
+
+.gallery-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 20px;
+}
+
+.gallery-grid figure {
+margin: 0;
+}
+
+.gallery-grid img {
+width: 100%;
+display: block;
+border-radius: 14px;
+border: 1px solid var(--border-color, #e5e7eb);
+}
+
+.gallery-grid figcaption {
+margin-top: 8px;
+font-size: 0.8rem;
+opacity: 0.6;
+}
+
+/* =========================================================
+PROJECT LINKS
+========================================================= */
+
+.project-links {
+max-width: 850px;
+margin: 0 auto 50px;
+text-align: center;
+}
+
+.project-links h2 {
+margin-bottom: 25px;
+}
+
+.project-buttons {
+display: flex;
+justify-content: center;
+gap: 12px;
+flex-wrap: wrap;
+}
+
+.project-buttons a {
+display: inline-flex;
+padding: 12px 22px;
+border-radius: 9px;
+text-decoration: none;
+font-weight: 700;
+font-size: 0.85rem;
+background: var(--primary-color, #111827);
+color: #ffffff;
+}
+
+/* =========================================================
+BACK LINK
+========================================================= */
+
+.back-projects {
+display: block;
+width: fit-content;
+margin: 0 auto;
+text-decoration: none;
+font-size: 0.85rem;
+font-weight: 600;
+color: inherit;
+}
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+.projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+}
+
+@media (max-width: 650px) {
+
+
+.projects-page,
+.project-detail {
+    padding: 35px 15px 60px;
+}
+
+.projects-header {
+    margin-bottom: 50px;
+}
+
+.projects-grid {
+    grid-template-columns: 1fr;
+}
+
+.project-meta {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.gallery-grid {
+    grid-template-columns: 1fr;
+}
+
+.project-detail-header {
+    margin-bottom: 35px;
+}
+
+
+}
+
+
+/* =========================================================
+PROJECT SUBMISSION FORM
+========================================================= */
+
+.project-form-page {
+max-width: 750px;
+margin: 0 auto;
+padding: 60px 20px 90px;
+}
+
+.project-form-header {
+text-align: center;
+margin-bottom: 45px;
+}
+
+.project-form-header span {
+display: inline-block;
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 2px;
+opacity: 0.55;
+margin-bottom: 10px;
+}
+
+.project-form-header h1 {
+font-size: clamp(2.3rem, 5vw, 3.5rem);
+margin: 0 0 15px;
+}
+
+.project-form-header p {
+line-height: 1.7;
+opacity: 0.7;
+}
+
+.project-form {
+padding: 35px;
+border: 1px solid var(--border-color, #e5e7eb);
+border-radius: 18px;
+background: var(--card-bg, #111827);
+}
+
+.project-form .form-group {
+margin-bottom: 22px;
+}
+
+.project-form label {
+display: block;
+margin-bottom: 8px;
+font-size: 0.85rem;
+font-weight: 600;
+}
+
+.project-form input,
+.project-form textarea {
+width: 100%;
+box-sizing: border-box;
+padding: 13px;
+border: 1px solid var(--border-color, #d1d5db);
+border-radius: 8px;
+background: transparent;
+color: inherit;
+font: inherit;
+}
+
+.project-form textarea {
+resize: vertical;
+min-height: 150px;
+}
+
+.project-form input:focus,
+.project-form textarea:focus {
+outline: none;
+border-color: currentColor;
+}
+
+.project-form input[type="file"] {
+padding: 10px;
+}
+
+.project-form small {
+display: block;
+margin-top: 8px;
+font-size: 0.75rem;
+line-height: 1.5;
+opacity: 0.6;
+}
+
+.project-form button {
+width: 100%;
+padding: 14px;
+border: none;
+border-radius: 9px;
+background: var(--primary-color, #ffffff);
+color: gray;
+font: inherit;
+font-weight: 700;
+cursor: pointer;
+}
+
+@media (max-width: 600px) {
+
+
+.project-form-page {
+    padding: 35px 15px 60px;
+}
+
+.project-form {
+    padding: 25px 20px;
+}
+
+}
+
+
+/* =========================================================
+MY PROJECTS
+========================================================= */
+
+.my-projects-page {
+max-width: 1200px;
+margin: 0 auto;
+padding: 70px 20px 100px;
+}
+
+.my-projects-header {
+max-width: 700px;
+margin-bottom: 45px;
+}
+
+.my-projects-header span {
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 2px;
+opacity: 0.55;
+}
+
+.my-projects-header h1 {
+font-size: clamp(1.3rem, 4vw, 2.5rem);
+margin: 10px 0;
+}
+
+.my-projects-header p {
+line-height: 1.7;
+opacity: 0.7;
+}
+
+/* GRID */
+
+.my-projects-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 22px;
+}
+
+/* CARD */
+
+.my-project-card {
+overflow: hidden;
+border: 1px solid var(--border-color, #e5e7eb);
+border-radius: 16px;
+background: var(--card-bg, #111827);
+}
+
+.my-project-card img {
+width: 100%;
+height: 210px;
+object-fit: cover;
+display: block;
+}
+
+.my-project-content {
+padding: 22px;
+}
+
+.project-cohort {
+font-size: 0.72rem;
+opacity: 0.55;
+}
+
+.my-project-content h2 {
+margin: 8px 0;
+font-size: 1.25rem;
+}
+
+.my-project-content p {
+font-size: 0.88rem;
+line-height: 1.6;
+opacity: 0.7;
+}
+
+/* STATUS */
+
+.project-status {
+margin-top: 18px;
+}
+
+.status-published,
+.status-review {
+display: inline-block;
+padding: 6px 10px;
+border-radius: 20px;
+font-size: 0.72rem;
+font-weight: 600;
+}
+
+.status-published {
+border: 1px solid #22c55e;
+}
+
+.status-review {
+border: 1px solid #f59e0b;
+}
+
+/* ACTION */
+
+.my-project-actions {
+margin-top: 20px;
+}
+
+.my-project-actions a {
+display: inline-block;
+padding: 10px 16px;
+border-radius: 8px;
+text-decoration: none;
+background: var(--primary-color, #ffffff);
+color: gray;
+font-size: 0.8rem;
+font-weight: 600;
+}
+
+/* EMPTY */
+
+.no-projects {
+padding: 60px 20px;
+text-align: center;
+border: 1px dashed var(--border-color, #d1d5db);
+border-radius: 16px;
+}
+
+.no-projects p {
+opacity: 0.65;
+}
+
+.no-projects a {
+display: inline-block;
+margin-top: 15px;
+padding: 12px 20px;
+border-radius: 8px;
+background: var(--primary-color, #111827);
+color: #ffffff;
+text-decoration: none;
+font-weight: 600;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+
+
+.my-projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+}
+
+@media (max-width: 600px) {
+
+
+.my-projects-page {
+    padding: 45px 15px 70px;
+}
+
+.my-projects-grid {
+    grid-template-columns: 1fr;
+}
+
+
+}
+
+
+

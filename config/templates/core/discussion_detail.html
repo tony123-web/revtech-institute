@@ -112,6 +112,30 @@
         </div>
 
     {% endif %}
+    <form
+    method="POST"
+    action="{% url 'create_reply' discussion.id %}"
+    class="reply-form"
+>
+
+    {% csrf_token %}
+
+    <textarea
+        name="content"
+        class="form-input"
+        rows="5"
+        placeholder="Write your reply..."
+        required
+    ></textarea>
+
+    <button
+        type="submit"
+        class="primary-button"
+    >
+        Post Reply →
+    </button>
+
+</form>
 
 </section>
 

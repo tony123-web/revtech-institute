@@ -22,6 +22,55 @@
 
 </section>
 
+    <!-- Dashboard Actions -->
+
+<section class="dashboard-actions">
+
+<a href="{% url 'profile' %}" class="dashboard-action">
+    <span>👤</span>
+    <div>
+        <strong>My Profile</strong>
+        <small>View and update your profile</small>
+    </div>
+</a>
+
+
+<a href="{% url 'my_projects' %}" class="dashboard-action">
+    <span>💻</span>
+    <div>
+        <strong>My Projects</strong>
+        <small>Manage your submitted projects</small>
+    </div>
+</a>
+
+
+<a href="{% url 'project_create' %}" class="dashboard-action">
+    <span>＋</span>
+    <div>
+        <strong>Submit Project</strong>
+        <small>Submit your final project</small>
+    </div>
+</a>
+
+
+<a href="{% url 'courses' %}" class="dashboard-action">
+    <span>📚</span>
+    <div>
+        <strong>Explore Programs</strong>
+        <small>Browse RevTech programs</small>
+    </div>
+</a>
+
+<a href="{% url 'logout' %}" class="dashboard-action">
+    <span>👤</span>
+    <div>
+        <strong style="color:red;">LOGOUT</strong>
+        <small>sign out of account</small>
+    </div>
+</a>
+</section>
+
+
 
 <!-- Programs -->
 <section class="dashboard-section">
@@ -37,11 +86,11 @@
 
     {% if enrollments %}
 
-        <div class="program-grid">
+        <div class="program-grid" >
 
             {% for enrollment in enrollments %}
 
-                <article class="program-card">
+                <article class="program-card" style="background:#111827;">
 
                     <!-- Program information -->
                     <div class="program-card-header">
@@ -53,14 +102,14 @@
 
                             <h3>
                                 <a
-                                    href="{% url 'cohort_detail' enrollment.cohort.id %}"
+                                    href="{% url 'core_cohort_detail' enrollment.cohort.slug %}"
                                 >
                                     {{ enrollment.cohort.program.title }}
                                 </a>
                             </h3>
 
                             <p>
-                                <a href="{% url 'cohort_detail' enrollment.cohort.id %}">
+                                <a href="{% url 'core_cohort_detail' enrollment.cohort.slug %}">
                                     {{ enrollment.cohort.program.short_description }}
                                 </a>
                             </p>
@@ -182,7 +231,7 @@
             </p>
 
             <a
-                href="#"
+                href="{% url 'courses' %}"
                 class="primary-button"
             >
                 Explore Programs

@@ -1,15 +1,74 @@
 {% extends "base.html" %}
 
-{% block title %}
-Programs | RevTech Institute
-{% endblock %}
+{% block title %}Explore Programs | RevTech{% endblock %}
 
 {% block content %}
 
-<h1>Our Programs</h1>
+<section class="programs-section">
 
-<p>
-    Explore technology programs offered by RevTech Institute.
-</p>
+
+<div class="programs-header">
+    <h1>Explore Our Programs</h1>
+
+    <p>
+        Build practical skills through structured,
+        project-based learning at RevTech.
+    </p>
+</div>
+
+{% if programs %}
+
+    <div class="programs-grid">
+
+        {% for program in programs %}
+
+            <article class="program-card">
+
+                {% if program.thumbnail %}
+                    <img
+                        src="{{ program.thumbnail.url }}"
+                        alt="{{ program.title }}"
+                        class="program-thumbnail"
+                    >
+                {% endif %}
+
+                <div class="program-card-content">
+
+                    <h2 style="color:gray;">{{ program.title }}</h2>
+
+                    <p  style="color:gray;">
+                        {{ program.short_description }}
+                    </p>
+
+                    <a
+                        href="{% url 'program_detail' program.slug %}"
+                        class="program-button"
+                    >
+                        View Program
+                    </a>
+
+                </div>
+
+            </article>
+
+        {% endfor %}
+
+    </div>
+
+{% else %}
+
+    <div class="empty-programs">
+        <h2>No programs available yet</h2>
+
+        <p>
+            Our programs are currently being prepared.
+            Check back soon.
+        </p>
+    </div>
+
+{% endif %}
+
+
+</section>
 
 {% endblock %}

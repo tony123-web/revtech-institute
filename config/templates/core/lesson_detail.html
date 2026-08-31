@@ -4,17 +4,19 @@
 
 <div class="lesson-page">
 
+
+<a
+    href="{% url 'seminar_room' cohort.id %}"
+    class="back-link"
+>
+    ← Back to Seminar Room
+</a>
+
+
 <div class="lesson-header">
 
-    <a
-        href="{% url 'module_detail' module.id %}"
-        class="back-link"
-    >
-        ← Back to {{ module.title }}
-    </a>
-
     <span class="dashboard-label">
-        {{ cohort.name }}
+        {{ module.title }}
     </span>
 
     <h1>
@@ -22,143 +24,350 @@
     </h1>
 
     {% if lesson.description %}
+
         <p>
             {{ lesson.description }}
         </p>
+
     {% endif %}
 
 </div>
 
 
-<!-- Lesson Recording -->
 
-<section class="lesson-video-section">
+<!-- Video -->
+<section class="lesson-video-card">
 
-    <div class="section-heading">
+    {% if lesson.video_file %}
 
-        <span class="dashboard-label">
-            RECORDED SESSION
-        </span>
+        <video
+            id="lesson-video"
+            controls
+            preload="metadata"
+        >
+            <source
+                src="{{ lesson.video_file.url }}"
+                type="video/mp4"
+            >
 
-        <h2>
-            Lesson Recording
-        </h2>
+            Your browser does not support video playback.
+        </video>
 
-    </div>
+    {% elif lesson.video_url %}
 
-
-    {% if lesson.video_url %}
-
-        <div class="video-container">
-
-            <iframe
+        <video
+            id="lesson-video"
+            controls
+            preload="metadata"
+        >
+            <source
                 src="{{ lesson.video_url }}"
-                title="{{ lesson.title }}"
-                allowfullscreen
-            ></iframe>
+                type="video/mp4"
+            >
 
-        </div>
+            Your browser does not support video playback.
+        </video>
 
     {% else %}
 
-        <div class="empty-state">
+        <div class="video-placeholder">
 
             <h3>
-                Recording not available yet.
+                Recording not available yet
             </h3>
 
             <p>
                 Your instructor has not uploaded the
-                recording for this lesson yet.
+                recorded session for this lesson yet.
             </p>
 
         </div>
 
     {% endif %}
+
+</section>
+
+
+<!-- Lesson Progress -->
+
+<section class="lesson-progress-card">
+
+    <div class="progress-header">
+
+        <span>
+            Lesson Progress
+        </span>
+
+        <strong id="progress-percentage">
+            {% if lesson.duration_seconds %}
+                {% widthratio progress.watched_seconds lesson.duration_seconds 100 %}%
+            {% else %}
+                —
+            {% endif %}
+        </strong>
+
+    </div>
+
+
+    <div class="progress-bar">
+
+        <div
+            id="lesson-progress-fill"
+            class="progress-fill"
+            style="width: {% widthratio progress.watched_seconds lesson.duration_seconds 100 %}%;"
+        ></div>
+
+    </div>
+
+
+    <p id="completion-message">
+
+        {% if progress.completed %}
+
+            ✓ Lesson completed
+
+        {% else %}
+
+            Watch at least 90% of this lesson to complete it.
+
+        {% endif %}
+
+    </p>
 
 </section>
 
 
 <!-- Assignment -->
 
-<section class="lesson-assignment-section">
+{% if lesson.assignments.exists %}
 
-    <div class="section-heading">
+    <section class="lesson-assignment-card">
 
-        <span class="dashboard-label">
+        <span class="card-label">
             ASSIGNMENT
         </span>
 
         <h2>
-            Your Task
+            Practice What You Learned
         </h2>
 
-    </div>
+        {% for assignment in lesson.assignments.all %}
 
-
-    {% if assignments %}
-
-        {% for assignment in assignments %}
-
-            <article class="assignment-card">
+            <div class="lesson-assignment">
 
                 <h3>
                     {{ assignment.title }}
                 </h3>
 
-                <div class="assignment-instructions">
+                <div>
                     {{ assignment.instructions|linebreaks }}
                 </div>
 
-                {% if assignment.due_date %}
+                <a
+                    href="{% url 'assignment_detail' assignment.id %}"
+                    class="primary-button"
+                >
+                    View Assignment →
+                </a>
 
-                    <p class="assignment-due">
-
-                        Due:
-                        {{ assignment.due_date }}
-
-                    </p>
-
-                {% endif %}
-
-            </article>
+            </div>
 
         {% endfor %}
 
-    {% else %}
+    </section>
 
-        <div class="empty-state">
-
-            <h3>
-                No assignment for this lesson.
-            </h3>
-
-            <p>
-                Your instructor has not added an
-                assignment yet.
-            </p>
-
-        </div>
-
-    {% endif %}
-
-</section>
-
-
-<!-- Navigation -->
-
-<div class="lesson-navigation">
-
-    <a
-        href="{% url 'module_detail' module.id %}"
-        class="secondary-button"
-    >
-        ← All Lessons
-    </a>
-
-</div>
+{% endif %}
 
 
 </div>
+
+{% if lesson.video_file or lesson.video_url %}
+
+<script>
+const video = document.getElementById(
+    "lesson-video"
+);
+
+const progressFill = document.getElementById(
+    "lesson-progress-fill"
+);
+
+const progressPercentage = document.getElementById(
+    "progress-percentage"
+);
+
+const completionMessage = document.getElementById(
+    "completion-message"
+);
+
+
+let lastSavedTime = 0;
+
+let watchedSeconds =
+    {{ progress.watched_seconds|default:0 }};
+
+let lastPosition = watchedSeconds;
+
+
+/*
+    Resume from previously saved progress.
+*/
+video.addEventListener(
+    "loadedmetadata",
+    function () {
+
+        if (
+            watchedSeconds > 0 &&
+            watchedSeconds < video.duration
+        ) {
+
+            video.currentTime =
+                watchedSeconds;
+
+        }
+
+        lastPosition =
+            video.currentTime;
+    }
+);
+
+
+/*
+    Save progress.
+*/
+function saveProgress() {
+
+    if (!video.duration) {
+        return;
+    }
+
+
+    const currentTime =
+        Math.floor(video.currentTime);
+
+
+    /*
+        Ignore backward movement.
+    */
+    if (currentTime < lastPosition) {
+        return;
+    }
+
+
+    /*
+        Only update our local position.
+    */
+    lastPosition =
+        currentTime;
+
+
+    /*
+        Don't send requests too frequently.
+    */
+    if (
+        currentTime - lastSavedTime < 5
+    ) {
+        return;
+    }
+
+
+    lastSavedTime =
+        currentTime;
+
+
+    const formData =
+        new FormData();
+
+
+    formData.append(
+        "watched_seconds",
+        currentTime
+    );
+
+
+    fetch(
+        "{% url 'update_lesson_progress' lesson.id %}",
+        {
+            method: "POST",
+
+            headers: {
+                "X-CSRFToken":
+                    "{{ csrf_token }}"
+            },
+
+            body: formData
+        }
+    )
+    .then(response =>
+        response.json()
+    )
+    .then(data => {
+
+        if (data.error) {
+            return;
+        }
+
+
+        progressFill.style.width =
+            `${data.percentage}%`;
+
+
+        progressPercentage.textContent =
+            `${data.percentage}%`;
+
+
+        if (data.completed) {
+
+            completionMessage.textContent =
+                "✓ Lesson completed";
+
+        }
+
+    })
+    .catch(error => {
+
+        console.error(
+            "Progress update failed:",
+            error
+        );
+
+    });
+
+}
+
+
+/*
+    Save while watching.
+*/
+video.addEventListener(
+    "timeupdate",
+    saveProgress
+);
+
+
+/*
+    Save when paused.
+*/
+video.addEventListener(
+    "pause",
+    saveProgress
+);
+
+
+/*
+    Save when finished.
+*/
+video.addEventListener(
+    "ended",
+    saveProgress
+);
+
+</script>
+
+{% endif %}
 
 {% endblock %}
+
+
+
+

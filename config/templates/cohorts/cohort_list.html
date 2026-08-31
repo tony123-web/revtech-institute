@@ -1,15 +1,132 @@
 {% extends "base.html" %}
 
 {% block title %}
-Cohorts | RevTech Institute
+    Cohorts | RevTech Institute
+{% endblock %}
+
+{% block description %}
+    Explore upcoming RevTech Institute cohorts and find the right learning opportunity for you.
 {% endblock %}
 
 {% block content %}
 
-<h1>RevTech Institute Cohorts</h1>
+<section class="cohort-list-page">
 
-<p>
-    Explore our current and upcoming learning cohorts.
-</p>
+    <div class="cohort-list-container">
+
+        <div class="cohort-list-header">
+
+            <span class="section-label">
+
+            </span>
+
+            <h1>
+                Upcoming Cohorts
+            </h1>
+
+            <p>
+                Join a practical learning cohort and build real
+                technology skills through structured training and projects.
+            </p>
+
+        </div>
+
+
+        <div class="cohort-grid">
+
+            {% for cohort in cohorts %}
+
+                <article class="cohort-card">
+
+                    <div class="cohort-card-header">
+
+                        <span class="cohort-status">
+                            {% if cohort.is_open %}
+                                Registration Open
+                            {% else %}
+                                Registration Closed
+                            {% endif %}
+                        </span>
+
+                        <h2>
+                            {{ cohort.name }}
+                        </h2>
+
+                        {% if cohort.program %}
+                            <p class="cohort-program">
+                                {{ cohort.program.title }}
+                            </p>
+                        {% endif %}
+
+                    </div>
+
+
+                    {% if cohort.description %}
+
+                        <p class="cohort-description">
+                            {{ cohort.description }}
+                        </p>
+
+                    {% endif %}
+
+
+                    <div class="cohort-meta">
+
+                        <div>
+                            <span>Starts</span>
+                            <strong>
+                                {{ cohort.start_date|date:"M d, Y" }}
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Fee</span>
+                            <strong>
+                                ₦{{ cohort.price|floatformat:2 }}
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Capacity</span>
+                            <strong>
+                                {{ cohort.capacity }} students
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="{% url 'cohort_detail' cohort.slug %}"
+                        class="primary-button cohort-card-button"
+                    >
+                        View Cohort
+                        <span>→</span>
+                    </a>
+
+                </article>
+
+            {% empty %}
+
+                <div class="empty-state">
+
+                    <h2>
+                        No upcoming cohorts
+                    </h2>
+
+                    <p>
+                        There are currently no open cohorts.
+                        Please check back soon.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
 
 {% endblock %}

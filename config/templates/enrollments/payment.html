@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Complete Enrollment | RevTech Institute
+{% endblock %}
+
+{% block content %}
+
+<section class="cohort-detail-page">
+
+    <div class="cohort-detail-container">
+
+        <div class="cohort-detail-hero">
+
+            <span class="section-label">
+                Enrollment
+            </span>
+
+            <h1>
+                Complete Your Enrollment
+            </h1>
+
+            <p>
+                Review your cohort information before proceeding
+                to secure payment.
+            </p>
+
+        </div>
+
+
+        <div class="cohort-enrollment-cta">
+
+            <h2>
+                {{ cohort.name }}
+            </h2>
+
+            {% if cohort.program %}
+
+                <p>
+                    {{ cohort.program.title }}
+                </p>
+
+            {% endif %}
+
+
+            <div class="cohort-detail-price">
+
+                <span>
+                    Cohort Fee
+                </span>
+
+                <strong>
+                    ₦{{ cohort.price|floatformat:2 }}
+                </strong>
+
+            </div>
+
+
+            <p>
+                You are enrolling as
+                <strong>
+                    {{ request.user.get_full_name|default:request.user.username }}
+                </strong>.
+            </p>
+
+            <a
+                href="{% url 'initialize_payment' enrollment.id %}"
+                class="primary-button"
+            >
+                Proceed to Payment
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

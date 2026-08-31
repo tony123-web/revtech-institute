@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Verification Link Expired | RevTech Institute
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-page">
+
+    <div class="auth-container">
+
+        <div class="auth-header">
+
+            <span class="section-label">
+                RevTech Institute
+            </span>
+
+            <h1>
+                Verification link expired
+            </h1>
+
+            <p>
+                Your email verification link has expired.
+            </p>
+
+        </div>
+
+        <div class="auth-card">
+
+            <p>
+                For your security, verification links are only
+                valid for 24 hours.
+            </p>
+
+            <p>
+                Request a new verification link and we'll send
+                it to your email.
+            </p>
+
+            <a
+                href="{% url 'resend_verification' %}"
+                class="primary-button auth-button"
+            >
+                Send New Verification Link
+            </a>
+
+            <div class="auth-footer">
+
+                <p>
+                    Already verified?
+
+                    <a href="{% url 'login' %}">
+                        Login
+                    </a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

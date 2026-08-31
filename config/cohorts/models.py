@@ -19,6 +19,11 @@ class Cohort(models.Model):
     description = models.TextField(
         blank=True
     )
+    price = models.DecimalField(
+        max_digits=10,null=True, blank=True,
+        decimal_places=2,
+        default=0
+    )
     start_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
     registration_deadline = models.DateField(blank=True, null=True)
@@ -38,7 +43,6 @@ class Cohort(models.Model):
     def __str__(self):
 
         return self.name
-
 
 class SeminarRoom(models.Model):
     id = models.UUIDField(
@@ -76,7 +80,6 @@ class SeminarRoom(models.Model):
 
     def __str__(self):
         return f"{self.cohort.name} - Seminar Room"
-
 
 class SeminarResource(models.Model):
     id = models.UUIDField(
@@ -184,5 +187,79 @@ class DiscussionReply(models.Model):
     def __str__(self):
         return f"Reply by {self.author.username}"
 
+class Week(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+    cohort = models.ForeignKey(
+        Cohort,
+        on_delete=models.CASCADE,
+        related_name="weeks"
+    )
+    title = models.CharField(
+        max_length=200
+    )
+    description = models.TextField(
+        blank=True
+    )
+    week_number = models.PositiveIntegerField()
+    start_date = models.DateField(
+        blank=True,
+        null=True
+    )
+    end_date = models.DateField(
+        blank=True,
+        null=True
+    )
+    is_active = models.BooleanField(
+        default=True
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    class Meta:
+        ordering = ["week_number"]
 
+        constraints = [
+            models.UniqueConstraint(
+                fields=["cohort", "week_number"],
+                name="unique_week_number_per_cohort"
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.cohort.name} - {self.title}"
+
+class Announcement(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+    cohort = models.ForeignKey(
+        Cohort,
+        on_delete=models.CASCADE,
+        related_name="announcements"
+    )
+    title = models.CharField(
+        max_length=200
+    )
+    content = models.TextField()
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+    is_active = models.BooleanField(
+        default=True
+    )
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return self.title
 

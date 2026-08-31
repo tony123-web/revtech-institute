@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="review-page">
+
+<a
+    href="{% url 'seminar_room' submission.assignment.lesson.module.cohort.id %}"
+    class="back-link"
+>
+    ← Back to Seminar Room
+</a>
+
+
+<div class="review-header">
+
+    <span class="dashboard-label">
+        INSTRUCTOR REVIEW
+    </span>
+
+    <h1>
+        {{ submission.assignment.title }}
+    </h1>
+
+    <p>
+        Submitted by
+        <strong>
+            {{ submission.student.username }}
+        </strong>
+    </p>
+
+</div>
+
+
+<!-- Assignment -->
+
+<section class="review-card">
+
+    <span class="card-label">
+        ASSIGNMENT
+    </span>
+
+    <h2>
+        Task
+    </h2>
+
+    <div class="assignment-instructions">
+
+        {{ submission.assignment.instructions|linebreaks }}
+
+    </div>
+
+</section>
+
+
+<!-- Student Submission -->
+
+<section class="review-card">
+
+    <span class="card-label">
+        STUDENT SUBMISSION
+    </span>
+
+    <h2>
+        GitHub Repository
+    </h2>
+
+    <a
+        href="{{ submission.github_url }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="primary-button"
+    >
+        Open GitHub Repository ↗
+    </a>
+
+
+    {% if submission.comment %}
+
+        <div class="student-comment">
+
+            <strong>
+                Student Comment
+            </strong>
+
+            {{ submission.comment|linebreaks }}
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+<!-- Instructor Controls -->
+
+<section class="review-card">
+
+    <span class="card-label">
+        INSTRUCTOR
+    </span>
+
+    <h2>
+        Review Submission
+    </h2>
+
+
+    <form
+        method="POST"
+        class="review-form"
+    >
+
+        {% csrf_token %}
+
+
+        <div class="form-group">
+
+            <label for="instructor_feedback">
+                Feedback
+            </label>
+
+            <textarea
+                name="instructor_feedback"
+                id="instructor_feedback"
+                class="form-input"
+                rows="7"
+                placeholder="Write feedback for the student..."
+            >{{ submission.instructor_feedback }}</textarea>
+
+        </div>
+
+
+        <label class="visibility-control">
+
+            <input
+                type="checkbox"
+                name="is_visible_to_cohort"
+                {% if submission.is_visible_to_cohort %}
+                    checked
+                {% endif %}
+            >
+
+            <span>
+                Share this submission with the cohort
+            </span>
+
+        </label>
+
+
+        <button
+            type="submit"
+            class="primary-button"
+        >
+            Save Review
+        </button>
+
+    </form>
+
+</section>
+
+
+</div>
+
+{% endblock %}

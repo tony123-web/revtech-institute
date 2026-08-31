@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Email Verified | RevTech Institute
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-page">
+
+    <div class="auth-container">
+
+        <div class="auth-header">
+
+            <span class="section-label">
+
+            </span>
+
+            <h1>
+                Email verified!
+            </h1>
+
+            <p>
+                Your RevTech Institute account has been successfully
+                verified.
+            </p>
+
+        </div>
+
+        <div class="auth-card">
+
+            <p>
+                You can now log in to your account and continue
+                completing your profile.
+            </p>
+
+            <a
+                href="{% url 'login' %}"
+                class="primary-button auth-button"
+            >
+                Continue to Login
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

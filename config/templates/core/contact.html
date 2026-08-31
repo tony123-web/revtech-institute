@@ -1,16 +1,196 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}
-Contact | RevTech Institute
+Contact RevTech
 {% endblock %}
 
 {% block content %}
 
-<h1>Contact RevTech Institute</h1>
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
 
-<p>
-    Have a question about our programs or upcoming cohorts?
-    Get in touch with us.
-</p>
+<div class="contact-page">
+
+
+<!-- HERO -->
+
+<section class="contact-hero">
+
+    <span>
+        CONTACT REVTECH
+    </span>
+
+    <h1>
+        Let's talk.
+    </h1>
+
+    <p>
+        Have a question about a program, cohort,
+        enrollment or partnership? We'd love to hear
+        from you.
+    </p>
+
+</section>
+
+
+<!-- CONTACT CONTENT -->
+
+<section class="contact-content">
+
+    <div class="contact-info">
+
+        <span>
+            GET IN TOUCH
+        </span>
+
+        <h2>
+            We're here to help.
+        </h2>
+
+        <p>
+            Whether you're interested in joining a cohort,
+            working with RevTech or simply want to ask a
+            question, you can reach out to us.
+        </p>
+
+
+        <div class="contact-item">
+
+            <strong>
+                Email
+            </strong>
+
+            <p>
+                tonydjango2001@gmail.com
+<!--                support@revtech.com-->
+            </p>
+
+        </div>
+
+
+        <div class="contact-item">
+
+            <strong>
+                WhatsApp
+            </strong>
+
+            <p>
+                Reach out through our official WhatsApp
+                community for cohort-related enquiries.
+            </p>
+
+        </div>
+
+
+        <div class="contact-item">
+
+            <strong>
+                Community
+            </strong>
+
+            <p>
+                Join the RevTech community to stay updated
+                about upcoming cohorts, programs and
+                opportunities.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONTACT FORM -->
+
+    <div class="contact-form-container">
+
+        <h2>
+            Send us a message
+        </h2>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+
+                <label for="name">
+                    Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Your name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="subject">
+                    Subject
+                </label>
+
+                <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    placeholder="How can we help?"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="message">
+                    Message
+                </label>
+
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="6"
+                    placeholder="Write your message..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <button type="submit" style="color:gray;">
+                Send Message
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+</div>
 
 {% endblock %}

@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Edit Project | RevTech
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/projects.css' %}">
+
+<section class="project-form-page">
+
+<div class="project-form-header">
+
+    <span>PROJECT EDITOR</span>
+
+    <h1>
+        Edit your project
+    </h1>
+
+    <p>
+        Update your project details before it is
+        reviewed and published.
+    </p>
+
+</div>
+
+
+<form
+    method="POST"
+    enctype="multipart/form-data"
+    class="project-form"
+>
+
+    {% csrf_token %}
+
+    {{ form.non_field_errors }}
+
+
+    <div class="form-group">
+
+        <label>
+            Project Title
+        </label>
+
+        {{ form.title }}
+
+        {{ form.title.errors }}
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Description
+        </label>
+
+        {{ form.description }}
+
+        {{ form.description.errors }}
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Technologies Used
+        </label>
+
+        {{ form.technologies }}
+
+        {{ form.technologies.errors }}
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            GitHub Repository
+        </label>
+
+        {{ form.github_url }}
+
+        {{ form.github_url.errors }}
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Live Project
+        </label>
+
+        {{ form.live_url }}
+
+        {{ form.live_url.errors }}
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Add More Screenshots
+        </label>
+
+        {{ image_form.images }}
+
+        <small>
+            You can upload additional screenshots.
+        </small>
+
+    </div>
+
+
+    <button type="submit">
+        Save Changes
+    </button>
+
+</form>
+
+
+</section>
+
+{% endblock %}

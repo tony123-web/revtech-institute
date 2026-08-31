@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+{{ project.title }} | RevTech
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/projects.css' %}">
+
+<section class="project-detail">
+
+<div class="project-detail-header">
+
+    <span>
+        {{ project.cohort.name }}
+    </span>
+
+    <h1>
+        {{ project.title }}
+    </h1>
+
+    <p>
+        {{ project.description }}
+    </p>
+
+</div>
+
+
+<!-- STUDENT -->
+
+<div class="project-meta">
+
+    <div>
+
+        <small>
+            BUILT BY
+        </small>
+
+        <strong>
+
+            {% if project.student.get_full_name %}
+
+                {{ project.student.get_full_name }}
+
+            {% else %}
+
+                {{ project.student.username }}
+
+            {% endif %}
+
+        </strong>
+
+    </div>
+
+
+    <div>
+
+        <small>
+            COHORT
+        </small>
+
+        <strong>
+            {{ project.cohort.name }}
+        </strong>
+
+    </div>
+
+
+    {% if project.technologies %}
+
+        <div>
+
+            <small>
+                TECHNOLOGIES
+            </small>
+
+            <strong>
+                {{ project.technologies }}
+            </strong>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<!-- SCREENSHOTS -->
+
+{% if project.images.all %}
+
+    <section class="project-gallery">
+
+        <h2>
+            Project Screenshots
+        </h2>
+
+        <div class="gallery-grid">
+
+            {% for image in project.images.all %}
+
+                <figure>
+
+                    <img
+                        src="{{ image.image.url }}"
+                        alt="{{ image.caption|default:project.title }}"
+                    >
+
+                    {% if image.caption %}
+
+                        <figcaption>
+                            {{ image.caption }}
+                        </figcaption>
+
+                    {% endif %}
+
+                </figure>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+{% endif %}
+
+
+<!-- LINKS -->
+
+<section class="project-links">
+
+    <h2>
+        Explore the project
+    </h2>
+
+
+    <div class="project-buttons">
+
+        {% if project.github_url %}
+
+            <a
+                href="{{ project.github_url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                GitHub
+            </a>
+
+        {% endif %}
+
+
+        {% if project.live_url %}
+
+            <a
+                href="{{ project.live_url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Live Project
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<a
+    href="{% url 'project_list' %}"
+    class="back-projects"
+>
+    ← Back to Student Projects
+</a>
+
+
+</section>
+
+{% endblock %}

@@ -45,6 +45,11 @@ class Module(models.Model):
         on_delete=models.CASCADE,
         related_name="modules"
     )
+    week = models.ForeignKey(
+        "cohorts.Week",null=True,blank=True,
+        on_delete=models.CASCADE,
+        related_name="modules"
+    )
     title = models.CharField(
         max_length=200
     )
@@ -64,12 +69,10 @@ class Module(models.Model):
 
     class Meta:
         ordering = ["order"]
-        constraints = [
-            models.UniqueConstraint(
-                fields=["cohort", "order"],
-                name="unique_module_order_per_program"
-            )
-        ]
+        models.UniqueConstraint(
+            fields=["week", "order"],
+            name="unique_module_order_per_week"
+        )
 
     def __str__(self):
         return f"{self.cohort.name} - {self.title}"
@@ -90,6 +93,11 @@ class Lesson(models.Model):
     )
     video_url = models.URLField(
         blank=True
+    )
+    video_file = models.FileField(
+        upload_to="lessons/videos/",
+        blank=True,
+        null=True
     )
     duration_seconds = models.PositiveIntegerField(
         default=0
@@ -126,35 +134,94 @@ class Lesson(models.Model):
         return f"{self.module.title} - {self.title}"
 
 class Assignment(models.Model):
+
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
         editable=False
     )
+
     lesson = models.ForeignKey(
         Lesson,
         on_delete=models.CASCADE,
         related_name="assignments"
     )
+
     title = models.CharField(
         max_length=200
     )
+
     instructions = models.TextField()
+
     due_date = models.DateTimeField(
         blank=True,
         null=True
     )
+
     is_active = models.BooleanField(
         default=True
     )
+
     created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+
+    class Meta:
+        ordering = ["created_at"]
+
+    def __str__(self):
+        return self.title
+
+class AssignmentSubmission(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+    assignment = models.ForeignKey(
+        Assignment,
+        on_delete=models.CASCADE,
+        related_name="submissions"
+    )
+    student = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="assignment_submissions"
+    )
+    github_url = models.URLField()
+    comment = models.TextField(
+        blank=True
+    )
+    instructor_feedback = models.TextField(
+        blank=True
+    )
+    is_visible_to_cohort = models.BooleanField(
+        default=False
+    )
+    submitted_at = models.DateTimeField(
         auto_now_add=True
     )
     updated_at = models.DateTimeField(
         auto_now=True
     )
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["assignment", "student"],
+                name="unique_student_assignment_submission"
+            )
+        ]
+        ordering = ["-submitted_at"]
+
     def __str__(self):
-        return f"{self.lesson.title} - {self.title}"
+        return (
+            f"{self.student.username} - "
+            f"{self.assignment.title}"
+        )
 
 class LessonProgress(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
