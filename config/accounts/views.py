@@ -9,8 +9,9 @@ from django.conf import settings
 from django.urls import reverse
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
-from .forms import RegistrationForm, ProfileForm, LoginForm,ProfileEditForm
+from .forms import RegistrationForm, ProfileForm, LoginForm,ProfileEditForm,RevTechPasswordResetForm
 from .models import Profile, EmailVerificationToken
+from core.emails import send_brevo_email
 from django.contrib.auth.views import (
     PasswordResetView,
     PasswordResetDoneView,
@@ -100,40 +101,62 @@ def register_view(request):
                 )
             )
 
-            html_message = render_to_string(
-                "accounts/emails/verification_email.html",
-                {
+            send_brevo_email(
+                recipient_email=email,
+                recipient_name=first_name,
+                subject="Verify your RevTech Institute account",
+                template="accounts/emails/verification_email.html",
+                context={
                     "first_name": first_name,
                     "verification_url": verification_url,
-                }
+                },
+                text_content=(
+                    f"Hello {first_name},\n\n"
+                    "Welcome to RevTech Institute!\n\n"
+                    "Please verify your email address using this link:\n\n"
+                    f"{verification_url}\n\n"
+                    "If you did not create this account, "
+                    "you can safely ignore this email.\n\n"
+                    "Regards,\n"
+                    "RevTech Institute"
+                ),
             )
 
-            text_message = (
-                f"Hello {first_name},\n\n"
-                "Welcome to RevTech Institute!\n\n"
-                "Please verify your email address using the link below:\n\n"
-                f"{verification_url}\n\n"
-                "If you did not create this account, "
-                "you can safely ignore this email.\n\n"
-                "Regards,\n"
-                "RevTech Institute"
-            )
+            # html_message = render_to_string(
+            #     "accounts/emails/verification_email.html",
+            #     {
+            #         "first_name": first_name,
+            #         "verification_url": verification_url,
+            #     }
+            # )
 
-            email_message = EmailMultiAlternatives(
-                subject="Verify your RevTech Institute account",
-                body=text_message,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                to=[email],
-            )
+            # text_message = (
+            #     f"Hello {first_name},\n\n"
+            #     "Welcome to RevTech Institute!\n\n"
+            #     "Please verify your email address using the link below:\n\n"
+            #     f"{verification_url}\n\n"
+            #     "If you did not create this account, "
+            #     "you can safely ignore this email.\n\n"
+            #     "Regards,\n"
+            #     "RevTech Institute"
+            # )
 
-            email_message.attach_alternative(
-                html_message,
-                "text/html"
-            )
 
-            email_message.send(
-                fail_silently=False
-            )
+            # email_message = EmailMultiAlternatives(
+            #     subject="Verify your RevTech Institute account",
+            #     body=text_message,
+            #     from_email=settings.DEFAULT_FROM_EMAIL,
+            #     to=[email],
+            # )
+
+            # email_message.attach_alternative(
+            #     html_message,
+            #     "text/html"
+            # )
+            #
+            # email_message.send(
+            #     fail_silently=False
+            # )
 
             return redirect("verification_sent")
 
@@ -290,41 +313,63 @@ def resend_verification_view(request):
             )
         )
 
-        html_message = render_to_string(
-            "accounts/emails/verification_email.html",
-            {
+        send_brevo_email(
+            recipient_email=email,
+            recipient_name=user.first_name,
+            subject="Verify your RevTech Institute account",
+            template="accounts/emails/verification_email.html",
+            context={
                 "first_name": user.first_name,
                 "verification_url": verification_url,
-            }
+            },
+            text_content=(
+                f"Hello {user.first_name},\n\n"
+                "Welcome to RevTech Institute!\n\n"
+                "Please verify your email address using this link:\n\n"
+                f"{verification_url}\n\n"
+                 "This link will expire in 24 hours.\n\n"
+                "If you did not create this account, "
+                "you can safely ignore this email.\n\n"
+                "Regards,\n"
+                "RevTech Institute"
+            ),
         )
 
-        text_message = (
-            f"Hello {user.first_name},\n\n"
-            "Here is your new RevTech Institute "
-            "email verification link:\n\n"
-            f"{verification_url}\n\n"
-            "This link will expire in 24 hours.\n\n"
-            "If you did not create this account, "
-            "you can safely ignore this email.\n\n"
-            "Regards,\n"
-            "RevTech Institute"
-        )
-
-        email_message = EmailMultiAlternatives(
-            subject="Verify your RevTech Institute account",
-            body=text_message,
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            to=[user.email],
-        )
-
-        email_message.attach_alternative(
-            html_message,
-            "text/html"
-        )
-
-        email_message.send(
-            fail_silently=False
-        )
+        # html_message = render_to_string(
+        #     "accounts/emails/verification_email.html",
+        #     {
+        #         "first_name": user.first_name,
+        #         "verification_url": verification_url,
+        #     }
+        # )
+        #
+        # text_message = (
+        #     f"Hello {user.first_name},\n\n"
+        #     "Here is your new RevTech Institute "
+        #     "email verification link:\n\n"
+        #     f"{verification_url}\n\n"
+        #     "This link will expire in 24 hours.\n\n"
+        #     "If you did not create this account, "
+        #     "you can safely ignore this email.\n\n"
+        #     "Regards,\n"
+        #     "RevTech Institute"
+        # )
+        #
+        # email_message = EmailMultiAlternatives(
+        #     subject="Verify your RevTech Institute account",
+        #     body=text_message,
+        #     from_email=settings.DEFAULT_FROM_EMAIL,
+        #     to=[user.email],
+        # )
+        #
+        # email_message.attach_alternative(
+        #     html_message,
+        #     "text/html"
+        # )
+        #
+        # email_message.send(
+        #     fail_silently=False
+        # )
 
         return redirect("verification_sent")
 
@@ -438,10 +483,17 @@ def edit_profile_view(request):
 
 
 class RevTechPasswordResetView(PasswordResetView):
+    form_class = RevTechPasswordResetForm
     template_name = "accounts/password_reset.html"
-    email_template_name = "accounts/emails/password_reset_email.txt"
-    html_email_template_name = "accounts/emails/password_reset_email.html"
-    subject_template_name = "accounts/emails/password_reset_subject.txt"
+    email_template_name = (
+        "accounts/emails/password_reset_email.txt"
+    )
+    html_email_template_name = (
+        "accounts/emails/password_reset_email.html"
+    )
+    subject_template_name = (
+        "accounts/emails/password_reset_subject.txt"
+    )
     success_url = "/account/password-reset/done/"
 
 

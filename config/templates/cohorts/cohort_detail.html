@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load humanize %}
 {% block title %}
     {{ cohort.name }} | RevTech Institute
 {% endblock %}
@@ -35,7 +35,9 @@
                 </span>
 
                 <strong>
-                    ₦{{ cohort.price|floatformat:2 }}
+
+                    ₦{{ cohort.price|intcomma }}
+
                 </strong>
 
             </div>

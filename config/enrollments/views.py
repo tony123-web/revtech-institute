@@ -10,6 +10,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from cohorts.models import Cohort
 from .models import Enrollment
+from core.emails import send_payment_confirmation_email
 
 import hashlib
 import hmac
@@ -138,6 +139,19 @@ def verify_and_activate_enrollment(enrollment, reference):
             "payment_date",
         ]
     )
+    if not enrollment.payment_confirmation_sent:
+        email_sent = send_payment_confirmation_email(
+            enrollment
+        )
+
+        if email_sent:
+            enrollment.payment_confirmation_sent = True
+
+            enrollment.save(
+                update_fields=[
+                    "payment_confirmation_sent"
+                ]
+            )
     return True, "Payment successful! Your enrollment is now active."
 
 @login_required
@@ -609,10 +623,10 @@ def paystack_confirm_revtech(request):
         enrollment,
         reference
     )
-    send_enrollment_confirmation_email(
-        enrollment,
-        reference
-    )
+    # send_enrollment_confirmation_email(
+    #     enrollment,
+    #     reference
+    # )
     if not success:
         return JsonResponse(
             {

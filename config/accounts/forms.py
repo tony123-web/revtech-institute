@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from .models import Profile
 from django.contrib.auth import authenticate
+from django.contrib.auth.forms import PasswordResetForm
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from core.emails import send_brevo_email
 
 
 class RegistrationForm(forms.Form):
@@ -258,6 +264,45 @@ class ProfileEditForm(forms.ModelForm):
             "portfolio_url",
             "central_url",
         ])
+
+
+class RevTechPasswordResetForm(PasswordResetForm):
+
+    def send_mail(
+        self,
+        subject_template_name,
+        email_template_name,
+        context,
+        from_email,
+        to_email,
+        html_email_template_name=None,
+    ):
+        subject = render_to_string(
+            subject_template_name,
+            context
+        ).strip()
+
+        text_message = render_to_string(
+            email_template_name,
+            context
+        )
+
+        html_message = ""
+
+        if html_email_template_name:
+            html_message = render_to_string(
+                html_email_template_name,
+                context
+            )
+
+        send_brevo_email(
+            recipient_email=to_email,
+            recipient_name=context["user"].get_full_name(),
+            subject=subject,
+            html_content=html_message,
+            text_content=text_message,
+        )
+
 
 
 
