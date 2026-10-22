@@ -1,6 +1,6 @@
-# RevTech Institute
+# RevTech Network 
 
-RevTech Institute is an online learning platform focused on practical, career-ready technology education.
+RevTech is a technology brand focused on three core areas: RevTech Institute, providing practical technology education; RevTech Event, facilitating event registration, ticketing, and management; and RevTech Store, offering technology products and devices.
 
 ## Technology Stack
 
