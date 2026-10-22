@@ -5,13 +5,13 @@ from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-
     path("", include("core.urls")),
     path("account/", include("accounts.urls")),
     path("programs/", include("courses.urls")),
     path("cohorts/", include("cohorts.urls")),
     path("projects/", include("projects.urls")),
     path("enrollments/", include("enrollments.urls")),
+    path("store/", include("store.urls")),
 ]
 
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

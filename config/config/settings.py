@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'cohorts',
     'projects',
     'enrollments',
+    'store',
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -89,6 +90,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processor.general',
             ],
         },
     },
@@ -209,7 +211,11 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-
+REVTECH_WHATSAPP_NUMBER = "2348108247372"
+REVTECH_STORE_NOTIFICATION_EMAIL = os.getenv(
+    "REVTECH_STORE_NOTIFICATION_EMAIL",
+    "revivallabour1707@gmail.com",
+)
 
 STORAGES = {
     "default": {

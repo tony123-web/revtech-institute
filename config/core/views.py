@@ -44,6 +44,8 @@ def home(request):
                 }
     )
 
+def revtech_home(request):
+    return render(request, "core/revtech_home.html")
 
 def about(request):
     return render(request, "core/about.html")

@@ -111,6 +111,12 @@
                             <p>
                                 <a href="{% url 'core_cohort_detail' enrollment.cohort.slug %}">
                                     {{ enrollment.cohort.program.short_description }}
+                                </a><br><br>
+                                <a
+                                        href="{% url 'core_cohort_detail' enrollment.cohort.slug %}"
+                                        style="background:green; padding:12px; border-radius:15px;"
+                                >
+                                    JOIN SEMINAR ROOM
                                 </a>
                             </p>
                         </div>

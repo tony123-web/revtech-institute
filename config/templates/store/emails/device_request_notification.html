@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Device Request - RevTech Store</title>
+</head>
+
+<body style="margin:0;padding:0;background-color:#f4f6f8;font-family:Arial,Helvetica,sans-serif;color:#1f2937;">
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0"
+       style="background-color:#f4f6f8;padding:40px 15px;">
+    <tr>
+        <td align="center">
+
+            <table width="100%" cellpadding="0" cellspacing="0" border="0"
+                   style="max-width:600px;background-color:#ffffff;border-radius:12px;overflow:hidden;">
+
+                <!-- Header -->
+                <tr>
+                    <td style="padding:32px 30px;text-align:center;background-color:#111827;">
+                        <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:700;">
+                            RevTech
+                        </h1>
+                        <p style="margin:8px 0 0;color:#d1d5db;font-size:14px;">
+                            RevTech Institute | Store Notification
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- Main content -->
+                <tr>
+                    <td style="padding:40px 35px;">
+
+                        <p style="margin:0 0 10px;font-size:13px;color:#2563eb;font-weight:700;text-transform:uppercase;letter-spacing:1px;">
+                            New Store Enquiry
+                        </p>
+
+                        <h2 style="margin:0 0 20px;font-size:24px;color:#111827;">
+                            A Customer Has Requested a Device
+                        </h2>
+
+                        <p style="margin:0 0 25px;font-size:16px;line-height:1.7;">
+                            A new device request has been submitted through
+                            the RevTech Store website. Review the customer's
+                            requirements and contact them to discuss
+                            availability, pricing, and the next steps.
+                        </p>
+
+                        <!-- Customer details -->
+                        <h3 style="margin:0 0 15px;font-size:18px;color:#111827;">
+                            Customer Information
+                        </h3>
+
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0"
+                               style="border:1px solid #e5e7eb;border-radius:8px;margin-bottom:28px;">
+
+                            <tr>
+                                <td style="padding:12px;background-color:#f9fafb;font-size:14px;font-weight:600;width:38%;border-bottom:1px solid #e5e7eb;">
+                                    Full name
+                                </td>
+                                <td style="padding:12px;font-size:14px;border-bottom:1px solid #e5e7eb;">
+                                    {{ device_request.full_name }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding:12px;background-color:#f9fafb;font-size:14px;font-weight:600;border-bottom:1px solid #e5e7eb;">
+                                    Phone number
+                                </td>
+                                <td style="padding:12px;font-size:14px;border-bottom:1px solid #e5e7eb;">
+                                    {{ device_request.phone_number }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding:12px;background-color:#f9fafb;font-size:14px;font-weight:600;">
+                                    Email address
+                                </td>
+                                <td style="padding:12px;font-size:14px;word-break:break-word;">
+                                    {% if device_request.email %}
+                                        {{ device_request.email }}
+                                    {% else %}
+                                        Not provided
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Device requirements -->
+                        <h3 style="margin:0 0 15px;font-size:18px;color:#111827;">
+                            Requested Device
+                        </h3>
+
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0"
+                               style="border:1px solid #e5e7eb;border-radius:8px;margin-bottom:28px;">
+
+                            <tr>
+                                <td style="padding:12px;background-color:#f9fafb;font-size:14px;font-weight:600;width:38%;border-bottom:1px solid #e5e7eb;">
+                                    Device type
+                                </td>
+                                <td style="padding:12px;font-size:14px;border-bottom:1px solid #e5e7eb;">
+                                    {{ device_request.get_device_type_display }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding:12px;background-color:#f9fafb;font-size:14px;font-weight:600;border-bottom:1px solid #e5e7eb;">
+                                    Preferred brand
+                                </td>
+                                <td style="padding:12px;font-size:14px;border-bottom:1px solid #e5e7eb;">
+                                    {% if device_request.preferred_brand %}
+                                        {{ device_request.preferred_brand }}
+                                    {% else %}
+                                        No preference specified
+                                    {% endif %}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding:12px;background-color:#f9fafb;font-size:14px;font-weight:600;border-bottom:1px solid #e5e7eb;">
+                                    Minimum budget
+                                </td>
+                                <td style="padding:12px;font-size:14px;border-bottom:1px solid #e5e7eb;">
+                                    {% if device_request.budget_min != None %}
+                                        ₦{{ device_request.budget_min|floatformat:2 }}
+                                    {% else %}
+                                        Not specified
+                                    {% endif %}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding:12px;background-color:#f9fafb;font-size:14px;font-weight:600;border-bottom:1px solid #e5e7eb;">
+                                    Maximum budget
+                                </td>
+                                <td style="padding:12px;font-size:14px;border-bottom:1px solid #e5e7eb;">
+                                    {% if device_request.budget_max != None %}
+                                        ₦{{ device_request.budget_max|floatformat:2 }}
+                                    {% else %}
+                                        Not specified
+                                    {% endif %}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding:12px;background-color:#f9fafb;font-size:14px;font-weight:600;border-bottom:1px solid #e5e7eb;">
+                                    Condition
+                                </td>
+                                <td style="padding:12px;font-size:14px;border-bottom:1px solid #e5e7eb;">
+                                    {{ device_request.get_condition_preference_display }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding:12px;background-color:#f9fafb;font-size:14px;font-weight:600;">
+                                    Intended use
+                                </td>
+                                <td style="padding:12px;font-size:14px;">
+                                    {% if device_request.intended_use %}
+                                        {{ device_request.intended_use }}
+                                    {% else %}
+                                        Not specified
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Specifications -->
+                        <h3 style="margin:0 0 12px;font-size:18px;color:#111827;">
+                            Specifications and Additional Details
+                        </h3>
+
+                        <div style="padding:18px;background-color:#f3f4f6;border-radius:8px;margin-bottom:28px;">
+                            <p style="margin:0;font-size:15px;color:#374151;line-height:1.8;white-space:pre-line;">
+                                {{ device_request.specifications }}
+                            </p>
+                        </div>
+
+                        <!-- Request reference -->
+                        <div style="padding:16px;background-color:#eff6ff;border-left:4px solid #2563eb;border-radius:6px;margin-bottom:28px;">
+                            <p style="margin:0 0 6px;font-size:13px;color:#1d4ed8;font-weight:700;">
+                                REQUEST REFERENCE
+                            </p>
+                            <p style="margin:0;font-size:13px;color:#1f2937;word-break:break-all;">
+                                {{ device_request.id }}
+                            </p>
+                        </div>
+
+                        <p style="margin:0 0 15px;font-size:15px;line-height:1.7;">
+                            <strong>Recommended next step:</strong>
+                            Review the request in Django Admin, check with
+                            your suppliers, and contact the customer with
+                            accurate pricing and availability.
+                        </p>
+
+                        <p style="margin:0;font-size:14px;color:#6b7280;line-height:1.7;">
+                            This is an automated notification from the
+                            RevTech Store website. The request is not a
+                            confirmed purchase or payment.
+                        </p>
+
+                    </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                    <td style="padding:25px 30px;text-align:center;background-color:#f9fafb;border-top:1px solid #e5e7eb;">
+                        <p style="margin:0 0 8px;font-size:13px;color:#6b7280;">
+                            © 2026 RevTech Institute
+                        </p>
+                        <p style="margin:0;font-size:12px;color:#9ca3af;">
+                            Learn. Build. Grow.
+                        </p>
+                    </td>
+                </tr>
+
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

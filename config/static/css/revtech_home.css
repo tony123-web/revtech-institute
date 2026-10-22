@@ -1,0 +1,1096 @@
+
+/* =====================================================
+   REVTECH MAIN HOMEPAGE
+   Independent styles — does not modify Institute CSS
+   ===================================================== */
+
+:root {
+    --rth-bg: #0b1120;
+    --rth-panel: #111c30;
+    --rth-panel-light: #172640;
+    --rth-text: #f8fafc;
+    --rth-muted: #aab8cc;
+    --rth-blue: #60a5fa;
+    --rth-blue-strong: #2563eb;
+    --rth-border: rgba(148, 163, 184, 0.18);
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    margin: 0;
+    background: var(--rth-bg);
+    color: var(--rth-text);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+body,
+body * {
+    box-sizing: border-box;
+}
+
+.rth-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    background: rgba(11, 17, 32, 0.92);
+    border-bottom: 1px solid var(--rth-border);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.rth-nav {
+    width: min(1160px, calc(100% - 48px));
+    min-height: 78px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.rth-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    color: var(--rth-text);
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 750;
+    letter-spacing: -0.7px;
+    white-space: nowrap;
+}
+
+.rth-brand-mark {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    background: linear-gradient(140deg, #3b82f6, #1d4ed8);
+    color: white;
+    font-size: 13px;
+    letter-spacing: -1px;
+    box-shadow: 0 5px 20px rgba(37, 99, 235, 0.25);
+}
+
+.rth-brand-highlight {
+    color: var(--rth-blue);
+}
+
+.rth-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.rth-nav-links > a:not(.rth-nav-cta) {
+    color: var(--rth-muted);
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.rth-nav-links > a:not(.rth-nav-cta):hover,
+.rth-footer-links a:hover {
+    color: white;
+}
+
+.rth-nav-cta {
+    padding: 11px 16px;
+    border: 1px solid rgba(96, 165, 250, 0.4);
+    border-radius: 9px;
+    color: white;
+    background: rgba(37, 99, 235, 0.12);
+    font-size: 14px;
+    font-weight: 650;
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.rth-nav-cta:hover {
+    background: rgba(37, 99, 235, 0.26);
+    border-color: var(--rth-blue);
+}
+
+.rth-nav-cta span {
+    margin-left: 5px;
+}
+
+.rth-menu-toggle {
+    display: none;
+}
+
+/* Hero */
+
+.rth-hero {
+    width: min(1160px, calc(100% - 48px));
+    min-height: 590px;
+    margin: 0 auto;
+    padding: 84px 0 90px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 55px;
+    overflow: hidden;
+}
+
+.rth-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.rth-eyebrow {
+    margin: 0 0 18px;
+    color: var(--rth-blue);
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 2px;
+}
+
+.rth-status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background: #60a5fa;
+    box-shadow: 0 0 12px rgba(96, 165, 250, 0.75);
+    vertical-align: 1px;
+}
+
+.rth-hero h1 {
+    max-width: 650px;
+    margin: 0;
+    font-size: clamp(42px, 5.2vw, 69px);
+    line-height: 1.09;
+    font-weight: 780;
+    letter-spacing: -3.2px;
+}
+
+.rth-hero h1 span {
+    color: var(--rth-blue);
+}
+
+.rth-hero-description {
+    max-width: 520px;
+    margin: 25px 0 0;
+    color: var(--rth-muted);
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+.rth-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    margin-top: 30px;
+}
+
+.rth-button {
+    min-height: 48px;
+    padding: 12px 18px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 650;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.rth-button:hover {
+    transform: translateY(-2px);
+}
+
+.rth-button-primary {
+    color: white;
+    background: var(--rth-blue-strong);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.2);
+}
+
+.rth-button-primary:hover {
+    background: #1d4ed8;
+}
+
+.rth-button-secondary {
+    color: var(--rth-text);
+    border-color: var(--rth-border);
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.rth-button-secondary:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.rth-hero-note {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-top: 34px;
+    color: #8494ab;
+    font-size: 12px;
+}
+
+.rth-note-line {
+    width: 25px;
+    height: 1px;
+    background: var(--rth-blue);
+}
+
+/* Hero visual */
+
+.rth-hero-visual {
+    min-height: 390px;
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.rth-visual-glow {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.17);
+    filter: blur(75px);
+}
+
+.rth-visual-card-main {
+    position: relative;
+    z-index: 2;
+    width: min(330px, 82%);
+    min-height: 325px;
+    padding: 31px;
+    border: 1px solid rgba(148, 163, 184, 0.23);
+    border-radius: 20px;
+    background: linear-gradient(145deg, #182943, #0e182a 78%);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3);
+    transform: rotate(-3deg);
+}
+
+.rth-visual-kicker {
+    color: #9aacc5;
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 2px;
+}
+
+.rth-visual-monogram {
+    margin-top: 37px;
+    color: #f8fafc;
+    font-size: 100px;
+    font-weight: 850;
+    line-height: 1;
+    letter-spacing: -12px;
+}
+
+.rth-visual-monogram span {
+    color: var(--rth-blue);
+}
+
+.rth-visual-divider {
+    width: 100%;
+    height: 1px;
+    margin-top: 30px;
+    background: var(--rth-border);
+}
+
+.rth-visual-card-main p {
+    margin: 20px 0 0;
+    color: #c0cde0;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.rth-floating-tag {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    border-radius: 10px;
+    background: #15233a;
+    color: #e5edf9;
+    font-size: 12px;
+    font-weight: 650;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
+}
+
+.rth-tag-top {
+    top: 52px;
+    right: 0;
+}
+
+.rth-tag-bottom {
+    bottom: 44px;
+    left: 0;
+}
+
+.rth-tag-icon {
+    color: var(--rth-blue);
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.rth-visual-orbit {
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    border: 1px solid rgba(96, 165, 250, 0.11);
+    border-radius: 50%;
+}
+
+.rth-orbit-two {
+    width: 430px;
+    height: 430px;
+    border-color: rgba(96, 165, 250, 0.06);
+}
+
+/* General sections */
+
+.rth-section {
+    width: min(1160px, calc(100% - 48px));
+    margin: 0 auto;
+}
+
+.rth-services {
+    padding-top: 60px;
+    padding-bottom: 100px;
+    scroll-margin-top: 95px;
+}
+
+.rth-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 35px;
+}
+
+.rth-section-heading .rth-eyebrow {
+    margin-bottom: 12px;
+}
+
+.rth-section-heading h2,
+.rth-about h2,
+.rth-final-cta h2 {
+    margin: 0;
+    font-size: clamp(28px, 3.5vw, 40px);
+    line-height: 1.2;
+    letter-spacing: -1.5px;
+}
+
+.rth-section-intro {
+    max-width: 390px;
+    margin: 0 0 3px;
+    color: var(--rth-muted);
+    font-size: 13px;
+    line-height: 1.85;
+}
+
+.rth-service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 19px;
+}
+
+.rth-service-card {
+    min-width: 0;
+    padding: 22px;
+    border: 1px solid var(--rth-border);
+    border-radius: 15px;
+    background: linear-gradient(150deg, rgba(23, 38, 64, 0.82), rgba(14, 24, 42, 0.72));
+    transition: transform 0.22s ease, border-color 0.22s ease;
+}
+
+.rth-service-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(96, 165, 250, 0.48);
+}
+
+.rth-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rth-service-number {
+    color: #91a5c0;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1.5px;
+}
+
+.rth-service-symbol {
+    color: var(--rth-blue);
+    font-size: 20px;
+}
+
+.rth-service-art {
+    height: 175px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12px 0 17px;
+    overflow: hidden;
+    border-radius: 11px;
+    background: #0c1729;
+}
+
+/* Institute illustration */
+
+.rth-art-window {
+    position: relative;
+    z-index: 1;
+    width: 72%;
+    padding: 14px;
+    border: 1px solid #304664;
+    border-radius: 9px;
+    background: #14253d;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transform: rotate(-3deg);
+}
+
+.rth-art-window-bar {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 19px;
+}
+
+.rth-art-window-bar i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #536c8d;
+}
+
+.rth-art-code-line {
+    height: 5px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background: #4384d6;
+    opacity: 0.8;
+}
+
+.rth-line-long {
+    width: 85%;
+}
+
+.rth-line-short {
+    width: 48%;
+    background: #65b6d7;
+}
+
+.rth-line-medium {
+    width: 67%;
+    background: #7a8edc;
+}
+
+.rth-art-orb {
+    position: absolute;
+    right: 6%;
+    bottom: 4%;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.3);
+    filter: blur(24px);
+}
+
+/* Event illustration */
+
+.rth-event-stage {
+    position: relative;
+    width: 78%;
+    height: 76%;
+    overflow: hidden;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #172f51, #111b30);
+}
+
+.rth-event-screen {
+    position: absolute;
+    top: 17px;
+    left: 50%;
+    width: 53%;
+    height: 51px;
+    border: 1px solid #467bb5;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #24518a, #182f53);
+    transform: translateX(-50%);
+}
+
+.rth-event-screen::after {
+    content: "REVTECH";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #b8d8ff;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.rth-event-person {
+    position: absolute;
+    bottom: 18px;
+    width: 24px;
+    height: 36px;
+    border-radius: 13px 13px 4px 4px;
+    background: #4778ae;
+}
+
+.rth-event-person::before {
+    content: "";
+    position: absolute;
+    top: -12px;
+    left: 5px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #82a7d0;
+}
+
+.rth-person-one {
+    left: 20%;
+}
+
+.rth-person-two {
+    left: 44%;
+    height: 43px;
+    background: #5b68a7;
+}
+
+.rth-person-three {
+    right: 18%;
+    background: #347f9e;
+}
+
+.rth-event-floor {
+    position: absolute;
+    right: -10%;
+    bottom: 0;
+    left: -10%;
+    height: 17px;
+    background: #0a1424;
+}
+
+.rth-event-spark {
+    position: absolute;
+    color: #7db9ff;
+    font-size: 23px;
+}
+
+.rth-spark-one {
+    top: 22px;
+    left: 13%;
+}
+
+.rth-spark-two {
+    right: 12%;
+    bottom: 22px;
+}
+
+/* Store illustration */
+
+.rth-device {
+    position: absolute;
+}
+
+.rth-device-laptop {
+    z-index: 1;
+    top: 34px;
+    left: 14%;
+    width: 64%;
+}
+
+.rth-laptop-screen {
+    height: 88px;
+    display: grid;
+    place-items: center;
+    border: 4px solid #647b98;
+    border-radius: 8px 8px 3px 3px;
+    background: linear-gradient(135deg, #18345b, #1c4b7e);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.22);
+}
+
+.rth-laptop-screen span {
+    color: #8dc5ff;
+    font-size: 25px;
+    font-weight: 850;
+    letter-spacing: -3px;
+}
+
+.rth-laptop-base {
+    height: 7px;
+    margin: 0 -8px;
+    border-radius: 2px 2px 8px 8px;
+    background: #8193aa;
+}
+
+.rth-device-phone {
+    z-index: 2;
+    right: 10%;
+    bottom: 22px;
+    width: 38px;
+    height: 75px;
+    padding: 4px;
+    border: 2px solid #8da1bb;
+    border-radius: 8px;
+    background: #253b58;
+    transform: rotate(8deg);
+}
+
+.rth-phone-screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(155deg, #3975b9, #122b4a);
+}
+
+.rth-device-shadow {
+    position: absolute;
+    right: 10%;
+    bottom: 18px;
+    left: 10%;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.22);
+    filter: blur(13px);
+}
+
+.rth-service-card h3 {
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+}
+
+.rth-service-card > p {
+    min-height: 100px;
+    margin: 12px 0 23px;
+    color: var(--rth-muted);
+    font-size: 13px;
+    line-height: 1.85;
+}
+
+.rth-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #93c5fd;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.rth-card-link span {
+    transition: transform 0.2s ease;
+}
+
+.rth-card-link:hover span {
+    transform: translateX(4px);
+}
+
+/* About section */
+
+.rth-about {
+    position: relative;
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr;
+    align-items: center;
+    gap: 65px;
+    padding-top: 75px;
+    padding-bottom: 85px;
+    border-top: 1px solid var(--rth-border);
+    scroll-margin-top: 95px;
+}
+
+.rth-about-mark {
+    display: grid;
+    place-items: center;
+    min-height: 240px;
+    border: 1px solid var(--rth-border);
+    border-radius: 18px;
+    background: radial-gradient(ellipse at center, #172c4c 0%, #101a2c 65%);
+    color: white;
+    font-size: clamp(95px, 12vw, 150px);
+    font-weight: 850;
+    letter-spacing: -15px;
+}
+
+.rth-about-mark span {
+    color: var(--rth-blue);
+}
+
+.rth-about h2 {
+    max-width: 600px;
+}
+
+.rth-about-content > p:not(.rth-eyebrow) {
+    max-width: 620px;
+    margin: 19px 0 25px;
+    color: var(--rth-muted);
+    font-size: 14px;
+    line-height: 1.95;
+}
+
+/* Final call to action */
+
+.rth-final-cta {
+    width: min(1160px, calc(100% - 48px));
+    margin: 0 auto 70px;
+    padding: 40px 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    border: 1px solid rgba(96, 165, 250, 0.23);
+    border-radius: 16px;
+    background: linear-gradient(110deg, #142b4b, #111d32 70%);
+}
+
+.rth-final-cta .rth-eyebrow {
+    margin-bottom: 12px;
+}
+
+.rth-final-cta h2 {
+    font-size: clamp(26px, 3vw, 35px);
+}
+
+.rth-final-cta > div > p:last-child {
+    margin: 13px 0 0;
+    color: var(--rth-muted);
+    font-size: 13px;
+}
+
+/* Footer */
+
+.rth-footer {
+    padding: 35px 24px 24px;
+    border-top: 1px solid var(--rth-border);
+    text-align: center;
+}
+
+.rth-footer-brand {
+    justify-content: center;
+}
+
+.rth-footer-tagline {
+    margin: 10px 0 22px;
+    color: var(--rth-muted);
+    font-size: 12px;
+}
+
+.rth-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    margin: 0 auto 25px;
+}
+
+.rth-footer-links a {
+    color: var(--rth-muted);
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.rth-copyright {
+    margin: 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--rth-border);
+    color: #718198;
+    font-size: 11px;
+}
+
+/* Responsive layout */
+
+@media (max-width: 900px) {
+    .rth-hero {
+        gap: 20px;
+        padding-top: 65px;
+        padding-bottom: 65px;
+    }
+
+    .rth-hero h1 {
+        font-size: clamp(40px, 6vw, 58px);
+        letter-spacing: -2.5px;
+    }
+
+    .rth-hero-visual {
+        min-height: 340px;
+    }
+
+    .rth-visual-card-main {
+        min-height: 290px;
+        padding: 25px;
+    }
+
+    .rth-visual-monogram {
+        font-size: 80px;
+    }
+
+    .rth-service-grid {
+        gap: 13px;
+    }
+
+    .rth-service-card {
+        padding: 17px;
+    }
+
+    .rth-service-card > p {
+        min-height: 125px;
+    }
+
+    .rth-about {
+        gap: 35px;
+    }
+}
+
+@media (max-width: 700px) {
+    html {
+        scroll-padding-top: 76px;
+    }
+
+    .rth-nav {
+        width: calc(100% - 36px);
+        min-height: 68px;
+    }
+
+    .rth-brand {
+        font-size: 20px;
+    }
+
+    .rth-brand-mark {
+        width: 35px;
+        height: 35px;
+    }
+
+    .rth-menu-toggle {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        padding: 0;
+        border: 1px solid var(--rth-border);
+        border-radius: 9px;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .rth-menu-toggle span {
+        width: 18px;
+        height: 2px;
+        border-radius: 3px;
+        background: white;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .rth-menu-toggle.is-open span:first-child {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .rth-menu-toggle.is-open span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .rth-menu-toggle.is-open span:last-child {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .rth-nav-links {
+        position: absolute;
+        top: calc(100% + 1px);
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 18px 18px;
+        border-bottom: 1px solid var(--rth-border);
+        background: #0b1120;
+    }
+
+    .rth-nav-links.is-open {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .rth-nav-links > a:not(.rth-nav-cta) {
+        padding: 13px 4px;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    }
+
+    .rth-nav-cta {
+        margin-top: 13px;
+        text-align: center;
+    }
+
+    .rth-hero {
+        width: calc(100% - 36px);
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding-top: 65px;
+        padding-bottom: 45px;
+    }
+
+    .rth-hero h1 {
+        max-width: 520px;
+        font-size: clamp(42px, 11vw, 60px);
+        letter-spacing: -2.5px;
+    }
+
+    .rth-hero-description {
+        font-size: 14px;
+    }
+
+    .rth-hero-note {
+        margin-top: 25px;
+        font-size: 11px;
+    }
+
+    .rth-hero-visual {
+        min-height: 330px;
+        margin-top: 5px;
+    }
+
+    .rth-visual-card-main {
+        width: min(300px, 76%);
+        min-height: 270px;
+        padding: 24px;
+    }
+
+    .rth-visual-monogram {
+        margin-top: 30px;
+        font-size: 78px;
+    }
+
+    .rth-visual-divider {
+        margin-top: 22px;
+    }
+
+    .rth-visual-card-main p {
+        margin-top: 14px;
+    }
+
+    .rth-tag-top {
+        top: 36px;
+        right: 0;
+    }
+
+    .rth-tag-bottom {
+        bottom: 24px;
+        left: 0;
+    }
+
+    .rth-visual-orbit {
+        width: 290px;
+        height: 290px;
+    }
+
+    .rth-orbit-two {
+        width: 340px;
+        height: 340px;
+    }
+
+    .rth-section {
+        width: calc(100% - 36px);
+    }
+
+    .rth-services {
+        padding-top: 40px;
+        padding-bottom: 65px;
+    }
+
+    .rth-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 13px;
+        margin-bottom: 25px;
+    }
+
+    .rth-section-heading h2,
+    .rth-about h2 {
+        font-size: 32px;
+        letter-spacing: -1px;
+    }
+
+    .rth-service-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .rth-service-card {
+        padding: 20px;
+    }
+
+    .rth-service-art {
+        height: 180px;
+    }
+
+    .rth-service-card > p {
+        min-height: 0;
+        margin-bottom: 20px;
+    }
+
+    .rth-about {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-top: 55px;
+        padding-bottom: 60px;
+        scroll-margin-top: 80px;
+    }
+
+    .rth-about-mark {
+        min-height: 180px;
+        font-size: 100px;
+    }
+
+    .rth-final-cta {
+        width: calc(100% - 36px);
+        margin-bottom: 45px;
+        padding: 27px 23px;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .rth-final-cta h2 {
+        font-size: 29px;
+        letter-spacing: -1px;
+    }
+
+    .rth-footer-links {
+        gap: 15px 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .rth-button,
+    .rth-service-card,
+    .rth-card-link span,
+    .rth-menu-toggle span {
+        transition: none;
+    }
+}

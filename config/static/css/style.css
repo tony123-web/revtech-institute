@@ -115,11 +115,7 @@ a {
 
     border-radius: 10px;
 
-    background: linear-gradient(
-        135deg,
-        var(--accent),
-        #8b5cf6
-    );
+    background: linear-gradient(140deg, #3b82f6, #1d4ed8);
 
     color: white;
 
@@ -132,6 +128,21 @@ a {
     font-weight: 500;
 }
 
+
+/* ---------- brand for logo---------- */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.brand-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    display: block;
+}
 
 /* ---------- NAV LINKS ---------- */
 
@@ -193,6 +204,283 @@ a {
 
 
 
+
+
+/* REVTECH THREE-PILLAR SECTION */
+
+.revtech-pillars {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.pillar-card {
+    padding: 28px;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 16px;
+    background: var(--card-bg, #ffffff);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.pillar-number {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary-color, #2563eb);
+}
+
+.pillar-card h3 {
+    margin: 0;
+}
+
+.pillar-card p {
+    line-height: 1.7;
+    flex-grow: 1;
+}
+
+.pillar-card .primary-button {
+    text-decoration: none;
+}
+
+@media (max-width: 900px) {
+    .pillars-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .pillars-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pillar-card {
+        padding: 22px;
+    }
+}
+
+
+
+
+/* RevTech Store */
+
+.store-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 28px 0;
+}
+
+.store-filters input,
+.store-filters select {
+    min-width: 180px;
+    flex: 1;
+    padding: 12px 14px;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 8px;
+    background: var(--card-bg, #fff);
+    color: inherit;
+}
+
+
+/* Store product grid */
+.store-product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Individual product card */
+.store-product-card {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Keep product images within their cards */
+
+.store-product-image {
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+    box-sizing: border-box;
+}
+
+
+
+/* Product information */
+.store-product-info {
+    min-width: 0;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.store-product-info h2 {
+    overflow-wrap: anywhere;
+}
+
+.store-product-info .primary-button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Tablets and small screens */
+@media (max-width: 768px) {
+    .store-product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .store-product-image {
+        height: 150px;
+    }
+
+    .store-product-info {
+        padding: 10px;
+    }
+
+    .store-product-info h2 {
+        font-size: 15px;
+        line-height: 1.4;
+    }
+
+    .store-product-price {
+        font-size: 15px;
+    }
+}
+
+/* Very narrow phones */
+@media (max-width: 360px) {
+    .store-product-grid {
+        gap: 8px;
+    }
+
+    .store-product-image {
+        height: 115px;
+    }
+
+    .store-product-info {
+        padding: 8px;
+    }
+
+    .store-product-info h2 {
+        font-size: 13px;
+    }
+
+    .store-product-info .primary-button {
+        padding: 8px 5px;
+        font-size: 12px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+.store-product-detail {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 36px;
+    margin-top: 28px;
+}
+
+.store-product-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    align-content: start;
+}
+
+.store-detail-image {
+    width: 100%;
+    max-height: 360px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: var(--card-bg, #fff);
+}
+
+.store-product-summary h1 {
+    margin-top: 8px;
+}
+
+.store-product-summary h2 {
+    font-size: 1.8rem;
+}
+
+.store-product-description,
+.store-product-specifications {
+    margin-top: 36px;
+    max-width: 850px;
+}
+
+.store-specification-row {
+    display: grid;
+    grid-template-columns: minmax(110px, 1fr) 2fr;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color, #e5e7eb);
+}
+
+.store-specification-row dt {
+    font-weight: 600;
+}
+
+.store-specification-row dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.store-empty-state {
+    padding: 32px 0;
+}
+
+@media (max-width: 800px) {
+    .store-product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .store-product-detail {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    .store-product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .store-product-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .store-filters {
+        flex-direction: column;
+    }
+
+    .store-filters input,
+    .store-filters select {
+        width: 100%;
+    }
+}
 
 
 
@@ -5952,9 +6240,164 @@ MOBILE
 }
 
 
+/* STORE REQUEST FOR DEVICE  */
+
+.device-request-page {
+    padding: 48px 20px 64px;
+    background: #0B1120;
+    color: #F8FAFC;
+}
+
+.device-request-container {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: #60A5FA;
+    text-decoration: none;
+}
+
+.request-intro {
+    color: #CBD5E1;
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+
+.device-request-form {
+    padding: 28px;
+    background: #172338;
+    border: 1px solid #2A3B56;
+    border-radius: 14px;
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+    color: #F8FAFC;
+    background: #0B1120;
+    border: 1px solid #2A3B56;
+    border-radius: 8px;
+    font: inherit;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    outline: 2px solid #60A5FA;
+    outline-offset: 1px;
+}
+
+.form-field small {
+    display: block;
+    margin-top: 6px;
+    color: #CBD5E1;
+}
+
+.required-mark,
+.field-error {
+    color: #FCA5A5;
+}
+
+.field-error {
+    margin: 6px 0 0;
+}
+
+.request-submit-button {
+    width: 100%;
+    padding: 13px 18px;
+    color: white;
+    background: #2563EB;
+    border: 0;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.request-submit-button:hover {
+    background: #1D4ED8;
+}
+
+.request-message {
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background: #172338;
+    border: 1px solid #2A3B56;
+}
+
+.request-note {
+    margin-top: 16px;
+    color: #CBD5E1;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+    .device-request-page {
+        padding: 32px 14px 48px;
+    }
+
+    .device-request-form {
+        padding: 20px 16px;
+    }
+}
+
+
+/* CORRECTING THE STORAGE DIV IN THE SECTION ABOVE */
 
 
 
+/* RevTech Store: mobile product grid fix */
+@media screen and (max-width: 768px) {
+    .store-product-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    .store-product-grid > .store-product-card {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .store-product-grid > .store-product-card .store-product-image {
+        width: 100% !important;
+        height: 140px !important;
+        object-fit: cover !important;
+    }
+
+    .store-product-grid > .store-product-card .store-product-info {
+        min-width: 0 !important;
+        padding: 10px !important;
+        box-sizing: border-box !important;
+    }
+
+    .store-product-grid > .store-product-card h2 {
+        font-size: 14px !important;
+        overflow-wrap: anywhere;
+    }
+}
 
 
 

@@ -96,7 +96,7 @@ def send_payment_confirmation_email(enrollment):
             or student.username
         ),
         subject="Payment Confirmed — RevTech Institute",
-        template="accounts/emails/payment_confirmation_email.html",
+        template="enrollments/emails/enrollment_confirmation.html",
         context={
             "student": student,
             "enrollment": enrollment,
@@ -114,7 +114,21 @@ def send_payment_confirmation_email(enrollment):
         ),
     )
 
+def device_request_email(student,message,subject,device_request):
+    student = student
 
+    return send_brevo_email(
+        recipient_email=student,
+        recipient_name="ARMSTRONG-CEO(RevTech Institute",
+        subject=subject,
+        template="store/emails/device_request_notification.html",
+        context={
+            "device_request":device_request,
+        },
+        text_content=(
+            message
+        ),
+    )
 
 
 

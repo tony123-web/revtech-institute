@@ -3,24 +3,19 @@
 {% block content %}
 
 <div class="cohort-page">
-
 <div class="cohort-page-header">
-
     <a
         href="{% url 'dashboard' %}"
         class="back-link"
     >
         ← Dashboard
     </a>
-
     <span class="dashboard-label">
         {{ cohort.program.title }}
     </span>
-
     <h1>
         {{ cohort.name }}
     </h1>
-
     {% if cohort.description %}
         <p>
             {{ cohort.description }}
@@ -35,6 +30,7 @@
     <a
         href="{% url 'seminar_room' cohort.id %}"
         class="primary-button"
+        style="background:green; padding:12px; border-radius:15px;"
     >
         Enter Seminar Room →
     </a>

@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}RevTech Institute{% endblock %}</title>
+    <title>{% block title %}RevTech Network{% endblock %}</title>
+    <link rel="shortcut icon" href="{%  static 'images/RevTech_logo.png' %}" type="image/x-icon" />
 
     <meta
         name="description"
@@ -26,20 +27,46 @@
 
             <a href="{% url 'home' %}" class="brand">
                 <span class="brand-mark">RT</span>
-                <span>RevTech<span class="brand-highlight"> Institute</span></span>
+                <span>RevTech Network<span class="brand-highlight"> </span></span>
             </a>
+<!--            <a href="{% url 'home' %}" class="brand">-->
+<!--                <img-->
+<!--                    src="{% static 'images/RevTech_logo.png' %}"-->
+<!--                    alt="RevTech Institute"-->
+<!--                    class="brand-logo"-->
+<!--                >-->
+
+<!--                <span>-->
+<!--                    RevTech<span class="brand-highlight"> Institute</span>-->
+<!--                </span>-->
+<!--            </a>-->
 
             <div class="nav-links">
-                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'institute_home' %}">Institute</a>
+                <a href="{% url 'cohorts' %}">Cohort</a>
+                <a href="#">Event</a>
+                <a href="{% url 'store_home' %}">Store</a>
                 <a href="{% url 'courses' %}">Programs</a>
-                <a href="{% url 'cohorts' %}">Cohorts</a>
                 <a href="{% url 'project_list' %}">Projects</a>
                 <a href="{% url 'about' %}">About</a>
                 <a href="{% url 'contact' %}">Contact</a>
+
                 {% if request.user.is_authenticated %}
-                <a href="/dashboard/">Dashboard</a>
+                    <a href="/dashboard/">Dashboard</a>
                 {% endif %}
             </div>
+
+<!--            <div class="nav-links">-->
+<!--                <a href="{% url 'home' %}">Home</a>-->
+<!--                <a href="{% url 'courses' %}">Programs</a>-->
+<!--                <a href="{% url 'cohorts' %}">Cohorts</a>-->
+<!--                <a href="{% url 'project_list' %}">Projects</a>-->
+<!--                <a href="{% url 'about' %}">About</a>-->
+<!--                <a href="{% url 'contact' %}">Contact</a>-->
+<!--                {% if request.user.is_authenticated %}-->
+<!--                <a href="/dashboard/">Dashboard</a>-->
+<!--                {% endif %}-->
+<!--            </div>-->
             {% if request.user.is_authenticated %}
 
             {% else %}
@@ -60,9 +87,25 @@
 <!-- Mobile Bottom Navigation -->
 <nav class="mobile-bottom-nav">
 
-    <a href="{% url 'home' %}" class="mobile-nav-item">
+    <a href="{% url 'institute_home' %}" class="mobile-nav-item" >
         <span class="mobile-nav-icon">⌂</span>
-        <span>Home</span>
+        <span>Institute</span>
+    </a>
+
+    <a href="#" class="mobile-nav-item">
+        <span class="mobile-nav-icon">◉</span>
+        <span>Event</span>
+    </a>
+
+
+    <a href="{% url 'store_home' %}" class="mobile-nav-item" >
+        <span class="mobile-nav-icon">⌂</span>
+        <span>Store</span>
+    </a>
+
+    <a href="{% url 'cohorts' %}" class="mobile-nav-item" >
+        <span class="mobile-nav-icon">⌂</span>
+        <span>Cohorts</span>
     </a>
 
     <a href="{% url 'courses' %}" class="mobile-nav-item">
@@ -70,10 +113,6 @@
         <span>Programs</span>
     </a>
 
-    <a href="{% url 'cohorts' %}" class="mobile-nav-item">
-        <span class="mobile-nav-icon">◉</span>
-        <span>Cohorts</span>
-    </a>
 
     <a href="{% url 'project_list' %}" class="mobile-nav-item">
         <span class="mobile-nav-icon">◇</span>
@@ -178,6 +217,63 @@
 
         {% block content %}
         {% endblock %}
+
+        <!-- =====================================================
+     SOCIAL HUB
+     ===================================================== -->
+
+<div class="social-hub">
+
+    <div class="social-links">
+
+        <a
+            href="{{global_link}}"
+            class="social-link"
+            aria-label="LinkAll"
+            target="_blank"
+        >
+            CONNECT
+        </a>
+
+<!--        <a-->
+<!--            href="#"-->
+<!--            class="social-link"-->
+<!--            aria-label="LinkedIn"-->
+<!--            target="_blank"-->
+<!--        >-->
+<!--            IN-->
+<!--        </a>-->
+
+<!--        <a-->
+<!--            href="#"-->
+<!--            class="social-link"-->
+<!--            aria-label="Instagram"-->
+<!--            target="_blank"-->
+<!--        >-->
+<!--            IG-->
+<!--        </a>-->
+
+<!--        <a-->
+<!--            href="#"-->
+<!--            class="social-link"-->
+<!--            aria-label="WhatsApp"-->
+<!--            target="_blank"-->
+<!--        >-->
+<!--            WA-->
+<!--        </a>-->
+
+    </div>
+
+
+    <button
+        class="social-toggle"
+        type="button"
+        aria-label="Open RevTech social links"
+    >
+        ✦
+    </button>
+
+</div>
 
     </main>
 

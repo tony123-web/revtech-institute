@@ -63,6 +63,83 @@ structured learning, mentorship, projects and collaborative experiences.
 
 </section>
 
+
+
+<!-- REVTECH PILLARS -->
+<section class="section revtech-pillars">
+    <div class="container" >
+
+        <div class="section-heading centered">
+            <span class="section-label">Explore RevTech</span>
+            <h2>One platform. Three ways to grow.</h2>
+            <p>
+                Learn technology, host your next seminar,
+                or find the device you need.
+            </p>
+        </div>
+
+        <div class="pillars-grid" >
+
+            <!-- REVTECH COHORT -->
+            <article class="pillar-card" style="background:#172641;">
+                <a href="{% url 'recent_upcoming_cohort' %}">
+                    <div class="pillar-number">01</div>
+                    <h3>RevTech Cohort</h3>
+                    <p>
+                        Develop practical technology skills,
+                        work on projects, and learn through
+                        structured training.
+                    </p>
+                </a>
+
+                <a href="{% url 'recent_upcoming_cohort' %}"
+                   class="primary-button">
+                    Explore Cohorts →
+                </a>
+            </article>
+
+            <!-- HOST SEMINAR -->
+            <article class="pillar-card" style="background:#142C2B;">
+                <a href="#">
+                    <div class="pillar-number">02</div>
+                    <h3>Host Seminar</h3>
+                    <p>
+                        Publish seminars, manage registrations,
+                        and give attendees a professional
+                        event experience.
+                    </p>
+                    <a href="#"
+                       class="primary-button">
+                        Explore Events →
+                    </a>
+                </a>
+
+            </article>
+
+            <!-- REVTECH STORE -->
+            <article class="pillar-card" style="background:#302519;">
+                <a href="{% url 'store_home' %}">
+                    <div class="pillar-number">03</div>
+                    <h3>RevTech Store</h3>
+                    <p>
+                        Browse laptops and smartphones,
+                        compare specifications, and contact
+                        us directly to make enquiries.
+                    </p>
+                    <a href="{% url 'store_home' %}"
+                       class="primary-button">
+                        Browse Devices →
+                    </a>
+                </a>
+
+            </article>
+
+        </div>
+    </div>
+</section>
+
+
+
 <!-- =====================================================
      STUDENT PROJECTS
      ===================================================== -->
@@ -184,7 +261,7 @@ structured learning, mentorship, projects and collaborative experiences.
         <div class="section-heading">
 
             <span class="section-label">
-                About RevTech
+                About RevTech Institute
             </span>
 
             <h2>
@@ -226,7 +303,7 @@ structured learning, mentorship, projects and collaborative experiences.
         <div class="section-heading centered">
 
             <span class="section-label">
-                The RevTech Approach
+                The RevTech Institute Approach
             </span>
 
             <h2>
@@ -519,62 +596,5 @@ structured learning, mentorship, projects and collaborative experiences.
 
 </section>
 
-
-<!-- =====================================================
-     SOCIAL HUB
-     ===================================================== -->
-
-<div class="social-hub">
-
-    <div class="social-links">
-
-        <a
-            href="{{link_all_link}}"
-            class="social-link"
-            aria-label="LinkAll"
-            target="_blank"
-        >
-            CONNECT
-        </a>
-
-<!--        <a-->
-<!--            href="#"-->
-<!--            class="social-link"-->
-<!--            aria-label="LinkedIn"-->
-<!--            target="_blank"-->
-<!--        >-->
-<!--            IN-->
-<!--        </a>-->
-
-<!--        <a-->
-<!--            href="#"-->
-<!--            class="social-link"-->
-<!--            aria-label="Instagram"-->
-<!--            target="_blank"-->
-<!--        >-->
-<!--            IG-->
-<!--        </a>-->
-
-<!--        <a-->
-<!--            href="#"-->
-<!--            class="social-link"-->
-<!--            aria-label="WhatsApp"-->
-<!--            target="_blank"-->
-<!--        >-->
-<!--            WA-->
-<!--        </a>-->
-
-    </div>
-
-
-    <button
-        class="social-toggle"
-        type="button"
-        aria-label="Open RevTech social links"
-    >
-        ✦
-    </button>
-
-</div>
 
 {% endblock %}

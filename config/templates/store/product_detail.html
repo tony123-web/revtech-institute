@@ -1,0 +1,110 @@
+
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}
+<section class="section">
+    <div style="padding:20px;">
+        <a href="{% url 'request_device' %}" class="request-submit-button" style="background:#142C2B; text-align:center;">
+                Can't find your device? Request it here
+            </a>
+    </div>
+
+    <div class="container">
+        <p>
+            <a href="{% url 'store_home' %}">RevTech Store</a>
+            / {{ product.name }}
+        </p>
+
+        <div class="store-product-detail">
+            <div class="store-product-gallery">
+                {% for image in images %}
+                    <img
+                        src="{{ image.image.url }}"
+                        alt="{{ image.alt_text|default:product.name }}"
+                        class="store-detail-image"
+                    >
+                {% empty %}
+                    <div class="store-image-placeholder">
+                        No product images available
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="store-product-summary">
+                <p>{{ product.get_category_display }}</p>
+                <h1>{{ product.name }}</h1>
+
+                <p>
+                    {{ product.brand }}
+                    {% if product.model_name %}
+                        · {{ product.model_name }}
+                    {% endif %}
+                </p>
+
+                <h2>
+                    ₦{{ product.price|floatformat:0|intcomma }}
+                </h2>
+
+                <p>
+                    Condition: {{ product.get_condition_display }}
+                </p>
+
+                <p>
+                    Availability: {{ product.get_availability_display }}
+                </p>
+
+                {% if product.availability == "available" %}
+                    <p>
+                        Contact us to confirm stock before making payment.
+                    </p>
+                {% elif product.availability == "pre_order" %}
+                    <p>
+                        Contact us to discuss sourcing and expected delivery.
+                    </p>
+                {% elif product.availability == "out_of_stock" %}
+                    <p>
+                        This product is currently out of stock.
+                        Contact us to ask about restocking.
+                    </p>
+                {% else %}
+                    <p>
+                        This product is no longer available.
+                    </p>
+                {% endif %}
+
+                {% if whatsapp_url %}
+                    <a
+                        href="{{ whatsapp_url }}"
+                        class="primary-button"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Enquire on WhatsApp
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="store-product-description">
+            <h2>Product Description</h2>
+            <p>{{ product.description|linebreaks }}</p>
+        </div>
+
+        {% if product.specifications %}
+            <div class="store-product-specifications">
+                <h2>Specifications</h2>
+
+                <dl>
+                    {% for key, value in product.specifications.items %}
+                        <div class="store-specification-row">
+                            <dt>{{ key|capfirst }}</dt>
+                            <dd>{{ value }}</dd>
+                        </div>
+                    {% endfor %}
+                </dl>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

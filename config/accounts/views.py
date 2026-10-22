@@ -121,43 +121,6 @@ def register_view(request):
                     "RevTech Institute"
                 ),
             )
-
-            # html_message = render_to_string(
-            #     "accounts/emails/verification_email.html",
-            #     {
-            #         "first_name": first_name,
-            #         "verification_url": verification_url,
-            #     }
-            # )
-
-            # text_message = (
-            #     f"Hello {first_name},\n\n"
-            #     "Welcome to RevTech Institute!\n\n"
-            #     "Please verify your email address using the link below:\n\n"
-            #     f"{verification_url}\n\n"
-            #     "If you did not create this account, "
-            #     "you can safely ignore this email.\n\n"
-            #     "Regards,\n"
-            #     "RevTech Institute"
-            # )
-
-
-            # email_message = EmailMultiAlternatives(
-            #     subject="Verify your RevTech Institute account",
-            #     body=text_message,
-            #     from_email=settings.DEFAULT_FROM_EMAIL,
-            #     to=[email],
-            # )
-
-            # email_message.attach_alternative(
-            #     html_message,
-            #     "text/html"
-            # )
-            #
-            # email_message.send(
-            #     fail_silently=False
-            # )
-
             return redirect("verification_sent")
 
     else:

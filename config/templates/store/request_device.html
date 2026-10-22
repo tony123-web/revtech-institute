@@ -1,0 +1,64 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<section class="device-request-page">
+    <div class="device-request-container">
+        <a  class="back-link">
+
+        </a>
+
+        <h1>Request a Device</h1>
+        <p class="request-intro">
+            Can't find the laptop, phone, or tablet you need?
+            Tell us what you're looking for. RevTech will review your
+            requirements and contact you about availability and pricing.
+        </p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="request-message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" class="device-request-form">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            {% for field in form %}
+                <div class="form-field">
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                        {% if field.field.required %}
+                            <span class="required-mark">*</span>
+                        {% endif %}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <small>{{ field.help_text }}</small>
+                    {% endif %}
+
+                    {% for error in field.errors %}
+                        <p class="field-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="request-submit-button">
+                Submit Device Request
+            </button>
+
+            <p class="request-note">
+                Submitting a request does not guarantee availability or
+                commit you to a purchase. We'll contact you to discuss
+                the device and its price.
+            </p>
+        </form>
+    </div>
+</section>
+{% endblock %}
